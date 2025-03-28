@@ -15,6 +15,7 @@ public:
 
 	void addContact(Contact newContact);
 	void displayPhoneList();
+	void displayContactInfo(int which);
 };
 
 #endif

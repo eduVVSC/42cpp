@@ -3,7 +3,6 @@
 
 void PhoneBook::addContact(Contact newContact)
 {
-	std::cout << "inside add! " << manyContactsAdded << std::endl;
 	if (manyContactsAdded >= 8)
 	{
 		while (manyContactsAdded >= 8)
@@ -18,6 +17,10 @@ void PhoneBook::addContact(Contact newContact)
 }
 int PhoneBook::manyContactsAdded = 0;
 
+void PhoneBook::displayContactInfo(int which)
+{
+	std::cout << contactList[which].toString() << std::endl;
+}
 
 void PhoneBook::displayPhoneList(){
 	std::cout << std::string(50, '-') << std::endl;

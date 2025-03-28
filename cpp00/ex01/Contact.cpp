@@ -8,7 +8,7 @@ std:: string Contact::getNickName()		{ return (this->nickName); }
 std:: string Contact::getPhone()		{ return (this->phone); }
 
 std::string Contact::toString() {
-	return "First Name: " + firstName + "\n" +
+	return "\nContact\nFirst Name: " + firstName + "\n" +
 		   "Last Name: " + lastName + "\n" +
 		   "Nick Name: " + nickName + "\n" +
 		   "Phone: " + phone;
