@@ -1,55 +1,43 @@
 
 #include "Contact.hpp"
 
-class Contact
-{
-	private:
-		
-		char				*firstName;
-		char				*lastName;
-		char				*nickName;
-		char				*phone;
-	public:
-		Contact(char *firstName, char *lastName, char *nickName, char *phone);
-		Contact();
-		~Contact();
+// getters
+std:: string Contact::getFirstName()	{ return (this->firstName); }
+std:: string Contact::getLastName()		{ return (this->lastName); }
+std:: string Contact::getNickName()		{ return (this->nickName); }
+std:: string Contact::getPhone()		{ return (this->phone); }
 
-		void search(char *name)
-		{
-			if (name == nullptr)
-			{
-				std::cout << "No name was entered to searched"<< std::endl;
-				return ;
-			}
-			for (Contact temp : arrayContacts)
-			{
-				if (strcmp(temp.getName(), this->name) == 0 )
-					std::cout << "Name was found " << std::endl;
-			}
-		}
+std::string Contact::toString() {
+	return "First Name: " + firstName + "\n" +
+		   "Last Name: " + lastName + "\n" +
+		   "Nick Name: " + nickName + "\n" +
+		   "Phone: " + phone;
+}
 
-		char	*getFirstName()
-		{
-			return (this->firstName);
-		}
+bool Contact::equals(Contact other){
+	if (firstName == other.getFirstName()
+		&& lastName == other.getLastName()
+			&& nickName == other.getNickName()
+				&& phone == other.getPhone())
+		return (true);
+	return (false);
+}
 
-		char	*getLastName()
-		{
-			return (this->lastName);
-		}
-};
-
-Contact::Contact(char *firstName, char *lastName, char *nickName, char *phone)
+Contact::Contact(std::string firstName, std::string lastName, std::string nickName, std::string phone)
 {
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->nickName = nickName;
 	this->phone = phone;
 }
+
 Contact::Contact()
 {
+	this->firstName = NO_DECLARATION;
+	this->lastName = NO_DECLARATION;
+	this->nickName = NO_DECLARATION;
+	this->phone = NO_DECLARATION;
 }
-
 
 Contact::~Contact()
 {

@@ -4,28 +4,33 @@
 #include <iostream>
 #include <cstring>
 #include <string>
-#include <array>
+
+# define NO_DECLARATION "Not declarated!"
 
 class Contact
 {
 	private:
-		std::string	name2;
-		char				*name;
-		char				*phone;
-		static int			countPeople;
-		static Contact	arrayContacts[9];
+		std::string		firstName;
+		std::string		lastName;
+		std::string		nickName;
+		std::string		phone;
 	public:
 		// Constructor
-		Contact(char *name, char *phone);
+		Contact(std::string firstName, std::string lastName, std::string nickName, std::string phone);
 		Contact();
 
 		// Destructor
 		~Contact();
 
 		// Methods
-		void	search(char *name);
-		char	*getName();
-		char	*getNum();
+		std:: string getFirstName();
+		std:: string getLastName();
+		std:: string getNickName();
+		std:: string getPhone();
+
+		std::string toString();
+
+		bool equals(Contact other);
 };
 
 #endif
