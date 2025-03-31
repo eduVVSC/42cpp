@@ -22,7 +22,7 @@ bool isValidPhoneNum(std::string numb)
 	return (true);
 }
 
-void add(PhoneBook pb)
+void add(PhoneBook *pb)
 {
 	std::string fName;
 	std::string lName;
@@ -32,13 +32,13 @@ void add(PhoneBook pb)
 	std::cout << "Enter contact first name: ";
 	std::getline(std::cin, fName);
 
-	std::cout << "\nEnter contact last name: ";
+	std::cout << "Enter contact last name: ";
 	std::getline(std::cin, lName);
 
-	std::cout << "\nEnter contact nick name: ";
+	std::cout << "Enter contact nick name: ";
 	std::getline(std::cin, nName);
 
-	std::cout << "\nEnter contact phone: ";
+	std::cout << "Enter contact phone: ";
 	do
 	{
 		std::getline(std::cin, number);
@@ -49,7 +49,7 @@ void add(PhoneBook pb)
 	} while (1);
 
 	Contact c(fName, lName, nName, number);
-	pb.addContact(c);
+	pb->addContact(c);
 
 	std::cout << "Contact created!!" << std::endl;
 }
@@ -73,20 +73,15 @@ int main()
 {
 	PhoneBook	p1;
 	std::string	action;
-	//Contact		c1("Eduardo", "Vasconcelos", "duds", "912232513");
-	//Contact		c2("Henri", "Courie", "hanrita", "912445245");
 
-	//std::cout << c1.toString() << std::endl;
-	//std::cout << c2.toString() << std::endl;
-	//std::cout << c1.equals(c2) << std::endl;
-	do{
+	do {
 		std::cout << "Enter action: ";
 		std::getline(std::cin, action);
 		if (action == "EXIT")
 			return (0);
-		else if(action == "ADD")
-			add(p1);
-		else if(action == "SEARCH")
+		else if (action == "ADD")
+			add(&p1);
+		else if (action == "SEARCH")
 			search(p1);
 	} while (1);
 	return (0);
