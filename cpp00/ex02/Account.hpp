@@ -6,16 +6,15 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:27:17 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/01 13:53:34 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:22:40 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ACCOUNT_HPP
 # define ACCOUNT_HPP
 
+# include <iomanip>
 # include <iostream>
-# include <cstring>
-# include <string>
 # include <ctime>
 
 class Account {
@@ -56,4 +55,3 @@ class Account {
 	};
 
 #endif
-
