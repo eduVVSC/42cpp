@@ -13,9 +13,10 @@ public:
 	PhoneBook();
 	~PhoneBook();
 
-	void addContact(Contact newContact);
-	void displayPhoneList();
-	void displayContactInfo(int which);
+	void	addContact(Contact newContact);
+	void	displayPhoneList();
+	void	displayContactInfo(int which);
+	int		getManyContact();
 };
 
 #endif

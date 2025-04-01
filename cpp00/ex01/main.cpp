@@ -58,14 +58,19 @@ void search(PhoneBook pb)
 {
 	int		val;
 
+	if (pb.getManyContact() == 0)
+	{
+		std::cout << "There are still no contacts added to the Phonebook!" << std::endl;
+		return ;
+	}
 	pb.displayPhoneList();
 	do
 	{
 		std::cout << "Enter contact index to see more info: ";
 		std::cin >> val;
-		if (val > 7 || val < 0)
+		if (val > pb.getManyContact() || val < pb.getManyContact())
 			std::cout << "Wrong number given, need to be between 0 and 7! Try again." << std::endl;
-	} while (val < 0 || val > 7);
+	} while (val < pb.getManyContact() || val > pb.getManyContact());
 	pb.displayContactInfo(val);
 }
 
@@ -74,6 +79,9 @@ int main()
 	PhoneBook	p1;
 	std::string	action;
 
+	std::cout << "------------------------------" << std::endl;
+	std::cout << "Welcome to my PhoneBook!!" << std::endl;
+	std::cout << "------------------------------" << std::endl;
 	do {
 		std::cout << "Enter action: ";
 		std::getline(std::cin, action);

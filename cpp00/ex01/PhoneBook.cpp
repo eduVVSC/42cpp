@@ -30,8 +30,9 @@ void PhoneBook::displayPhoneList(){
 			  << std::setw(10) << "Nickname" << std::endl;
 	std::cout << std::string(50, '-') << std::endl;
 
-			// change the substr function to your own to properly handle the way that it wants it to be printed
-	for (size_t i = 0; i < 8; i++) {
+	// change the substr function to your own to properly handle the way that it wants it to be printed
+	for (size_t i = 0; i < (size_t)manyContactsAdded; i++)
+	{
 		std::cout << std::setw(10) << i << " | "
 				  << std::setw(10) << contactList[i].getFirstName().substr(0, 9) << " | "
 				  << std::setw(10) << contactList[i].getLastName().substr(0, 9) << " | "
@@ -40,6 +41,7 @@ void PhoneBook::displayPhoneList(){
 	std::cout << std::string(50, '-') << std::endl;
 }
 
+int PhoneBook::getManyContact() { return (manyContactsAdded); }
 
 PhoneBook::PhoneBook()
 {
