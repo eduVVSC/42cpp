@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:27:16 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/01 14:01:00 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:06:41 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,12 @@
 
 	/// @brief print each account info and status if it is closed
 	void	Account::displayStatus( void ) const {
-		std::cout << "in here with the account " << _accountIndex << std::endl;
+		_displayTimestamp();
+		std::cout << "index:" << _accountIndex
+			<< ";amount:" << _amount
+			<< ";deposit:" << _nbDeposits
+			<< ";withdrawals:" << _nbWithdrawals
+			<< std::endl;
 	}
 
 	/// @brief Print the info of all the accounts together
