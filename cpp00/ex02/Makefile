@@ -6,7 +6,7 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/03/31 11:28:22 by edvieira         ###   ########.fr        #
+#    Updated: 2025/04/01 12:37:52 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INFILES = 	tests.cpp\
 
 OBJFILES = $(INFILES:.cpp=.o)
 
-NAME = phonebook
+NAME = account
 
 all: $(NAME)
 

@@ -6,53 +6,16 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:27:16 by edvieira          #+#    #+#             */
-/*   Updated: 2025/03/31 22:14:29 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:01:00 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
 
-
-class Account {
-	public:
-			typedef	Account	t;
-
-			static int		getNbAccounts( void );
-			static int		getTotalAmount( void );
-			static int		getNbDeposits( void );
-			static int		getNbWithdrawals( void );
-			static void		displayAccountsInfos( void );
-
-			Account( int initial_deposit );
-			~Account( void );
-
-			void	makeDeposit( int deposit );
-			bool	makeWithdrawal( int withdrawal );
-			int		checkAmount( void ) const;
-			void	displayStatus( void ) const;
-
-
-	private:
-
-			static int	_nbAccounts;
-			static int	_totalAmount;
-			static int	_totalNbDeposits;
-			static int	_totalNbWithdrawals;
-
-			static void	_displayTimestamp( void );
-
-			int			_accountIndex;
-			int			_amount;
-			int			_nbDeposits;
-			int			_nbWithdrawals;
-
-			Account( void );
-
-	};
-
 	// private method
 	void	Account::_displayTimestamp( void ){
-		std::cout << "[" << std::time(nullptr) << "] ";
+		time_t timestamp;
+		std::cout << "[" << std::time(&timestamp) << "] ";
 	}
 
 	int Account::_totalAmount = 0;
@@ -63,13 +26,17 @@ class Account {
 	Account::Account( int initial_deposit )
 	{
 		_amount = initial_deposit;
-		_nbDeposits = 1;
+		_nbDeposits = 0;
 		_nbWithdrawals = 0;
 		_accountIndex = _nbAccounts;
 
 		_nbAccounts++;
-		_totalNbDeposits++;
 		_totalAmount += initial_deposit;
+
+		_displayTimestamp();
+		std::cout << "index:" << _accountIndex
+					<< ";ammout:" << _amount
+					<< ";created" << std::endl;
 	}
 
 	Account::Account( void )
@@ -78,25 +45,75 @@ class Account {
 		_nbDeposits = 0;
 		_nbWithdrawals = 0;
 		_accountIndex = _nbAccounts;
+
 		_nbAccounts++;
+
+		_displayTimestamp();
+		std::cout << "index:" << _accountIndex
+					<< ";ammout:" << _amount
+					<< ";created" << std::endl;
+	}
+
+	Account::~Account(void)
+	{
+		_displayTimestamp();
+		std::cout << "index:" << _accountIndex
+					<< ";ammout:" << _amount
+					<< ";closed" << std::endl;
 	}
 
 	void	Account::makeDeposit( int deposit )
 	{
+		int		oldAmount = 0;
+
+		oldAmount = _amount;
+
 		_amount += deposit;
-		_totalAmount += deposit;
 		_nbDeposits++;
+		_totalAmount += deposit;
+
 		_totalNbDeposits++;
+
+		// display deposit details
+		_displayTimestamp();
+		std::cout << "index:" << _nbAccounts
+					<< ";p_amount:" << oldAmount
+					<< ";deposit:" << deposit
+					<< ";ammount:" << _amount
+					<< ";nb_deposits:" << _nbDeposits
+					<< std::endl;
 	}
 
 	bool	Account::makeWithdrawal( int withdrawal )
 	{
+		int		oldAmount = 0;
+
 		if (_amount < withdrawal)
+		{
+			// refused message display
+			_displayTimestamp();
+			std::cout << "index:" << _nbAccounts
+						<< ";p_amount:" << _amount
+						<< ";withdrawal:refused"
+						<< std::endl;
 			return (false);
+		}
+
 		_amount -= withdrawal;
 		_totalAmount -= withdrawal;
 		_nbWithdrawals++;
+
 		_totalNbWithdrawals++;
+
+		// success message display
+		_displayTimestamp();
+		std::cout << "index:" << _nbAccounts
+					<< ";p_amount:" << oldAmount
+					<< ";withdrawal:" << withdrawal
+					<< ";ammount:" << _amount
+					<< ";nb_withdrawals:" << _nbWithdrawals
+					<< std::endl;
+
 		return (true);
 	}
 
@@ -111,8 +128,8 @@ class Account {
 	int		Account::getNbWithdrawals( void ) { return (_totalNbWithdrawals); }
 
 	/// @brief print each account info and status if it is closed
-	void	displayStatus( void ){
-
+	void	Account::displayStatus( void ) const {
+		std::cout << "in here with the account " << _accountIndex << std::endl;
 	}
 
 	/// @brief Print the info of all the accounts together
@@ -122,6 +139,5 @@ class Account {
 					<< ";total:" << _totalAmount
 					<< ";deposits:" << _totalNbDeposits
 					<< ";withdrawals:" << _totalNbWithdrawals << std::endl;
-
 		// should I print all the accounts
 	}

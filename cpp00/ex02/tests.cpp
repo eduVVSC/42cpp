@@ -35,7 +35,7 @@ int		main( void ) {
 
 	int	const			w[]			= { 321, 34, 657, 4, 76, 275, 657, 7654 };
 	size_t const		w_size( sizeof(w) / sizeof(int) );
-	
+
 	ints_t				withdrawals( w, w + w_size );
 	ints_t::iterator	wit_begin	= withdrawals.begin();
 	ints_t::iterator	wit_end		= withdrawals.end();
