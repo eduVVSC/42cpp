@@ -6,26 +6,28 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:20 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/02 23:04:25 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:04:55 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
+#include "Weapon.hpp"
 
 void HumanB::attack()
 {
-	if (!wp)
-		std::cout << name << "has no weapon, cannot attack" << std::endl;
+	if (!hasWeapon)
+		std::cout << name << " has no weapon, cannot attack" << std::endl;
 	else
-		std::cout << name << "attacks with their" << wp->getType() << std::endl;
+		std::cout << name << " attacks with their " << (this->wp->getType()) << std::endl;
 }
 
-void	HumanB::setWeapon(Weapon wp)
+void	HumanB::setWeapon(Weapon &wp)
 {
 	this->wp = &wp;
+	hasWeapon = true;
 }
 
-HumanB::HumanB(std::string name, Weapon wp)
+HumanB::HumanB(std::string name, Weapon &wp)
 {
 	this->name = name;
 	this->wp = &wp;
