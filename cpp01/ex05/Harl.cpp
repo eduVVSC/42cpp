@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 11:23:09 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:25:17 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void Harl::complain( std::string level )
 	arrStr[0] = "DEBUG";
 	arrStr[1] = "INFO";
 	arrStr[2] = "WARNING";
-	arrStr[3] = "ERROR";
+	arrStr[3] = "ERROR ";
 
 	arrVoid[0] = &Harl::debug;
 	arrVoid[1] =  &Harl::info;

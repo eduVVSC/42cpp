@@ -6,7 +6,7 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/04/03 14:18:37 by edvieira         ###   ########.fr        #
+#    Updated: 2025/04/07 13:08:58 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INFILES = 	main.cpp\
 
 OBJFILES = $(INFILES:.cpp=.o)
 
-NAME = harl
+NAME = harlFilter
 
 all: $(NAME)
 
