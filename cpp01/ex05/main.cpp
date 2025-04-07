@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 22:14:29 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/03 14:24:14 by edvieira         ###   ########.fr       */
+/*   Created: 2025/04/03 14:13:31 by edvieira          #+#    #+#             */
+/*   Updated: 2025/04/07 11:22:18 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_HPP
-# define WEAPON_HPP
+#include "Harl.hpp"
 
-#include <iostream>
-#include <string>
-
-class Weapon
+int main(int ac, char **av)
 {
-	private:
-		std::string	type;
-	public:
-		void		setType(std::string type);
-		std::string	getType();
-
-		Weapon(std::string type);
-		Weapon();
-
-		~Weapon();
-};
-
-#endif
+	if (ac == 2)
+	{
+		Harl h;
+		h.complain(av[1]);
+	}
+	return (0);
+}

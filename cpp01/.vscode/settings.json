@@ -45,6 +45,10 @@
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"cinttypes": "cpp",
-		"typeinfo": "cpp"
+		"typeinfo": "cpp",
+		"harl.hpp": "c",
+		"cstring": "cpp",
+		"map": "cpp",
+		"fstream": "cpp"
 	}
 }
