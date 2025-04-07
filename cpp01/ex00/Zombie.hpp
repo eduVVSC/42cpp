@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:40 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/02 21:17:34 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:54:43 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ class Zombie
 	public:
 		std::string getName( void);
 		void announce( void );
-		Zombie();
+
+		Zombie(const Zombie& copy);
 		Zombie(std:: string);
+
+		//Zombie& operator=(const Zombie&);
 		~Zombie();
 };
 

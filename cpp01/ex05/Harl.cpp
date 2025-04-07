@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 11:25:17 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/07 18:25:54 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void Harl::complain( std::string level )
 	std::string	arrStr[4];
 	void (Harl::*arrVoid[4])();
 
+	// doing the same map should, we are create a type of key array, and one
+	// that saves the pointers to the functions that will be used whenever the
+	// key entered is trigger to the respective functions
+
 	arrStr[0] = "DEBUG";
 	arrStr[1] = "INFO";
 	arrStr[2] = "WARNING";
-	arrStr[3] = "ERROR ";
+	arrStr[3] = "ERROR";
 
 	arrVoid[0] = &Harl::debug;
 	arrVoid[1] =  &Harl::info;
@@ -57,10 +61,8 @@ void Harl::error( void )
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-Harl::Harl()
-{
-}
+Harl::Harl(Harl& cp) { (void) cp; }
 
-Harl::~Harl()
-{
-}
+Harl::Harl() { }
+
+Harl::~Harl() { }

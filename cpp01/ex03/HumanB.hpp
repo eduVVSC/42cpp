@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/03 14:01:48 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:55:48 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ class HumanB
 		std::string		name;
 		Weapon			*wp;
 		bool			hasWeapon;
+
 	public:
 		void	attack();
 		void	setWeapon(Weapon &wp);
 
 		HumanB(std::string name, Weapon &wp);
+		HumanB(const HumanB &copy);
 		HumanB(std::string name);
 
 		~HumanB();

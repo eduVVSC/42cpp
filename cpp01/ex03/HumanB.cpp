@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:20 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/03 14:04:55 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:55:23 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ HumanB::HumanB(std::string name)
 	this->wp = NULL;
 }
 
-HumanB::~HumanB()
-{
+HumanB::HumanB(const HumanB &copy) : name(copy.name), wp(copy.wp) { }
 
-}
+HumanB::~HumanB( ) { }
 

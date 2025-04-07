@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:58 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 13:28:20 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:14:58 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 Zombie* newZombie(std::string name)
 {
-	std::cout << "\n------------------------------------------\n\tInside newZombie!!\n" << std::endl;
+	//std::cout << "\n------------------------------------------\n\tInside newZombie!!\n" << std::endl;
 
 
 	Zombie *zb = new Zombie(name);
-	std::cout << "\n\tgoing back to main!!\n------------------------------------------" << std::endl;
+	//std::cout << "\n\tgoing back to main!!\n------------------------------------------" << std::endl;
 	return (zb);
 }
 
