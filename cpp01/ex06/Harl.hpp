@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:34 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/03 14:24:37 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:47:04 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ class Harl
 		void warning( void );
 		void error( void );
 	public:
+
 		void complain( std::string level );
+
+		Harl(Harl& cp);
 		Harl();
+
 		~Harl();
 };
 
