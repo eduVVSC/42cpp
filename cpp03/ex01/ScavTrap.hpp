@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 18:35:31 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/10 09:22:40 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:22:43 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ class ScavTrap : public ClapTrap
 		ScavTrap(ScavTrap &cp);
 		~ScavTrap();
 
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
 		ScavTrap&	operator=(ScavTrap const&);
 };
 

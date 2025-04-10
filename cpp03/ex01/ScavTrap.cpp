@@ -6,43 +6,59 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 08:09:28 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/10 09:13:10 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:24:31 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name)
+void ScavTrap::attack(const std::string& target)
 {
-	std::cout << "ScavTrap -> Constructor called for: " << name << std::endl;
+	if(energyPoint > 0 && hitPoints > 0)
+	{
+		std::cout << "ScavTrap " + this->name + " attacks " + target + ", causing ";
+		std::cout << this->attackDamage + " points of damage!" << std::endl;
+		energyPoint--;
+	}
+	else
+		std::cout << "ScavTrap " + this->name + " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
+}
 
-	trap = new ClapTrap(name);
-	trap->setHitPoints(100);
-	trap->setEnergyPoint(50);
-	trap->setAttackDamage(20);
+void ScavTrap::takeDamage(unsigned int amount)
+{
+	this->hitPoints -= amount;
+	std::cout << "ScavTrap " << name << " was attacked, it received " << amount << " hit points." << std::endl;
+	//std::cout << "Remaining live: " << hitPoints << std::endl;
+}
+
+void ScavTrap::beRepaired(unsigned int amount)
+{
+	if (energyPoint > 0 && hitPoints > 0)
+	{
+		std::cout << "ScavTrap " << name <<" repairs itself, it regains " << amount << " hit points." << std::endl;
+		this->hitPoints += amount;
+		energyPoint--;
+	}
+	else
+		std::cout << "ScavTrap " + this->name + " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+{
+	hitPoints = 100;
+	energyPoint = 50;
+	attackDamage = 20;
 }
 
 // check if it is correct in here
-ScavTrap::ScavTrap(ScavTrap &cp)
-{
-	std::cout << "ScavTrap -> Constructor called for: " << cp.trap->getName() << std::endl;
-
-	trap = new ClapTrap(*cp.trap);
-	trap->setHitPoints(100);
-	trap->setEnergyPoint(50);
-	trap->setAttackDamage(20);
-}
+ScavTrap::ScavTrap(ScavTrap &cp) : ClapTrap(cp) { }
 
 ScavTrap::~ScavTrap()
 {
-	std::string name = this->trap->getName();
-
-	delete trap;
-
 	std::cout << "ScavTrap -> Destructor called for: " << name << std::endl;
 }
 
 void	ScavTrap::guardGate()
 {
-	std::cout << this->trap->getName() << " ScavTrap is now in Gate keeper mode." << std::endl;
+	std::cout << name << " ScavTrap is now in Gate keeper mode." << std::endl;
 }
