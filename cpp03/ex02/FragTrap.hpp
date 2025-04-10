@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:55:35 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/10 16:39:51 by edvieira         ###   ########.fr       */
+/*   Created: 2025/04/10 16:40:31 by edvieira          #+#    #+#             */
+/*   Updated: 2025/04/10 16:49:55 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-int	main()
+# include "ClapTrap.hpp"
+
+class FragTrap : public ClapTrap
 {
-	ScavTrap *st1 = new ScavTrap("test");
-	ScavTrap *st2 = new ScavTrap(*st1);
+	private:
 
-	st1->guardGate();
-	st1->attack("enemy");
-	st1->beRepaired(10);
-	st1->takeDamage(10);
+	public:
+		void highFiveGuys(void);
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
 
-	delete st1;
-	std::cout << "\nnext test\n";
-	st2->guardGate();
-	st2->attack("enemy");
-	st2->beRepaired(10);
-	st2->takeDamage(10);
-	delete st2;
-}
+		FragTrap(std::string name);
+		FragTrap(FragTrap &cp);
+		~FragTrap();
+
+		FragTrap&	operator=(FragTrap const&);
+};
+
+
+#endif

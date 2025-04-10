@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 08:09:28 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/10 16:46:36 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:36:10 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 }
 
 // check if it is correct in here
-ScavTrap::ScavTrap(ScavTrap &cp) : ClapTrap(cp)
-{
-	std::cout << "ScavTrap -> Constructor called for: " << name << std::endl;
-}
+ScavTrap::ScavTrap(ScavTrap &cp) : ClapTrap(cp) { }
 
 ScavTrap::~ScavTrap()
 {
