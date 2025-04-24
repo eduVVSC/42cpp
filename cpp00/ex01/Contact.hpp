@@ -1,8 +1,9 @@
 #ifndef CONTACT_HPP
-#define CONTACT_HPP
+# define CONTACT_HPP
 
+#include <iomanip>
 #include <iostream>
-#include <cstring>
+#include <cstdlib>
 #include <string>
 
 # define NO_DECLARATION "Not declarated!"

@@ -9,18 +9,25 @@ bool isValidPhoneNum(std::string numb)
 	for (size_t i = 0; i < numb.length(); i++)
 	{
 		if (isalpha(numb[i]))
-		{
-			std::cout << "going out here 1\n";
 			return (false);
-		}
 		else if(!isalnum(numb[i]))
-		{
-			std::cout << "going out here 2\n";
 			return (false);
-		}
 	}
 	return (true);
 }
+
+bool is_only_num(std::string input)
+{
+	for (size_t i = 0; i < input.length(); i++)
+	{
+		if (isalpha(input[i]))
+			return (false);
+		else if(!isalnum(input[i]))
+			return (false);
+	}
+	return (true);
+}
+
 
 void add(PhoneBook *pb)
 {
@@ -43,7 +50,7 @@ void add(PhoneBook *pb)
 	{
 		std::getline(std::cin, number);
 		if (!isValidPhoneNum(number))
-			std::cout << "Wrong phone number given, needs to have only numbers and 9 numbers without spaces." << std::endl;
+			std::cout << "Wrong phone number given, need to be only 9 numbers: ";
 		else
 			break;
 	} while (1);
@@ -56,21 +63,30 @@ void add(PhoneBook *pb)
 
 void search(PhoneBook pb)
 {
+	std::string	s;
 	int		val;
 
+	val = 10;
 	if (pb.getManyContact() == 0)
 	{
 		std::cout << "There are still no contacts added to the Phonebook!" << std::endl;
 		return ;
 	}
+
 	pb.displayPhoneList();
-	do
-	{
+
+	do {
 		std::cout << "Enter contact index to see more info: ";
-		std::cin >> val;
-		if (val > pb.getManyContact() || val < pb.getManyContact())
-			std::cout << "Wrong number given, need to be between 0 and 7! Try again." << std::endl;
-	} while (val < pb.getManyContact() || val > pb.getManyContact());
+		std::getline(std::cin, s);
+		if (!is_only_num(s))
+			std::cout << "String with something different than numbers!	" << std::endl;
+		else
+		{
+			val = atoi(s.c_str());
+			if (val < 0 || val > (pb.getManyContact() - 1))
+				std::cout << "Wrong number given!" << pb.getManyContact() << std::endl;
+		}
+	} while (val < 0 || val > (pb.getManyContact() - 1));
 	pb.displayContactInfo(val);
 }
 
@@ -91,6 +107,7 @@ int main()
 			add(&p1);
 		else if (action == "SEARCH")
 			search(p1);
+		std::cout << "--------ended while loop--------" << std::endl;
 	} while (1);
 	return (0);
 }
