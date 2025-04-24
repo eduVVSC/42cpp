@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 22:14:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:36:51 by edvieira         ###   ########.fr       */
+/*   Created: 2025/04/10 16:40:31 by edvieira          #+#    #+#             */
+/*   Updated: 2025/04/10 16:49:55 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-#include "Weapon.hpp"
+# include "ClapTrap.hpp"
 
-class HumanB
+class FragTrap : public ClapTrap
 {
 	private:
-		std::string		name;
-		Weapon			*wp;
-		bool			hasWeapon;
 
 	public:
-		void	attack();
-		void	setWeapon(Weapon &wp);
+		void highFiveGuys(void);
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
 
-		HumanB(const HumanB &copy);
-		HumanB(std::string name);
-		HumanB();
+		FragTrap(std::string name);
+		FragTrap(FragTrap &cp);
+		~FragTrap();
 
-		HumanB& operator=(const HumanB&);
-		~HumanB();
+		FragTrap&	operator=(FragTrap const&);
 };
+
 
 #endif

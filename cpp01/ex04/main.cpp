@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:32:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 18:18:55 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:48:12 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 				std::cout << line;
 				/* if (!line.find(av[2]))// error is in here!
 					//writeLineChange(&writeFile, line, av[2], av[3]);
-				writeFile.write(line.c_str(), line.length()); */
+				writeFile.write(line.c_str(), line.length());z */
 				writeFile.put('\n');
 				std::cout << std::endl;
 			}

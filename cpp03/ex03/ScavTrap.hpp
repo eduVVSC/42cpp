@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 22:14:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:36:51 by edvieira         ###   ########.fr       */
+/*   Created: 2025/04/09 18:35:31 by edvieira          #+#    #+#             */
+/*   Updated: 2025/04/10 16:22:43 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
-#include "Weapon.hpp"
+# include "ClapTrap.hpp"
 
-class HumanB
+class ScavTrap : public ClapTrap
 {
 	private:
-		std::string		name;
-		Weapon			*wp;
-		bool			hasWeapon;
 
 	public:
-		void	attack();
-		void	setWeapon(Weapon &wp);
+		void guardGate();
 
-		HumanB(const HumanB &copy);
-		HumanB(std::string name);
-		HumanB();
+		ScavTrap(std::string name);
+		ScavTrap(ScavTrap &cp);
+		~ScavTrap();
 
-		HumanB& operator=(const HumanB&);
-		~HumanB();
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
+		ScavTrap&	operator=(ScavTrap const&);
 };
 
 #endif

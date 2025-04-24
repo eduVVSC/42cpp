@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:20 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 17:55:23 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:37:11 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	HumanB::setWeapon(Weapon &wp)
 	hasWeapon = true;
 }
 
-HumanB::HumanB(std::string name, Weapon &wp)
-{
-	this->name = name;
-	this->wp = &wp;
-}
-
 HumanB::HumanB(std::string name)
 {
 	this->name = name;
+	this->wp = NULL;
+}
+
+HumanB::HumanB()
+{
+	this->name = "not declared";
 	this->wp = NULL;
 }
 

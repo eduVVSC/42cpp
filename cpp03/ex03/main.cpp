@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 22:14:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:36:51 by edvieira         ###   ########.fr       */
+/*   Created: 2025/04/09 17:55:35 by edvieira          #+#    #+#             */
+/*   Updated: 2025/04/10 16:54:11 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-#include "Weapon.hpp"
-
-class HumanB
+int	main()
 {
-	private:
-		std::string		name;
-		Weapon			*wp;
-		bool			hasWeapon;
+	FragTrap *st1 = new FragTrap("test");
 
-	public:
-		void	attack();
-		void	setWeapon(Weapon &wp);
+	st1->highFiveGuys();
+	st1->attack("enemy");
+	st1->beRepaired(10);
+	st1->takeDamage(10);
 
-		HumanB(const HumanB &copy);
-		HumanB(std::string name);
-		HumanB();
-
-		HumanB& operator=(const HumanB&);
-		~HumanB();
-};
-
-#endif
+	delete st1;
+}

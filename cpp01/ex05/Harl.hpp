@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:34 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/09 17:44:33 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:49:40 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class Harl
 		void error( void );
 	public:
 		void complain( std::string level );
+
+		Harl& operator=(const Harl&);
 
 		Harl(Harl& cp);
 		Harl();

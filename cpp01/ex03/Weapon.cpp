@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:28 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/02 22:52:41 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:53:38 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,17 @@ void			Weapon::setType(std::string type)
 	this->type = type;
 }
 
-std::string		Weapon::getType()
+std::string		Weapon::getType(){ return (type); }
+
+Weapon &Weapon::operator=(const Weapon &other)
 {
-	return (type);
+	this->type = other.type;
+	return (*this);
+}
+
+Weapon::Weapon(const Weapon& cp)
+{
+	this->type = cp.type;
 }
 
 Weapon::Weapon(std::string type)
