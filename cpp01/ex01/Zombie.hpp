@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:40 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 17:54:12 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:15:44 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Zombie
 		Zombie(std:: string);
 		Zombie();
 
+		Zombie& operator=(const Zombie&);
 		~Zombie();
 };
 

@@ -49,6 +49,16 @@
 		"harl.hpp": "c",
 		"cstring": "cpp",
 		"map": "cpp",
-		"fstream": "cpp"
+		"fstream": "cpp",
+		"chrono": "cpp",
+		"format": "cpp",
+		"span": "cpp",
+		"sstream": "cpp",
+		"variant": "cpp",
+		"text_encoding": "cpp",
+		"charconv": "cpp",
+		"ctime": "cpp",
+		"ratio": "cpp",
+		"iomanip": "cpp"
 	}
 }

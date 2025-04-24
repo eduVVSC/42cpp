@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:44 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/07 16:17:33 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:24:10 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int main()
 {
-	std::string name = "daStack";
-	Zombie zb(NULL);
+	Zombie zb("daStack");
 	Zombie *zb2 = newZombie("daHeap");
 
 	randomChump("chris");
