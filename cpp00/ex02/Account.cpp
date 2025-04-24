@@ -6,16 +6,25 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:27:16 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/01 14:25:27 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/04/24 10:49:11 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <iostream>
+#include <iomanip>  // for std::put_time
+#include <ctime>
 
-	// private method
 	void	Account::_displayTimestamp( void ){
-		time_t timestamp;
-		std::cout << "[" << std::time(&timestamp) << "] ";
+		time_t	timestamp;
+		char	bf[20];
+
+		timestamp = time(NULL);
+		std::tm *now = localtime(&timestamp);
+		std::strftime(bf, sizeof(bf), "[%Y%m%d_%H%M%S]", now);
+		std::cout << bf << " ";
+/* 		timestamp = time(NULL);
+		std::cout << std::put_time(localtime(&timestamp), "[%Y%m%d_%H%M%S] "); */
 	}
 
 	int Account::_totalAmount = 0;
@@ -35,7 +44,7 @@
 
 		_displayTimestamp();
 		std::cout << "index:" << _accountIndex
-					<< ";ammout:" << _amount
+					<< ";amount:" << _amount
 					<< ";created" << std::endl;
 	}
 
@@ -50,7 +59,7 @@
 
 		_displayTimestamp();
 		std::cout << "index:" << _accountIndex
-					<< ";ammout:" << _amount
+					<< ";amount:" << _amount
 					<< ";created" << std::endl;
 	}
 
@@ -58,7 +67,7 @@
 	{
 		_displayTimestamp();
 		std::cout << "index:" << _accountIndex
-					<< ";ammout:" << _amount
+					<< ";amount:" << _amount
 					<< ";closed" << std::endl;
 	}
 
@@ -76,23 +85,23 @@
 
 		// display deposit details
 		_displayTimestamp();
-		std::cout << "index:" << _nbAccounts
+		std::cout << "index:" << _accountIndex
 					<< ";p_amount:" << oldAmount
 					<< ";deposit:" << deposit
-					<< ";ammount:" << _amount
+					<< ";amount:" << _amount
 					<< ";nb_deposits:" << _nbDeposits
 					<< std::endl;
 	}
 
 	bool	Account::makeWithdrawal( int withdrawal )
 	{
-		int		oldAmount = 0;
+		int		oldAmount = _amount;
 
 		if (_amount < withdrawal)
 		{
 			// refused message display
 			_displayTimestamp();
-			std::cout << "index:" << _nbAccounts
+			std::cout << "index:" << _accountIndex
 						<< ";p_amount:" << _amount
 						<< ";withdrawal:refused"
 						<< std::endl;
@@ -107,10 +116,10 @@
 
 		// success message display
 		_displayTimestamp();
-		std::cout << "index:" << _nbAccounts
+		std::cout << "index:" << _accountIndex
 					<< ";p_amount:" << oldAmount
 					<< ";withdrawal:" << withdrawal
-					<< ";ammount:" << _amount
+					<< ";amount:" << _amount
 					<< ";nb_withdrawals:" << _nbWithdrawals
 					<< std::endl;
 
@@ -130,9 +139,10 @@
 	/// @brief print each account info and status if it is closed
 	void	Account::displayStatus( void ) const {
 		_displayTimestamp();
+
 		std::cout << "index:" << _accountIndex
 			<< ";amount:" << _amount
-			<< ";deposit:" << _nbDeposits
+			<< ";deposits:" << _nbDeposits
 			<< ";withdrawals:" << _nbWithdrawals
 			<< std::endl;
 	}
@@ -144,5 +154,6 @@
 					<< ";total:" << _totalAmount
 					<< ";deposits:" << _totalNbDeposits
 					<< ";withdrawals:" << _totalNbWithdrawals << std::endl;
+
 		// should I print all the accounts
 	}

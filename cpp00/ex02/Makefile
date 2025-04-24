@@ -6,13 +6,13 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/04/01 12:37:52 by edvieira         ###   ########.fr        #
+#    Updated: 2025/04/24 10:44:04 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 C++ = c++
-C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+C++_FLAGS = -Wall -Wextra -Werror -std=c++98
 INFILES = 	tests.cpp\
 			Account.cpp\
 
