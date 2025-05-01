@@ -28,8 +28,7 @@ bool is_only_num(std::string input)
 	return (true);
 }
 
-
-void add(PhoneBook *pb)
+bool add(PhoneBook *pb)
 {
 	std::string fName;
 	std::string lName;
@@ -37,19 +36,35 @@ void add(PhoneBook *pb)
 	std::string number;
 
 	std::cout << "Enter contact first name: ";
-	std::getline(std::cin, fName);
+	if (!std::getline(std::cin, fName))
+	{
+		if (std::cin.eof())
+			return (false);
+	}
 
 	std::cout << "Enter contact last name: ";
-	std::getline(std::cin, lName);
+	if (!std::getline(std::cin, lName))
+	{
+		if (std::cin.eof())
+			return (false);
+	}
 
 	std::cout << "Enter contact nick name: ";
-	std::getline(std::cin, nName);
+	if (!std::getline(std::cin, nName))
+	{
+		if (std::cin.eof())
+			return (false);
+	}
 
 	std::cout << "Enter contact phone: ";
 	do
 	{
-		std::getline(std::cin, number);
-		if (!isValidPhoneNum(number))
+		if (!std::getline(std::cin, number))
+		{
+			if (std::cin.eof())
+				return (false);
+		}
+		if (number.empty() && !isValidPhoneNum(number))
 			std::cout << "Wrong phone number given, need to be only 9 numbers: ";
 		else
 			break;
@@ -59,9 +74,10 @@ void add(PhoneBook *pb)
 	pb->addContact(c);
 
 	std::cout << "Contact created!!" << std::endl;
+	return (true);
 }
 
-void search(PhoneBook pb)
+bool search(PhoneBook pb)
 {
 	std::string	s;
 	int		val;
@@ -70,14 +86,18 @@ void search(PhoneBook pb)
 	if (pb.getManyContact() == 0)
 	{
 		std::cout << "There are still no contacts added to the Phonebook!" << std::endl;
-		return ;
+		return (true);
 	}
 
 	pb.displayPhoneList();
 
 	do {
 		std::cout << "Enter contact index to see more info: ";
-		std::getline(std::cin, s);
+		if (!std::getline(std::cin, s))
+		{
+			if (std::cin.eof())
+				return (false);
+		}
 		if (!is_only_num(s))
 			std::cout << "String with something different than numbers!	" << std::endl;
 		else
@@ -88,6 +108,7 @@ void search(PhoneBook pb)
 		}
 	} while (val < 0 || val > (pb.getManyContact() - 1));
 	pb.displayContactInfo(val);
+	return (true);
 }
 
 int main()
@@ -100,13 +121,24 @@ int main()
 	std::cout << "------------------------------" << std::endl;
 	do {
 		std::cout << "Enter action: ";
-		std::getline(std::cin, action);
+		if (!std::getline(std::cin, action))
+		{
+			if (std::cin.eof())
+				return (1);
+			std::cin.clear();
+		}
 		if (action == "EXIT")
 			return (0);
 		else if (action == "ADD")
-			add(&p1);
+		{
+			if (!add(&p1))
+				return (1);
+		}
 		else if (action == "SEARCH")
-			search(p1);
+		{
+			if (!search(p1))
+					return (1);
+		}
 		std::cout << "--------ended while loop--------" << std::endl;
 	} while (1);
 	return (0);

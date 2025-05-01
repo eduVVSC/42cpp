@@ -8,6 +8,8 @@ class PhoneBook
 private:
 	Contact		contactList[8];
 	static int	manyContactsAdded;
+
+	std::string	getPrintableName(std::string toPrint);
 public:
 	PhoneBook();
 	~PhoneBook();

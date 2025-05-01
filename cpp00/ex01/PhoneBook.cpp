@@ -22,6 +22,14 @@ void PhoneBook::displayContactInfo(int which)
 	std::cout << contactList[which].toString() << std::endl;
 }
 
+std::string PhoneBook::getPrintableName(std::string toPrint){
+	if (toPrint.length() > 10)
+		return (toPrint.substr(0, 9) + ".");
+	else
+		return (toPrint);
+}
+
+
 void PhoneBook::displayPhoneList(){
 	std::cout << std::string(50, '-') << std::endl;
 	std::cout << std::setw(10) << "Index" << " | "
@@ -34,9 +42,9 @@ void PhoneBook::displayPhoneList(){
 	for (size_t i = 0; i < (size_t)manyContactsAdded; i++)
 	{
 		std::cout << std::setw(10) << i << " | "
-				  << std::setw(10) << contactList[i].getFirstName().substr(0, 9) << " | "
-				  << std::setw(10) << contactList[i].getLastName().substr(0, 9) << " | "
-				  << std::setw(10) << contactList[i].getNickName().substr(0, 9) << " | " << std::endl;
+				  << std::setw(10) << getPrintableName(contactList[i].getFirstName()) << " | "
+				  << std::setw(10) << getPrintableName(contactList[i].getLastName()) << " | "
+				  << std::setw(10) << getPrintableName(contactList[i].getNickName()) << " | " << std::endl;
 	}
 	std::cout << std::string(50, '-') << std::endl;
 }
