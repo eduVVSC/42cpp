@@ -49,7 +49,16 @@
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"cinttypes": "cpp",
-		"typeinfo": "cpp"
+		"typeinfo": "cpp",
+		"charconv": "cpp",
+		"ratio": "cpp",
+		"variant": "cpp",
+		"chrono": "cpp",
+		"map": "cpp",
+		"format": "cpp",
+		"fstream": "cpp",
+		"span": "cpp",
+		"text_encoding": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

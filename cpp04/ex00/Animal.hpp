@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:55:59 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/01 17:45:42 by edvieira         ###   ########.fr       */
+/*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
+/*   Updated: 2025/05/01 18:48:49 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#ifndef ANIMAL_H
+# define ANIMAL_H
 
 # include <string>
-# include <iostream>
+#include <iostream>
 
-class ClapTrap
+class Animal
 {
-	private:
-		std::string	name;
-		unsigned int			hitPoints;
-		unsigned int			energyPoint;
-		unsigned int			attackDamage;
+	protected:
+		std::string type;
 
 	public:
-		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
+		virtual void makeSound() const;
+		std::string getType() const;
 
-		ClapTrap(std::string name);
-		ClapTrap(ClapTrap &cp);
-		~ClapTrap();
+		Animal&operator=(Animal const&);
 
-		ClapTrap&	operator=(ClapTrap const&);
+		Animal(Animal &other);
+		Animal();
+		~Animal();
 };
 
 #endif
