@@ -6,14 +6,12 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:57:07 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/01 18:51:30 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:56:28 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "Dog.hpp"
-
-// Search what does the virtual method do differently
 
 int	main(void)
 {

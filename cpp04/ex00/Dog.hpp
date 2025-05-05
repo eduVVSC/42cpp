@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/01 18:49:02 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:47:34 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ class Dog: public Animal
 		virtual void makeSound() const;
 
 		Dog&operator=(Dog const&);
+
+		Dog(Dog &dog);
 		Dog();
+
 		~Dog();
 };
 
