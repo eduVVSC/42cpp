@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:42 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 19:40:58 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:50:44 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,11 @@ Zombie::Zombie(std::string name)
 {
 	this->name = name;
 
-	//std::cout  << name <<  "- Zombie CREATED" << std::endl;
-}
-
-Zombie::Zombie(const Zombie& copy)
-{
-	this->name = copy.name;
-
-	//std::cout  << name <<  "- Zombie CREATED" << std::endl;
+	std::cout << "\t ➕ Zombie CREATED" << name << std::endl;
 }
 
 Zombie::~Zombie()
 {
-	std::cout << "💀 Destroyer zombie ->" << name << std::endl;
+	std::cout << "\t💀 Destroyer zombie " << name << std::endl;
 }
 

@@ -6,13 +6,13 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/04/02 22:50:48 by edvieira         ###   ########.fr        #
+#    Updated: 2025/05/05 15:10:53 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 C++ = c++
-C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+C++_FLAGS = -Wall -Wextra -Werror -std=c++98
 INFILES = 	main.cpp\
 			Weapon.cpp\
 			HumanA.cpp\

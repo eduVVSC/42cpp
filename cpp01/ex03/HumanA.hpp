@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:31 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 19:48:13 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:09:21 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@ class HumanA
 	private:
 		std::string		name;
 		Weapon			&wp;
+
 	public:
 		void	attack();
 		void	setWeapon(Weapon &wp);
 
-		HumanA(Weapon &wp); // does the constructor empty need to have the gun? I think so!
-		HumanA(const HumanA& copy);
+		HumanA(Weapon &wp);
 		HumanA(std::string name, Weapon &wp);
 
-		HumanA& operator=(const HumanA&);
 		~HumanA();
 };
 

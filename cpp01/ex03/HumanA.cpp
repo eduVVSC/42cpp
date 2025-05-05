@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:41 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 19:48:27 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:08:23 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	HumanA::setWeapon(Weapon &wp)
 }
 
 HumanA::HumanA(std::string name, Weapon &wp) : name(name), wp(wp) { }
-
-HumanA::HumanA(const HumanA &copy) : name(copy.name), wp(copy.wp) { }
 
 HumanA::HumanA(Weapon &wp) : name("not declared"), wp(wp) { }
 

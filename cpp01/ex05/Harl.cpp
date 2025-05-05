@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:51:12 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:24:40 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void Harl::error( void )
 {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
-
-Harl::Harl(Harl& cp) { (void) cp; }
 
 Harl::Harl() { }
 

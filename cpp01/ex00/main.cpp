@@ -6,20 +6,25 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:44 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 15:24:10 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:42:25 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
+// goal of the exercise
+// see which cases are better to the memory to be allocated in heap and in stack
+//  and the difference between them.
 int main()
 {
-	Zombie zb("daStack");
-	Zombie *zb2 = newZombie("daHeap");
+	std:: cout << " --> Test of stack memory! Going inside randomChump function:" << std::endl;
+		randomChump("ofStack");
+	std::cout << "\n--------back in main!!--------\n" << std::endl;
 
-	randomChump("chris");
+	std:: cout << " -->  Test of heap memory! Going inside newZombie function:" << std::endl;
+		Zombie *zb2 = newZombie("ofHeap");
+	std::cout << "\n--------back in main!!--------\n" << std::endl;
 
-	zb.announce();
 	zb2->announce();
 	delete zb2;
 	return (0);

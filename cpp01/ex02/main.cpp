@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:01:26 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 16:20:53 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:05:16 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int main()
 {
-	std::string str = "HI THIS IS BRAIN"	;
+	std::string str = "HI THIS IS BRAIN";
 	std::string *stringPTR = &str;
 	std::string &stringREF = str;
-	std::string str2 = str;
+	std::string str2 = str; // added to show equals behaviour when not using reference!
 
 	std::cout << "--Address value--" << std::endl;
 	std::cout << "str    |" << &str << "|"<< std::endl;

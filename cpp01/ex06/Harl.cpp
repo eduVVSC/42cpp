@@ -6,13 +6,33 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:53:35 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:36:45 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 #include <map>
 #include <functional>
+
+enum class ComplainType{
+	DEBUG,
+	INFO,
+	WARNING,
+	ERROR,
+	NONE,
+};
+
+ComplainType Harl::getHash(std::string level) {
+	if (level == "DEBUG")
+		return ComplainType::DEBUG;
+	if (level == "INFO")
+		return ComplainType::INFO;
+	if (level == "WARNING")
+		return ComplainType::WARNING;
+	if (level == "ERROR")
+		return ComplainType::ERROR;
+	return ComplainType::NONE;
+}
 
 void Harl::complain( std::string level )
 {
@@ -33,13 +53,42 @@ void Harl::complain( std::string level )
 	printState = false;
 
 	// without switch
-	for (int i = 0; i < 4; ++i)
+	/* for (int i = 0; i < 4; ++i)
 	{
 		if (arrStr[i] == level || printState)
 		{
 			(this->*arrVoid[i])();
 			printState = true;
 		}
+	} */
+	switch (getHash(level))
+	{
+
+		case ComplainType::DEBUG:
+			debug();
+			info();
+			warning();
+			error();
+			break ;
+
+		case ComplainType::INFO:
+			info();
+			warning();
+			error();
+			break ;
+
+		case ComplainType::WARNING:
+			warning();
+			error();
+			break;
+
+		case ComplainType::ERROR:
+			error();
+			break ;
+
+		default:
+			std::cout << "[ Probably complaning about insignificant problems ]" << std::endl;
+			break;
 	}
 
 	if (printState == false)
@@ -69,8 +118,6 @@ void Harl::error( void )
 	std::cout << "[ ERROR ]" << std::endl;
 	std::cout << "This is unacceptable! I want to speak to the manager now.\ns" << std::endl;
 }
-
-Harl::Harl(Harl& cp) { (void) cp; }
 
 
 Harl::Harl()

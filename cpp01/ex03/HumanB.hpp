@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:14:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:36:51 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:07:57 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ class HumanB
 		void	attack();
 		void	setWeapon(Weapon &wp);
 
-		HumanB(const HumanB &copy);
 		HumanB(std::string name);
 		HumanB();
 
-		HumanB& operator=(const HumanB&);
 		~HumanB();
 };
 

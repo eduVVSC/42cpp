@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:32:09 by edvieira          #+#    #+#             */
-/*   Updated: 2025/04/24 21:48:12 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:07:07 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,24 @@
 #include <cstring>
 #include <string>
 
+
+// s1 to be replaced by s2
 void writeLineChange(std::ofstream *writeFile, std:: string line, char *s1, char *s2)
 {
-	const char *lineInChar = line.c_str();
-	size_t	whereToStop;
-	size_t	i = -1;
-
-	whereToStop = line.find(s1);
-	while (++i < whereToStop)
-		writeFile->put(lineInChar[i]);
-
-
-	for (size_t j = 0; j < strlen(s2); j++)
-		writeFile->put(s2[j]);
-
-	i = i + strlen(s1);
-	while (++i < line.length())
-		writeFile->put(lineInChar[i]);
+	(void) s2;
+	(void) writeFile;
+	for (size_t i = 0; i < line.length(); i++)
+	{
+		if (i == line.find(s1, i))
+		{
+			size_t wordLen = strlen(s2);
+			for (size_t i = 0; i < wordLen; i++)
+				writeFile->put(s2[i]);
+			i += strlen(s1) - 1;
+		}
+		else
+			writeFile->put(line.at(i));
+	}
 }
 
 int	main(int ac, char **av)
@@ -51,12 +52,9 @@ int	main(int ac, char **av)
 
 			while (getline(readFile, line))
 			{
-				std::cout << line;
-				/* if (!line.find(av[2]))// error is in here!
-					//writeLineChange(&writeFile, line, av[2], av[3]);
-				writeFile.write(line.c_str(), line.length());z */
+				std::cout << line << std::endl;
+				writeLineChange(&writeFile, line, av[2], av[3]);
 				writeFile.put('\n');
-				std::cout << std::endl;
 			}
 
 			readFile.close();
