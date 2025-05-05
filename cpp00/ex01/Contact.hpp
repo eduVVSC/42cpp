@@ -14,10 +14,11 @@ class Contact
 		std::string		firstName;
 		std::string		lastName;
 		std::string		nickName;
+		std::string		secret;
 		std::string		phone;
 	public:
 		// Constructor
-		Contact(std::string firstName, std::string lastName, std::string nickName, std::string phone);
+		Contact(std::string firstName, std::string lastName, std::string nickName, std::string phone, std::string secret);
 		Contact();
 
 		// Destructor
@@ -27,6 +28,7 @@ class Contact
 		std:: string getFirstName();
 		std:: string getLastName();
 		std:: string getNickName();
+		std:: string getSecret();
 		std:: string getPhone();
 
 		std::string toString();

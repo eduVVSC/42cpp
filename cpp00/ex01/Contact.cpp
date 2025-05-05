@@ -8,10 +8,11 @@ std:: string Contact::getNickName()		{ return (this->nickName); }
 std:: string Contact::getPhone()		{ return (this->phone); }
 
 std::string Contact::toString() {
-	return "\n-------Contact-------\nFirst Name: " + firstName + "\n" +
-		   "Last Name: " + lastName + "\n" +
-		   "Nick Name: " + nickName + "\n" +
-		   "Phone: " + phone;
+	return "\n-------Contact-------\nFirst Name: " + this->firstName + "\n" +
+			"Last Name: " + this->lastName + "\n" +
+			"Nick Name: " + this->nickName + "\n" +
+			"Phone: " + this->phone + "\n" +
+			"Secret: " + this->secret;
 }
 
 bool Contact::equals(Contact other){
@@ -23,12 +24,13 @@ bool Contact::equals(Contact other){
 	return (false);
 }
 
-Contact::Contact(std::string firstName, std::string lastName, std::string nickName, std::string phone)
+Contact::Contact(std::string firstName, std::string lastName, std::string nickName, std::string phone, std::string secret)
 {
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->nickName = nickName;
 	this->phone = phone;
+	this->secret = secret;
 }
 
 Contact::Contact()

@@ -3,16 +3,17 @@
 
 void PhoneBook::addContact(Contact newContact)
 {
-	if (manyContactsAdded >= 8)
+	int	locationToAdd;
+
+	locationToAdd = manyContactsAdded;
+	if (locationToAdd >= 8)
 	{
-		while (manyContactsAdded >= 8)
-			manyContactsAdded -= 8;
-		contactList[manyContactsAdded] = newContact;
+		while (locationToAdd >= 8)
+			locationToAdd -= 8;
+		contactList[locationToAdd] = newContact;
 	}
 	else
-	{
-		contactList[manyContactsAdded] = newContact;
-	}
+		contactList[locationToAdd] = newContact;
 	manyContactsAdded++;
 }
 int PhoneBook::manyContactsAdded = 0;
@@ -29,8 +30,8 @@ std::string PhoneBook::getPrintableName(std::string toPrint){
 		return (toPrint);
 }
 
-
 void PhoneBook::displayPhoneList(){
+	int manyContacts = manyContactsAdded;
 	std::cout << std::string(50, '-') << std::endl;
 	std::cout << std::setw(10) << "Index" << " | "
 			  << std::setw(10) << "First Name" << " | "
@@ -38,8 +39,9 @@ void PhoneBook::displayPhoneList(){
 			  << std::setw(10) << "Nickname" << std::endl;
 	std::cout << std::string(50, '-') << std::endl;
 
-	// change the substr function to your own to properly handle the way that it wants it to be printed
-	for (size_t i = 0; i < (size_t)manyContactsAdded; i++)
+	if (manyContacts > 8)
+		manyContacts = 8;
+	for (size_t i = 0; i < (size_t)manyContacts; i++)
 	{
 		std::cout << std::setw(10) << i << " | "
 				  << std::setw(10) << getPrintableName(contactList[i].getFirstName()) << " | "

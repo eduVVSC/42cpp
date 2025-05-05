@@ -8,9 +8,7 @@ bool isValidPhoneNum(std::string numb)
 		return (false);
 	for (size_t i = 0; i < numb.length(); i++)
 	{
-		if (isalpha(numb[i]))
-			return (false);
-		else if(!isalnum(numb[i]))
+		if (numb.at(i) > '9' || numb.at(i) < '0')
 			return (false);
 	}
 	return (true);
@@ -34,43 +32,71 @@ bool add(PhoneBook *pb)
 	std::string lName;
 	std::string nName;
 	std::string number;
+	std::string secret;
 
-	std::cout << "Enter contact first name: ";
-	if (!std::getline(std::cin, fName))
+	while (1)
 	{
-		if (std::cin.eof())
-			return (false);
+		std::cout << "Enter contact first name: ";
+		if (!std::getline(std::cin, fName))
+		{
+			if (std::cin.eof())
+				return (false);
+		}
+		if (!fName.empty() && (fName != "\n"))
+			break ;
 	}
 
-	std::cout << "Enter contact last name: ";
-	if (!std::getline(std::cin, lName))
+	while (1)
 	{
-		if (std::cin.eof())
-			return (false);
+		std::cout << "Enter contact last name: ";
+		if (!std::getline(std::cin, lName))
+		{
+			if (std::cin.eof())
+				return (false);
+		}
+		if (!lName.empty() && (lName != "\n"))
+			break ;
 	}
 
-	std::cout << "Enter contact nick name: ";
-	if (!std::getline(std::cin, nName))
+	while (1)
 	{
-		if (std::cin.eof())
-			return (false);
+		std::cout << "Enter contact nick name: ";
+		if (!std::getline(std::cin, nName))
+		{
+			if (std::cin.eof())
+				return (false);
+		}
+		if (!nName.empty() && (nName != "\n"))
+			break ;
 	}
 
 	std::cout << "Enter contact phone: ";
-	do
+	while (1)
 	{
 		if (!std::getline(std::cin, number))
 		{
 			if (std::cin.eof())
 				return (false);
 		}
-		if (number.empty() && !isValidPhoneNum(number))
+		if (number.empty() || !isValidPhoneNum(number))
 			std::cout << "Wrong phone number given, need to be only 9 numbers: ";
 		else
 			break;
-	} while (1);
+	}
 
-	Contact c(fName, lName, nName, number);
+	while (1)
+	{
+		std::cout << "Enter contact secret: ";
+		if (!std::getline(std::cin, secret))
+		{
+			if (std::cin.eof())
+				return (false);
+		}
+		if (!secret.empty() && (secret != "\n"))
+			break ;
+	}
+
+	Contact c(fName, lName, nName, number, secret);
 	pb->addContact(c);
 
 	std::cout << "Contact created!!" << std::endl;
@@ -99,12 +125,12 @@ bool search(PhoneBook pb)
 				return (false);
 		}
 		if (!is_only_num(s))
-			std::cout << "String with something different than numbers!	" << std::endl;
+			std::cout << "String with something different than numbers!" << std::endl;
 		else
 		{
 			val = atoi(s.c_str());
 			if (val < 0 || val > (pb.getManyContact() - 1))
-				std::cout << "Wrong number given!" << pb.getManyContact() << std::endl;
+				std::cout << "Wrong number given!" << std::endl;
 		}
 	} while (val < 0 || val > (pb.getManyContact() - 1));
 	pb.displayContactInfo(val);
@@ -113,12 +139,26 @@ bool search(PhoneBook pb)
 
 int main()
 {
-	PhoneBook	p1;
+	PhoneBook	pb;
 	std::string	action;
 
 	std::cout << "------------------------------" << std::endl;
 	std::cout << "Welcome to my PhoneBook!!" << std::endl;
 	std::cout << "------------------------------" << std::endl;
+	/*Contact c1("aaaa", "aaaa", "aaaa", "123123123", "aaaa");
+	Contact c2("bbbbb", "bbbbb", "bbbbb", "123123123", "bbbbb");
+	Contact c3("ccccc", "ccccc", "ccccc", "123123123", "ccccc");
+	for (size_t i = 0; i < 8; i++)
+	{
+		pb.addContact(c1);
+	}
+	pb.displayPhoneList();
+	pb.addContact(c2);
+	pb.displayPhoneList();
+	pb.addContact(c3);
+	pb.displayPhoneList();
+	pb.displayContactInfo(1); */
+
 	do {
 		std::cout << "Enter action: ";
 		if (!std::getline(std::cin, action))
@@ -131,15 +171,14 @@ int main()
 			return (0);
 		else if (action == "ADD")
 		{
-			if (!add(&p1))
+			if (!add(&pb))
 				return (1);
 		}
 		else if (action == "SEARCH")
 		{
-			if (!search(p1))
+			if (!search(pb))
 					return (1);
 		}
-		std::cout << "--------ended while loop--------" << std::endl;
 	} while (1);
 	return (0);
 }
