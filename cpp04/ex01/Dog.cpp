@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:13:01 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:51:24 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "Dog.hpp"
 
-void Animal::makeSound() const
+void Dog::makeSound() const
 {
-	std::cout << "I do not know what sound do i make?!?!?!?" << std::endl;
-}
-std::string Animal::getType() const
-{
-	return (this->type);
+	std::cout << "Bark Bark Bark!" << std::endl;
 }
 
-Animal::Animal()
+Brain *Dog::getBrain(){ return (this->brain); }
+
+Dog::Dog(Dog &dog) : Animal()
 {
-	this->type = "I do not know what the fuck i am?!?!?!?";
-	std::cout << "Creating some animal" << std::endl;
+	this->brain = dog.getBrain();
+	this->type = dog.getType();
+	std::cout << "creating dog!" << std::endl;
 }
 
-Animal::Animal(Animal &other)
+Dog::Dog() : Animal()
 {
-	this->type = other.getType();
+	this->type = "Dog";
+	this->brain = new Brain();
+	std::cout << "creating dog!" << std::endl;
 }
 
-Animal::~Animal()
+Dog::~Dog()
 {
-}
-
-Animal &Animal::operator=(const Animal &other){
-	this->type = other.getType();
-	return (*this);
+	if (brain)
+		delete brain;
 }

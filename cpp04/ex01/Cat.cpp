@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:13:01 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:51:01 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "Cat.hpp"
 
-void Animal::makeSound() const
-{
-	std::cout << "I do not know what sound do i make?!?!?!?" << std::endl;
-}
-std::string Animal::getType() const
-{
-	return (this->type);
+void Cat::makeSound() const {
+	std::cout << "Meow!!" << std::endl;
 }
 
-Animal::Animal()
-{
-	this->type = "I do not know what the fuck i am?!?!?!?";
-	std::cout << "Creating some animal" << std::endl;
+Brain *Cat::getBrain(){ return (this->brain); }
+
+Cat::Cat(Cat &cp) : Animal (){
+	this->brain = cp.getBrain();
+	this->type = cp.getType();
+	std::cout << "Copying cat!" << std::endl;
 }
 
-Animal::Animal(Animal &other)
+Cat::Cat() : Animal()
 {
-	this->type = other.getType();
+	this->brain = new Brain();
+	this->type = "cat";
+	std::cout << "creating cat!" << std::endl;
 }
 
-Animal::~Animal()
-{
-}
-
-Animal &Animal::operator=(const Animal &other){
+Cat &Cat::operator=(const Cat &other){
 	this->type = other.getType();
 	return (*this);
+}
+
+Cat::~Cat()
+{
+	if (brain)
+		delete brain;
 }

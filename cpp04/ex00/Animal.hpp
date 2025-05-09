@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/05 11:54:41 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:13:16 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ class Animal
 		virtual void makeSound() const;
 		std::string getType() const;
 
-		Animal&operator=(Animal const&);
+		Animal&operator=(const Animal &other);
 
 		Animal(Animal &other);
+
 		Animal();
-		~Animal();
+		virtual ~Animal();
 };
 
 #endif

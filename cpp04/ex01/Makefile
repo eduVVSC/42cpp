@@ -6,14 +6,14 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/05/09 14:36:49 by edvieira         ###   ########.fr        #
+#    Updated: 2025/05/09 15:51:35 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 C++ = c++
 C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
-INFILES = 	main.cpp\
+INFILES = 	main.cpp Brain.cpp\
 			Animal.cpp Dog.cpp Cat.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)

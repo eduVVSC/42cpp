@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 14:12:08 by edvieira         ###   ########.fr       */
+/*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
+/*   Updated: 2025/05/09 14:57:42 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_H
-# define DOG_H
+#include "Cat.hpp"
 
-# include "Animal.hpp"
+void Cat::makeSound() const {
+	std::cout << "Meow!!" << std::endl;
+}
 
-class Dog: public Animal
+Cat::Cat(Cat &cp) : Animal (){
+	this->type = cp.getType();
+	std::cout << "Copying cat!" << std::endl;
+}
+
+Cat &Cat::operator=(const Cat &other){
+	this->type = other.getType();
+	return (*this);
+}
+
+Cat::Cat() : Animal()
 {
-	private:
+	this->type = "cat";
+	std::cout << "creating cat!" << std::endl;
+}
 
-	public:
-		virtual void makeSound() const;
-
-		Dog&operator=(Dog const&);
-
-		Dog(Dog &dog);
-		Dog();
-
-		~Dog();
-};
-
-#endif
+Cat::~Cat()
+{
+}

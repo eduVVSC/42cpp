@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/05 11:44:02 by edvieira         ###   ########.fr       */
+/*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
+/*   Updated: 2025/05/09 15:42:51 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#ifndef DOG_H
+# define DOG_H
 
-void Cat::makeSound()
-{
-	std::cout << "Meow!!" << std::endl;
-}
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-Cat::Cat() : Animal()
+class Dog: public Animal
 {
-	this->type = "cat";
-	std::cout << "creating cat!" << std::endl;
-}
+	private:
+		Brain *brain;
 
-Cat::~Cat()
-{
-}
+	public:
+		virtual void makeSound() const;
+		Brain *getBrain();
+
+		Dog&operator=(Dog const&);
+
+		Dog(Dog &dog);
+		Dog();
+
+		~Dog();
+};
+
+#endif
