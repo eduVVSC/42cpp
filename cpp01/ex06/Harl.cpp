@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/05 16:36:45 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:00:30 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 #include <map>
 #include <functional>
 
-enum class ComplainType{
-	DEBUG,
-	INFO,
-	WARNING,
-	ERROR,
-	NONE,
-};
-
-ComplainType Harl::getHash(std::string level) {
+int Harl::getHash(std::string level) {
 	if (level == "DEBUG")
 		return ComplainType::DEBUG;
 	if (level == "INFO")
@@ -36,6 +28,9 @@ ComplainType Harl::getHash(std::string level) {
 
 void Harl::complain( std::string level )
 {
+	/*
+		// ====== without  switch ======  //
+
 	bool		printState;
 	std::string	arrStr[4];
 	void (Harl::*arrVoid[4])();
@@ -52,18 +47,19 @@ void Harl::complain( std::string level )
 
 	printState = false;
 
-	// without switch
-	/* for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		if (arrStr[i] == level || printState)
 		{
 			(this->*arrVoid[i])();
 			printState = true;
 		}
-	} */
+	}
+	if (printState == false)
+		std::cout << "[ Probably complaning about insignificant problems ]" << std::endl; */
+
 	switch (getHash(level))
 	{
-
 		case ComplainType::DEBUG:
 			debug();
 			info();
@@ -90,9 +86,6 @@ void Harl::complain( std::string level )
 			std::cout << "[ Probably complaning about insignificant problems ]" << std::endl;
 			break;
 	}
-
-	if (printState == false)
-		std::cout << "[ Probably complaning about insignificant problems ]" << std::endl;
 }
 
 void Harl::debug( void )

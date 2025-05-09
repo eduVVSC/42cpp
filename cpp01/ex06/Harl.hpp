@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:11:34 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/05 16:31:28 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 13:49:52 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include <string>
 # include <iostream>
 
+struct ComplainType {
+	enum Type {
+		DEBUG,
+		INFO,
+		WARNING,
+		ERROR,
+		NONE
+	};
+};
+
 class Harl
 {
 	private:
@@ -23,7 +33,7 @@ class Harl
 		void info( void );
 		void warning( void );
 		void error( void );
-		ComplainType getHash(std::string level);
+		int getHash(std::string level);
 	public:
 
 		void complain( std::string level );
