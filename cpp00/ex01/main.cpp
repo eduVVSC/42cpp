@@ -34,7 +34,7 @@ bool add(PhoneBook *pb)
 	std::string number;
 	std::string secret;
 
-	while (1)
+	do
 	{
 		std::cout << "Enter contact first name: ";
 		if (!std::getline(std::cin, fName))
@@ -42,11 +42,9 @@ bool add(PhoneBook *pb)
 			if (std::cin.eof())
 				return (false);
 		}
-		if (!fName.empty() && (fName != "\n"))
-			break ;
-	}
+	} while (!(!fName.empty() && (fName != "\n")));
 
-	while (1)
+	do
 	{
 		std::cout << "Enter contact last name: ";
 		if (!std::getline(std::cin, lName))
@@ -54,11 +52,9 @@ bool add(PhoneBook *pb)
 			if (std::cin.eof())
 				return (false);
 		}
-		if (!lName.empty() && (lName != "\n"))
-			break ;
-	}
+	} while (!(!lName.empty() && (lName != "\n")));
 
-	while (1)
+	do
 	{
 		std::cout << "Enter contact nick name: ";
 		if (!std::getline(std::cin, nName))
@@ -66,9 +62,7 @@ bool add(PhoneBook *pb)
 			if (std::cin.eof())
 				return (false);
 		}
-		if (!nName.empty() && (nName != "\n"))
-			break ;
-	}
+	} while (!(!nName.empty() && (nName != "\n")));
 
 	std::cout << "Enter contact phone: ";
 	while (1)
@@ -84,17 +78,14 @@ bool add(PhoneBook *pb)
 			break;
 	}
 
-	while (1)
-	{
+	do{
 		std::cout << "Enter contact secret: ";
 		if (!std::getline(std::cin, secret))
 		{
 			if (std::cin.eof())
 				return (false);
 		}
-		if (!secret.empty() && (secret != "\n"))
-			break ;
-	}
+	} while (!(!secret.empty() && (secret != "\n")));
 
 	Contact c(fName, lName, nName, number, secret);
 	pb->addContact(c);
