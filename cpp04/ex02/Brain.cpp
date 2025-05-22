@@ -43,7 +43,7 @@ std::string *Brain::getIdeas(){ return (this->ideas);}
 
 Brain::Brain()
 {
-	std::cout << "Brain Created!"<< std::endl;
+	std::cout << "🧠 Brain Created!"<< std::endl;
 }
 
 Brain &Brain::operator=(const Brain &other){
@@ -59,4 +59,5 @@ Brain::Brain(Brain &other)
 }
 
 Brain::~Brain(){
+	std::cout << "🧠 Brain Destroyed!"<< std::endl;
 }

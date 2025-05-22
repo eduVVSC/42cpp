@@ -36,8 +36,5 @@ Cat &Cat::operator=(const Cat &other){
 	return (*this);
 }
 
-Cat::~Cat()
-{
-	if (brain)
-		delete brain;
+Cat::~Cat(){
 }

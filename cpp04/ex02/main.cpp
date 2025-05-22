@@ -23,7 +23,7 @@ int	main(void)
 	a4[0] = new Dog();
 	a4[1] = new Cat();
 	a4[2] = new Dog();
-	a4[3] = new Animal();
+	a4[3] = new Dog();
 	std::cout << std::endl;
 
 	for (size_t i = 0; i < 4; i++)

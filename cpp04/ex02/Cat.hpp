@@ -19,7 +19,6 @@
 class Cat: public Animal
 {
 	private:
-		Brain *brain;
 
 	public:
 		virtual void makeSound() const;

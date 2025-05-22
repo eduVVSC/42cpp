@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:42:51 by edvieira         ###   ########.fr       */
+/*   Created: 2025/05/01 17:57:07 by edvieira          #+#    #+#             */
+/*   Updated: 2025/05/09 15:52:29 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_H
-# define DOG_H
+# include "AMateria.hpp"
+# include "ICharacter.h.h"
+# include "Ice.hpp"
+#include "Cure.hpp"
 
-# include "Animal.hpp"
-# include "Brain.hpp"
-
-class Dog: public Animal
+int	main(void)
 {
-	private:
 
-	public:
-		virtual void makeSound() const;
-		Brain *getBrain();
+    return (1);
+}
 
-		Dog&operator=(Dog const&);
-
-		Dog(Dog &dog);
-		Dog();
-
-		~Dog();
-};
-
-#endif

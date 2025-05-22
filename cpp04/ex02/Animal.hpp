@@ -14,16 +14,18 @@
 # define ANIMAL_H
 
 # include <string>
-#include <iostream>
+# include <iostream>
+# include "Brain.hpp"
 
 
 class Animal
 {
 protected:
 	std::string type;
+	Brain *brain;
 
 public:
-	virtual void makeSound() const;
+	virtual void makeSound() const = 0;
 
 	std::string getType() const;
 
@@ -31,7 +33,6 @@ public:
 
 	Animal(Animal &other);
 	Animal();
-
 	virtual ~Animal();
 };
 #endif

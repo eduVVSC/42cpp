@@ -35,6 +35,4 @@ Dog::Dog() : Animal()
 
 Dog::~Dog()
 {
-	if (brain)
-		delete brain;
 }

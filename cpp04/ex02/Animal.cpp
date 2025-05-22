@@ -24,6 +24,7 @@ std::string Animal::getType() const
 Animal::Animal()
 {
 	this->type = "I do not know what the fuck i am?!?!?!?";
+	this->brain = new Brain();
 	std::cout << "Creating some animal" << std::endl;
 }
 
@@ -34,6 +35,8 @@ Animal::Animal(Animal &other)
 
 Animal::~Animal()
 {
+	if (brain)
+		delete brain;
 }
 
 Animal &Animal::operator=(const Animal &other){
