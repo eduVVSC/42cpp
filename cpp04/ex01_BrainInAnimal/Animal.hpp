@@ -14,13 +14,15 @@
 # define ANIMAL_H
 
 # include <string>
-#include <iostream>
+# include <iostream>
+# include "Brain.hpp"
 
 
 class Animal
 {
 protected:
 	std::string type;
+	Brain *brain;
 
 public:
 	virtual void makeSound() const;
