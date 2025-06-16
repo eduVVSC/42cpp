@@ -31,20 +31,18 @@ std::string Bureaucrat::getName() const{ return name; }
 
 // ====== constructor and destructors
 
-Bureaucrat::Bureaucrat(int grade, std::string name){
+Bureaucrat::Bureaucrat(int grade, std::string name) : name(name) {
   if (grade < maxGrade)
     throw GradeTooHighException("Grade too High!");
   if (grade > minGrade)
     throw GradeTooLowException("Grade too Low!");
 
   this->grade = grade;
-  this->name = name;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other){
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.getName()) {
   // no need to protect becuase it will be protected in the other bureaucrat
-  this->grade = other.grade;
-  this->name = other.name;
+  this->grade = other.getGrade();
 }
 
 Bureaucrat::~Bureaucrat(){}

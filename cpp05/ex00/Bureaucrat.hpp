@@ -16,7 +16,7 @@ class Bureaucrat {
        static const int maxGrade = 1;
 
        int grade;
-       std::string name;
+       const std::string name;
     public:
       // === Constructor
       Bureaucrat(int grade, std::string name);
