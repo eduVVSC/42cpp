@@ -14,12 +14,13 @@
 
 class Bureaucrat {
     private:
-       static const int minGrade = 150;
-       static const int maxGrade = 1;
+       static const int MIN_GRADE = 150;
+       static const int MAX_GRADE = 1;
 
-       int grade;
        const std::string name;
-    public:
+       int grade;
+
+   public:
       // === Constructor
       Bureaucrat(int grade, std::string name);
       Bureaucrat(const Bureaucrat& other);
@@ -37,6 +38,7 @@ class Bureaucrat {
       Bureaucrat& operator=(const Bureaucrat& other);
 };
 
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
 
 #endif //BUREAUCRAT_H

@@ -18,7 +18,7 @@ void Bureaucrat::signForm(Form form){
 }
 
 void Bureaucrat::sumGrade(){
-  if ((grade - 1) > maxGrade){
+  if ((grade - 1) > MAX_GRADE){
     grade--;
   }
   else {
@@ -28,7 +28,7 @@ void Bureaucrat::sumGrade(){
 }
 
 void Bureaucrat::subtractGrade(){
-  if ((grade + 1) < minGrade){
+  if ((grade + 1) < MIN_GRADE){
     grade++;
   }
   else {
@@ -44,9 +44,9 @@ std::string Bureaucrat::getName() const{ return name; }
 // ====== constructor and destructors
 
 Bureaucrat::Bureaucrat(int grade, std::string name) : name(name) {
-  if (grade < maxGrade)
+  if (grade < MAX_GRADE)
     throw GradeTooHighException("Grade too High!");
-  if (grade > minGrade)
+  if (grade > MIN_GRADE)
     throw GradeTooLowException("Grade too Low!");
 
   this->grade = grade;
@@ -55,6 +55,16 @@ Bureaucrat::Bureaucrat(int grade, std::string name) : name(name) {
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.getName()) {
   // no need to protect becuase it will be protected in the other bureaucrat
   this->grade = other.getGrade();
+}
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
+    os << bureaucrat.getName() << " has " << bureaucrat.getGrade() << " grade" << std::endl;
+    return os;
+}
+
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
+  other.getName() = this->getName();
+    return *this;
 }
 
 Bureaucrat::~Bureaucrat(){}

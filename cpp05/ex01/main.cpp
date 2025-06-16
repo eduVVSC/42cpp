@@ -1,74 +1,44 @@
 
 #include <iostream>
-#include "Bureaucrat.hpp"
+#include "Bureaucrats/Bureaucrat.hpp"
+#include "Forms/Form.hpp"
+
+void correctTest(Bureaucrat *b1) {
+    std::cout << "=============== Tests supposed to work ==============="<< std::endl;
+    try {
+        Form *f1 = new Form("form1", 100, 5);
+        Form *f2 = new Form("form2", 5, 5);
+
+        b1->signForm(*f1);
+        b1->signForm(*f2);
+    } catch (const std::exception &e) {
+      std::cout << e.what() << std::endl;
+    }
+}
 
 
-void creatingTest() {
-  std::cout << "======================\n" << "Creating test." << std::endl;
+void wrongTest(Bureaucrat * b1) {
+    std::cout << "=============== Tests not supposed to work ==============="<< std::endl;
   try {
-    Bureaucrat *b4 = new Bureaucrat(5, "normal test2");
-    std::cout << "b4 created: " << b4->getName() << " " << b4->getGrade() << std::endl;
-  } catch (const std::exception& e) {
-    std::cout << e.what() << std::endl;
-  }
-  try {
-    Bureaucrat *b3 = new Bureaucrat(150, "normal test1");
-    std::cout << "b3 created: " << b3->getName() << " " << b3->getGrade() << std::endl;
-  } catch (const std::exception& e) {
-    std::cout << e.what() << std::endl;
-  }
-  try {
-    Bureaucrat *b1 = new Bureaucrat(151, "testGradeTooLowException");
+    Form *f1 = new Form("form2", 1, 5);
 
-    std::cout << "b1 created: " << b1->getName() << " " << b1->getGrade() << std::endl;
-
-  } catch (const GradeTooLowException & e) {
-    std::cout << e.what() << std::endl;
-  }
-
-  try {
-    Bureaucrat *b2 = new Bureaucrat(-2, "testGradeTooLowException");
-    std::cout << "b2 created: " << b2->getName() << " " << b2->getGrade() << std::endl;
-  } catch (const GradeTooHighException & e) {
+    b1->signForm(*f1);
+  } catch (const std::exception &e) {
     std::cout << e.what() << std::endl;
   }
 }
-
-void operationsTest() {
-
-  std::cout << "======================\n" << "Operations test." << std::endl;
-  try {
-    Bureaucrat *b1 = new Bureaucrat(150, "testGradeTooHighException");
-
-    std::cout << "testing subtraction in " << b1->getName() << " " << b1->getGrade() << std::endl;
-
-    b1->sumGrade();
-    std::cout << "after add 1 in " << b1->getGrade() << std::endl;
-    b1->subtractGrade();
-    std::cout << "after sub 1 in " << b1->getGrade() << std::endl;
-    b1->subtractGrade();
-    std::cout << "after sub 2 in " << b1->getGrade() << std::endl;
-  } catch (std::exception & e) {
-    std::cout << e.what() << std::endl;
-  }
-
-  try {
-    Bureaucrat *b2 = new Bureaucrat(1, "testGradeTooLowException");
-
-    b2->subtractGrade();
-    std::cout << "after 1 sub in " << b2->getGrade() << std::endl;
-    b2->subtractGrade();
-    std::cout << "after 2 sub in " << b2->getGrade() << std::endl;
-    b2->sumGrade();
-    std::cout << "after 1 add in " << b2->getGrade() << std::endl;
-  } catch (std::exception & e) {
-    std::cout << e.what() << std::endl;
-  }
-}
-
 
 int main(void){
-  creatingTest();
-  operationsTest();
+  try {
+
+    Bureaucrat *b1 = new Bureaucrat(5, "b1");
+
+    std::cout << "b1 created: " << *b1 << std::endl;
+
+    correctTest(b1);
+    wrongTest(b1);
+  } catch (const std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
   return 0;
 }

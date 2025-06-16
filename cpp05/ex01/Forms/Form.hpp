@@ -8,9 +8,13 @@
 # include "../exceptions/GradeTooHighException.hpp"
 # include "../exceptions/GradeTooLowException.hpp"
 # include <string>
+# include <iostream>
 
 class Form {
 private:
+    static const int MIN_GRADE = 150;
+    static const int MAX_GRADE = 1;
+
     const std::string name;
     bool sign;
     int requiredGradeSign;
@@ -25,12 +29,14 @@ public:
 
     // ====== constructor
     Form(std::string name, int requiredGradeSign, int requiredGradeExecute);
-    Form(Form &form);
+    Form(const Form &form);
 
     ~Form();
+
     Form& operator=(Form &other);
+
 };
 
-
+std::ostream& operator<<(std::ostream& os, const Form& form);
 
 #endif
