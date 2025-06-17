@@ -11,7 +11,7 @@ class ShrubberyCreationForm : public AForm {
 private:
 
 public:
-    void execute(Bureaucrat const & executor);
+    void execute(Bureaucrat const & executor) const;
 
     ShrubberyCreationForm(std::string target);
 };

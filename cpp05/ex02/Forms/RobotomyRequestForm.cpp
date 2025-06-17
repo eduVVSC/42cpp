@@ -10,7 +10,7 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm(target, "Ro
     this->sign = false;
 }
 
-void RobotomyRequestForm::execute(const Bureaucrat &executor) {
+void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
     if (sign){
         if (executor.getGrade() <= requiredGradeExecute){
         }

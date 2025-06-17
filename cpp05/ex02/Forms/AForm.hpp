@@ -14,6 +14,8 @@
 # include <string>
 # include <iostream>
 
+class Bureaucrat;
+
 class AForm {
 protected:
     static const int MIN_GRADE = 150;
@@ -30,9 +32,9 @@ public:
     std::string getName() const;
     int getRequiredGradeSign() const;
     int getRequiredGradeExecute() const;
-
     void beSign(int grade);
-    virtual void execute(Bureaucrat const & executor);
+
+    virtual void execute(Bureaucrat const & executor) const = 0;
     // ====== constructor
 
     AForm(std::string target, std::string name);

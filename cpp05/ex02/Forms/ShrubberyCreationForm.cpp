@@ -10,7 +10,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target,
     this->sign = false;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat &executor) {
+void ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
     if (sign){
         if (executor.getGrade() <= requiredGradeExecute){
         }

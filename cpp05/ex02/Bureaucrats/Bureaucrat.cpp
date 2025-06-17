@@ -45,11 +45,10 @@ void Bureaucrat::subtractGrade(){
  */
 void Bureaucrat::executeForm(AForm const & form) const{
     try{
-        form.execute(this);
-        std::cout << this << " executed " << form << " successfully " << std::endl;
-
-    } catch (std::exception e) {
-        std::cout << this << " could not execute " << form << " because " << e.what() << std::endl;
+        form.execute(*this);
+        std::cout << "✅ " << *this << " executed " << form << " successfully " << std::endl;
+    } catch (std::exception &e) {
+        std::cout << "❌ " << *this << " could not execute " << form << " because " << e.what() << std::endl;
     }
 }
 
@@ -81,7 +80,7 @@ Bureaucrat::~Bureaucrat(){}
 // ====== operator
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
-    os << bureaucrat.getName() << " has " << bureaucrat.getGrade() << " grade" << std::endl;
+    os << "[" << bureaucrat.getName() << " has " << bureaucrat.getGrade() << " grade" << "]";
     return os;
 }
 
