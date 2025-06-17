@@ -29,6 +29,11 @@ int Bureaucrat::getGrade() const{ return grade; }
 
 std::string Bureaucrat::getName() const{ return name; }
 
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
+    os << bureaucrat.getName() << " has " << bureaucrat.getGrade() << " grade" << std::endl;
+    return os;
+}
+
 // ====== constructor and destructors
 
 Bureaucrat::Bureaucrat(int grade, std::string name) : name(name) {
