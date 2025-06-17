@@ -33,6 +33,8 @@ void AForm::beSign(int grade){
         else
             throw GradeTooLowException("Grade too low to sign ");
     }
+    else
+        throw AlreadySignedException("This form has already been signed");
 }
 
 // ====== constructor

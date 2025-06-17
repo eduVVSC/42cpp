@@ -7,6 +7,7 @@
 
 # include "../exceptions/GradeTooHighException.hpp"
 # include "../exceptions/GradeTooLowException.hpp"
+# include "../exceptions/AlreadySignedException.hpp"
 # include <string>
 # include <iostream>
 

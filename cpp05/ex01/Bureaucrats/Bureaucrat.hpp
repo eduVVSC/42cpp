@@ -32,7 +32,7 @@ class Bureaucrat {
       int getGrade() const;
       std::string getName() const;
 
-      void signForm(Form form);
+      void signForm(Form &form);
 
       // === Operator =
       Bureaucrat& operator=(const Bureaucrat& other);

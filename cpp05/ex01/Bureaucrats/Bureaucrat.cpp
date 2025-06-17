@@ -6,7 +6,7 @@
 
 // ====== functions
 
-void Bureaucrat::signForm(Form form){
+void Bureaucrat::signForm(Form &form){
   try {
       form.beSign(this->getGrade());
       std::cout << "Bureaucrat " <<  this->getName() << " signed form "

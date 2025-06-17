@@ -8,6 +8,7 @@
 # include "../exceptions/GradeTooHighException.hpp"
 # include "../exceptions/GradeTooLowException.hpp"
 # include "../exceptions/NotSignedException.hpp"
+# include "../exceptions/AlreadySignedException.hpp"
 
 # include "../Bureaucrats/Bureaucrat.hpp"
 

@@ -16,6 +16,7 @@ C++_FLAGS = -Wall -Wextra -Werror -std=c++98
 INFILES = 	exceptions/GradeTooHighException.cpp \
 			exceptions/GradeTooLowException.cpp \
 			exceptions/NotSignedException.cpp \
+			exceptions/AlreadySignedException.cpp \
 			Forms/ShrubberyCreationForm.cpp \
 			Forms/PresidentialPardonForm.cpp \
 			Forms/RobotomyRequestForm.cpp \

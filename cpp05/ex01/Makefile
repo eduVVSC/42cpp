@@ -15,6 +15,7 @@ C++ = c++
 C++_FLAGS = -Wall -Wextra -Werror -std=c++98
 INFILES = 	exceptions/GradeTooHighException.cpp \
 			exceptions/GradeTooLowException.cpp \
+			exceptions/AlreadySignedException.cpp \
 			Bureaucrats/Bureaucrat.cpp \
 			Forms/Form.cpp \
 			main.cpp
