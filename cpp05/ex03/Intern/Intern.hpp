@@ -17,8 +17,11 @@
 
 class Intern {
 private:
+    static const int PRESIDENCIAL_PARDON_FORM = 0;
+    static const int ROBOTOMY_REQUEST_FORM = 1;
+    static const int SHRUBBERY_CREATION_FORM = 2;
 public:
-    Aform makeForm(std::string formName, std::string target);
+    AForm *makeForm(std::string formName, std::string target);
 
     Intern();
     Intern(const Intern &other);

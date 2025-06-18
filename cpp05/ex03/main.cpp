@@ -1,9 +1,10 @@
 
 #include <iostream>
 #include "Bureaucrats/Bureaucrat.hpp"
+#include "Intern/Intern.hpp"
 #include "Forms/PresidentialPardonForm.hpp"
-#include "Forms/RobotomyRequestForm.hpp"
 #include "Forms/ShrubberyCreationForm.hpp"
+#include "Forms/RobotomyRequestForm.hpp"
 
 void testWork(Bureaucrat * b1, AForm * f1) {
     std::cout << "=============== Test Work ==============="<< std::endl;
@@ -23,10 +24,12 @@ void testNotEnoughGrade(Bureaucrat * b1, AForm * f1) {
 
 int main(void){
   try {
-    Bureaucrat *b1 = new Bureaucrat(5, "b1");
-    Bureaucrat *b2 = new Bureaucrat(140, "b2");
+      Bureaucrat *b1 = new Bureaucrat(5, "b1");
+      Bureaucrat *b2 = new Bureaucrat(140, "b2");
 
-    PresidentialPardonForm *f1 = new PresidentialPardonForm("target 1");
+      Intern *i = new Intern();
+
+      AForm *f1 = i->makeForm("PresidentialPardonForm","target 1");
 
       testNotSigned(b1, f1);
       std::cout << "====> Signing"<< std::endl;
