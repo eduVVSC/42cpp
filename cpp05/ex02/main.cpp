@@ -26,7 +26,7 @@ int main(void){
     Bureaucrat *b1 = new Bureaucrat(5, "b1");
     Bureaucrat *b2 = new Bureaucrat(140, "b2");
 
-    RobotomyRequestForm *f1 = new RobotomyRequestForm("target 1");
+    ShrubberyCreationForm *f1 = new ShrubberyCreationForm("target 1");
 
       testNotSigned(b1, f1);
       std::cout << "====> Signing"<< std::endl;

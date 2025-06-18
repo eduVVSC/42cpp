@@ -13,8 +13,8 @@
 # include "../Bureaucrats/Bureaucrat.hpp"
 
 # include <stdlib.h>
+# include <fstream>
 # include <string>
-# include <iostream>
 
 class Bureaucrat;
 
