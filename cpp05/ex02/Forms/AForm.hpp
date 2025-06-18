@@ -19,7 +19,7 @@
 class Bureaucrat;
 
 class AForm {
-protected:
+private:
     static const int MIN_GRADE = 150;
     static const int MAX_GRADE = 1;
 
@@ -32,9 +32,14 @@ public:
       // ===== getters
     bool getSign() const;
     std::string getName() const;
+    std::string getTarget() const;
     int getRequiredGradeSign() const;
     int getRequiredGradeExecute() const;
     void beSign(int grade);
+
+    void setSign(bool sign);
+    void setRequiredGradeSign(int grade);
+    void setRequiredGradeExecute(int grade);
 
     virtual void execute(Bureaucrat const & executor) const = 0;
     // ====== constructor

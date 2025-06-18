@@ -5,9 +5,9 @@
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm(target, "RobotomyRequestForm") {
-    this->requiredGradeSign = 25;
-    this->requiredGradeExecute = 5;
-    this->sign = false;
+    setRequiredGradeSign(25);
+    setRequiredGradeExecute(5);
+    setSign(false);
 }
 
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const {

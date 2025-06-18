@@ -12,8 +12,9 @@
 
 # include "../Bureaucrats/Bureaucrat.hpp"
 
+# include <stdlib.h>
+# include <fstream>
 # include <string>
-# include <iostream>
 
 class Bureaucrat;
 
@@ -35,7 +36,6 @@ public:
     int getRequiredGradeSign() const;
     int getRequiredGradeExecute() const;
     void beSign(int grade);
-
 
     void setSign(bool sign);
     void setRequiredGradeSign(int grade);

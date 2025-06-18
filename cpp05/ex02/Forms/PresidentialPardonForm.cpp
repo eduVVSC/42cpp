@@ -6,11 +6,10 @@
 
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm(target, "PresidentialPardonForm") {
-    this->requiredGradeSign = 25;
-    this->requiredGradeExecute = 5;
-    this->sign = false;
+    setRequiredGradeSign(25);
+    setRequiredGradeExecute(5);
+    setSign(false);
 }
-
 void PresidentialPardonForm::execute(const Bureaucrat &executor) const {
     if (sign){
         if (executor.getGrade() <= requiredGradeExecute){

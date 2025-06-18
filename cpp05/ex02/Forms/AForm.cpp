@@ -4,26 +4,6 @@
 
 #include "AForm.hpp"
 
-
-/*
-void AForm::execute(Bureaucrat const & executor) {
-    int grade = executor.getGrade();
-    if (grade <= requiredGradeExecute){
-
-    }
-    else
-        throw GradeTooLowException("Grade to low to execute the form!");
-}
-*/
-
-std::string AForm::getName() const{ return name; }
-
-bool AForm::getSign() const{ return sign; }
-
-int AForm::getRequiredGradeSign() const{ return requiredGradeSign; }
-
-int AForm::getRequiredGradeExecute() const{ return requiredGradeExecute; }
-
 void AForm::beSign(int grade){
     // greater grade
     if (!sign){
@@ -35,6 +15,35 @@ void AForm::beSign(int grade){
     }
     else
         throw AlreadySignedException("This form has already been signed");
+}
+
+// ====== Getters
+
+std::string AForm::getTarget() const {
+    return target;
+}
+
+std::string AForm::getName() const{ return name; }
+
+bool AForm::getSign() const{ return sign; }
+
+int AForm::getRequiredGradeSign() const{ return requiredGradeSign; }
+
+int AForm::getRequiredGradeExecute() const{ return requiredGradeExecute; }
+
+
+// ====== Setters
+
+void AForm::setSign(bool sign) {
+    this->sign = sign;
+}
+
+void AForm::setRequiredGradeSign(int grade) {
+    requiredGradeSign = grade;
+}
+
+void AForm::setRequiredGradeExecute(int grade) {
+    requiredGradeExecute = grade;
 }
 
 // ====== constructor
