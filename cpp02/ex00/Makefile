@@ -14,10 +14,11 @@
 C++ = c++
 C++_FLAGS = -Wall -Wextra -Werror -std=c++98
 INFILES = 	main.cpp\
+			Fixed.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)
 
-NAME = zombie
+NAME = a.out
 
 all: $(NAME)
 
