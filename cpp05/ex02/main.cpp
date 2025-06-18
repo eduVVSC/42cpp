@@ -26,14 +26,13 @@ int main(void){
     Bureaucrat *b1 = new Bureaucrat(5, "b1");
     Bureaucrat *b2 = new Bureaucrat(140, "b2");
 
-    PresidentialPardonForm *f1 = new PresidentialPardonForm("target 1");
+    RobotomyRequestForm *f1 = new RobotomyRequestForm("target 1");
 
       testNotSigned(b1, f1);
       std::cout << "====> Signing"<< std::endl;
       b1->signForm(*f1);
       testNotEnoughGrade(b2, f1);
       testWork(b1, f1);
-
       delete b1;
       delete b2;
       delete f1;

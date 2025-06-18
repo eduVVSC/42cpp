@@ -13,6 +13,15 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm(target, "Ro
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
     if (sign){
         if (executor.getGrade() <= requiredGradeExecute){
+            std::cout << "Makes some drilling noises..." << std::endl;
+
+            srand(time(0));
+            int randNum = rand();
+
+            if (randNum % 2 == 0)
+                std::cout << target << " has been 🤖robotomized successfully!" << std::endl;
+            else
+                std::cout << "⛔ Robotomy failed!!" << std::endl;
         }
         else
             throw GradeTooLowException("Grade was too low");

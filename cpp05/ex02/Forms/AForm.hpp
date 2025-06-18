@@ -12,6 +12,7 @@
 
 # include "../Bureaucrats/Bureaucrat.hpp"
 
+# include <stdlib.h>
 # include <string>
 # include <iostream>
 
