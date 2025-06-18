@@ -36,7 +36,6 @@ int main(void){
       b1->signForm(*f1);
       testNotEnoughGrade(b2, f1);
       testWork(b1, f1);
-
       delete b1;
       delete b2;
       delete f1;

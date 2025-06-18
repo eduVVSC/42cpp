@@ -31,7 +31,7 @@ AForm* Intern::makeForm(std::string formName, std::string target) {
             result = new ShrubberyCreationForm(target);
             break;
         default:
-            throw TypeNotFound("The given type does not exist!");
+            throw TypeNotFound("Could not create the form, The given type does not exist!");
     }
     return result;
 }
