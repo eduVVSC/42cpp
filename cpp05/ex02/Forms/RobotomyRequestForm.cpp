@@ -11,15 +11,15 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm(target, "Ro
 }
 
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
-    if (sign){
-        if (executor.getGrade() <= requiredGradeExecute){
+    if (getSign()){
+        if (executor.getGrade() <= getRequiredGradeExecute()){
             std::cout << "Makes some drilling noises..." << std::endl;
 
             srand(time(0));
             int randNum = rand();
 
             if (randNum % 2 == 0)
-                std::cout << target << " has been 🤖robotomized successfully!" << std::endl;
+                std::cout << getTarget() << " has been 🤖robotomized successfully!" << std::endl;
             else
                 std::cout << "⛔ Robotomy failed!!" << std::endl;
         }

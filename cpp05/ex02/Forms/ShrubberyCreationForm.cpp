@@ -11,9 +11,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target,
 }
 
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
-    if (sign){
-        if (executor.getGrade() <= requiredGradeExecute){
-            std::string filename = target + "_shrubbery";
+    if (getSign()){
+        if (executor.getGrade() <= getRequiredGradeExecute()){
+            std::string filename = getTarget() + "_shrubbery";
             std::ofstream MyFile(filename.c_str());
             MyFile << "    oxoxoo    ooxoo\n  ooxoxo oo  oxoxooo\n oooo xxoxoo ooo ooox\n oxo o oxoxo  xoxxoxo\n  oxo xooxoooo o ooo\n    ooo\\oo\\  /o/o\n        \\  \\/ /\n         |   /\n         |  |\n         | D|\n         |  |\n         |  |";
         }

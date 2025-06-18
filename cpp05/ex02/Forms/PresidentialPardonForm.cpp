@@ -11,9 +11,9 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm(targe
     setSign(false);
 }
 void PresidentialPardonForm::execute(const Bureaucrat &executor) const {
-    if (sign){
-        if (executor.getGrade() <= requiredGradeExecute){
-            std::cout << target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+    if (getSign()){
+        if (executor.getGrade() <= getRequiredGradeExecute()){
+            std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
         }
         else
             throw GradeTooLowException("Grade was too low");
