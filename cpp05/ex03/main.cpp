@@ -39,6 +39,7 @@ int main(void){
       delete b1;
       delete b2;
       delete f1;
+      delete i;
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
   }
