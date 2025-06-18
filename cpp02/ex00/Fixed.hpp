@@ -1,7 +1,3 @@
-//
-// Created by edvieira on 6/16/25.
-//
-
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
@@ -26,4 +22,4 @@ public:
     Fixed &operator=(Fixed const &other);
 };
 
-#endif //FIXED_H
+#endif
