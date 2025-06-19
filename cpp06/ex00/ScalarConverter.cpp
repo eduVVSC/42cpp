@@ -23,6 +23,10 @@ Pattern findPattern(std::string input) {
 
 
     if (manyChar > 0) { // inf inff - nan nanf - float -
+        if (input.compare("nan") == 0 || input.compare("nanf") == 0)
+            return NANS;
+        if (manyChar == 1 && input.at(input.length()) == 'f')
+            return FLOAT;
         return CHAR;
     }
     else { // means that is going to be an int or a double
@@ -49,7 +53,7 @@ bool isNonDisplayable(int asciiValue) {
  */
 void print (double d, float f, int i, char c) {
     if (isNonDisplayable(static_cast<char>(c))) // printable char!
-        std::cout << "char: impossible" << std::endl;
+        std::cout << "char: Non displayable" << std::endl;
     else
         std::cout << "char: " <<  "\'" << c << "\'" << std::endl;
 
