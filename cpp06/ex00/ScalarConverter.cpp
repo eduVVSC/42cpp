@@ -140,7 +140,6 @@ void doubleConverter(std::string input) {
     }
 }
 
-// to be done
 void nanConverter(std::string input) {
     (void) input;
     std::cout << "char: impossible \nint: impossible \nfloat: nanf \ndouble: nan" << std::endl;
