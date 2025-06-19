@@ -25,11 +25,11 @@ Pattern findPattern(std::string input) {
     if (manyChar > 0) { // inf inff - nan nanf - float -
         if (input.compare("nan") == 0 || input.compare("nanf") == 0)
             return NANS;
-        if (manyChar == 1 && input.at(input.length()) == 'f')
+        if (manyChar == 1 && input.at(input.length() - 1) == 'f')
             return FLOAT;
         return CHAR;
     }
-    else { // means that is going to be an int or a double
+    else {
         if (hasDot)
             return DOUBLE;
         return INT;
@@ -62,7 +62,7 @@ void print (double d, float f, int i, char c) {
     else
         std::cout << "int: " << i << std::endl;
 
-    if (d < FLT_MIN || d > FLT_MAX) // float overflow!
+    if (d < FLOAT_MIN || d > FLOAT_MAX) // float overflow!
         std::cout << "float: impossible" << std::endl;
     else
         std::cout << "float: " << f << std::endl;
@@ -103,12 +103,17 @@ void intConverter(std::string input) {
 }
 
 void floatConverter(std::string input) {
-    long long ll = strtoll(input.c_str(), NULL, 10);
+    input = input.substr(0, input.length() - 1);
 
-    if (ll > FLT_MAX || ll < FLT_MIN)
+    char* endptr;
+    double d = strtod(input.c_str(), &endptr);
+
+    if (endptr == input.c_str() || *endptr != '\0' || d > FLOAT_MAX || d < FLOAT_MIN) {
         printOverflow();
+        return;
+    }
     else {
-        float f = static_cast<float>(ll);
+        float f = static_cast<float>(d);
         int i = static_cast<int>(f);
         char c = static_cast<char>(i);
 
@@ -118,15 +123,20 @@ void floatConverter(std::string input) {
 }
 
 void doubleConverter(std::string input) {
-    long long ll = strtoll(input.c_str(), NULL, 10);
-    if (ll > DBL_MAX || ll < DBL_MIN)
+    char* endptr;
+    double d = strtod(input.c_str(), &endptr);
+
+    // Check for conversion errors
+    if (endptr == input.c_str() || *endptr != '\0') {
         printOverflow();
+        return;
+    }
     else {
-        double d = static_cast<double>(ll);
+        //std::cout << d << std::endl;
         float f = static_cast<float>(d);
         int i = static_cast<int>(d);
         char c = static_cast<char>(i);
-        print(d, f, i,c );
+        print(d, f, i, c);
     }
 }
 
