@@ -5,17 +5,25 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-# include "Pattern.hpp"
-
 # include <string>
 # include <iostream>
 # include <limits.h>
 
+enum Pattern {
+    INT,
+    CHAR,
+    FLOAT,
+    DOUBLE,
+    NANS,
+    INF,
+};
+
 class ScalarConverter {
+private:
+
 public:
     static void convert(std::string input);
 };
-
 
 
 #endif

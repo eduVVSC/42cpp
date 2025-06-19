@@ -18,7 +18,7 @@ INFILES = 	ScalarConverter.cpp\
 
 OBJFILES = $(INFILES:.cpp=.o)
 
-NAME = bureaucrat
+NAME = convertor
 
 all: $(NAME)
 
