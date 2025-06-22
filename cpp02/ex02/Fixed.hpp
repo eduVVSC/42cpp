@@ -15,6 +15,7 @@ public:
 
     float toFloat() const;
     int toInt() const;
+    
 
     Fixed();
     Fixed(int const val);
@@ -25,7 +26,24 @@ public:
 
     Fixed &operator=(Fixed const &other);
 };
+
 std::ostream& operator<<(std::ostream& os, const Fixed& other);
 
+bool operator<(const Fixed& other);
+bool operator>(const Fixed& other);
+bool operator>=(const Fixed& other);
+bool operator<=(const Fixed& other);
+bool operator==(const Fixed& other);
+bool operator!=(const Fixed& other);
+
+Fixed operator+(const Fixed& other);
+Fixed operator-(const Fixed& other);
+Fixed operator=(const Fixed& other);
+Fixed operator*(const Fixed& other);
+Fixed operator/(const Fixed& other);
+
+// missing two operators
+Fixed operator++(const Fixed& other);
+Fixed operator--(const Fixed& other);
 
 #endif
