@@ -15,7 +15,33 @@ public:
 
     float toFloat() const;
     int toInt() const;
-    
+
+    static Fixed& min(Fixed& fst, Fixed& scnd); // working
+    static Fixed& max(Fixed& fst, Fixed& scnd); // working
+
+    static const Fixed& min(const Fixed& fst, const Fixed& scnd);
+    static const Fixed& max(const Fixed& fst, const Fixed& scnd);
+
+    // Operations operators
+    Fixed operator++( void ); // working
+    Fixed operator++( int ); // working
+    Fixed operator--( void ); // working
+    Fixed operator--( int ); // working
+    Fixed operator+(const Fixed& other); // working
+    Fixed operator-(const Fixed& other); // working
+    Fixed operator*(const Fixed& other); // working
+    Fixed operator/(const Fixed& other); // working
+
+    // Comparison operators
+    bool operator==(const Fixed& other);  // working
+    bool operator!=(const Fixed& other);  // working
+    bool operator<(const Fixed& other);  // working
+    bool operator>(const Fixed& other);  // working
+    bool operator<=(const Fixed& other);  // working
+    bool operator>=(const Fixed& other);  // working
+
+    // Print operator
+    friend std::ostream& operator<<(std::ostream& os, const Fixed& fst);
 
     Fixed();
     Fixed(int const val);
@@ -28,22 +54,5 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& other);
-
-bool operator<(const Fixed& other);
-bool operator>(const Fixed& other);
-bool operator>=(const Fixed& other);
-bool operator<=(const Fixed& other);
-bool operator==(const Fixed& other);
-bool operator!=(const Fixed& other);
-
-Fixed operator+(const Fixed& other);
-Fixed operator-(const Fixed& other);
-Fixed operator=(const Fixed& other);
-Fixed operator*(const Fixed& other);
-Fixed operator/(const Fixed& other);
-
-// missing two operators
-Fixed operator++(const Fixed& other);
-Fixed operator--(const Fixed& other);
 
 #endif
