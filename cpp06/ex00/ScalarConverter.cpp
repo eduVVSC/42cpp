@@ -21,12 +21,13 @@ Pattern findPattern(std::string input) {
             hasDot = true;
     }
 
-
     if (manyChar > 0) { // inf inff - nan nanf - float -
         if (input.compare("nan") == 0 || input.compare("nanf") == 0)
             return NANS;
         if (manyChar == 1 && input.at(input.length() - 1) == 'f')
             return FLOAT;
+        if (input.compare("-inf") == 0 || input.compare("+inf") == 0 )
+            return INF;
         return CHAR;
     }
     else {
@@ -146,7 +147,10 @@ void nanConverter(std::string input) {
 }
 
 void infConverter(std::string input) {
-    (void) input;
+    if (input.at(0) == '+')
+        std::cout << "char: impossible \nint: impossible \nfloat: +inf \ndouble: +inf" << std::endl;
+    else
+        std::cout << "char: impossible \nint: impossible \nfloat: -inf \ndouble: -inf" << std::endl;
 }
 
 void ScalarConverter::convert(std::string input) {
