@@ -9,12 +9,12 @@ void Fixed::setRawBits(int const raw) {
     this->rawBits = raw;
 }
 
-int Fixed::toInt() const {
+int Fixed::toInt( void ) const {
     int integerPart = this->rawBits >> this->fractBits;
     return integerPart;
 }
 
-float Fixed::toFloat() const {
+float Fixed::toFloat( void ) const {
     return ((float)rawBits / (1 << fractBits));
 }
 
@@ -41,7 +41,7 @@ Fixed::Fixed(int const val) {
 
 Fixed::Fixed(Fixed const &other) {
     std::cout << "Copy constructor operator called" << std::endl;
-    this->rawBits = other.getRawBits();
+    *this = other;
 }
 
 Fixed::~Fixed() {
