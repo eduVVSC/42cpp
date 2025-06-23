@@ -15,49 +15,28 @@
 #include <functional>
 
 int Harl::getHash(std::string level) {
-	if (level == "DEBUG")
-		return ComplainType::DEBUG;
-	if (level == "INFO")
-		return ComplainType::INFO;
-	if (level == "WARNING")
-		return ComplainType::WARNING;
-	if (level == "ERROR")
-		return ComplainType::ERROR;
-	return ComplainType::NONE;
-}
-
-void Harl::complain( std::string level )
-{
-	/*
-		// ====== without  switch ======  //
-
-	bool		printState;
 	std::string	arrStr[4];
-	void (Harl::*arrVoid[4])();
+	ComplainType::Type	complainType[4];
 
 	arrStr[0] = "DEBUG";
 	arrStr[1] = "INFO";
 	arrStr[2] = "WARNING";
 	arrStr[3] = "ERROR";
 
-	arrVoid[0] = &Harl::debug;
-	arrVoid[1] =  &Harl::info;
-	arrVoid[2] =  &Harl::warning;
-	arrVoid[3] =  &Harl::error;
+	complainType[0] = ComplainType::DEBUG;
+	complainType[1] =  ComplainType::INFO;
+	complainType[2] =  ComplainType::WARNING;
+	complainType[3] =  ComplainType::ERROR;
 
-	printState = false;
-
-	for (int i = 0; i < 4; ++i)
-	{
-		if (arrStr[i] == level || printState)
-		{
-			(this->*arrVoid[i])();
-			printState = true;
-		}
+	for (int i = 0; i < 4; ++i){
+		if (arrStr[i] == level)
+			return complainType[i];
 	}
-	if (printState == false)
-		std::cout << "[ Probably complaning about insignificant problems ]" << std::endl; */
+	return ComplainType::NONE;
+}
 
+void Harl::complain( std::string level )
+{
 	switch (getHash(level))
 	{
 		case ComplainType::DEBUG:

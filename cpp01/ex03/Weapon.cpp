@@ -17,7 +17,7 @@ void			Weapon::setType(std::string type)
 	this->type = type;
 }
 
-std::string		Weapon::getType(){ return (type); }
+std::string	const &Weapon::getType() const { return (type); }
 
 Weapon &Weapon::operator=(const Weapon &other)
 {

@@ -17,15 +17,16 @@
 //  and the difference between them.
 int main()
 {
-	std:: cout << " --> Test of stack memory! Going inside randomChump function:" << std::endl;
+	std:: cout << " --> Test of stack memory! Going inside randomChump function:\n" << std::endl;
 		randomChump("ofStack");
 	std::cout << "\n--------back in main!!--------\n" << std::endl;
 
-	std:: cout << " -->  Test of heap memory! Going inside newZombie function:" << std::endl;
+	std:: cout << " -->  Test of heap memory! Going inside newZombie function:\n" << std::endl;
 		Zombie *zb2 = newZombie("ofHeap");
 	std::cout << "\n--------back in main!!--------\n" << std::endl;
 
 	zb2->announce();
+
 	delete zb2;
 	return (0);
 }

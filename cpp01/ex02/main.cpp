@@ -29,8 +29,23 @@ int main()
 	std::cout << "\n--Value of variable--" << std::endl;
 	std::cout << "str    |" << str << "|"<< std::endl;
 	std::cout << "str2   |" << str2 << "|"<< std::endl;
-	std::cout << "strPTR |" << stringPTR << "|"<< std::endl;
+	std::cout << "strPTR |" << *stringPTR << "|"<< std::endl;
 	std::cout << "strREF |" << stringREF << "|"<< std::endl;
+
+	str = "mudou";
+	std::cout << "\n--After changing the original variable--" << std::endl;
+	std::cout << "str    |" << &str << "|"<< std::endl;
+	std::cout << "str2   |" << &str2 << "|"<< std::endl;
+	std::cout << "strPTR |" << stringPTR << "|"<< std::endl;
+	std::cout << "strREF |" << &stringREF << "|\n" << std::endl;
+
+
+	std::cout << "str    |" << str << "|"<< std::endl;
+	std::cout << "str2   |" << str2 << "|"<< std::endl;
+	std::cout << "strPTR |" << *stringPTR << "|"<< std::endl;
+	std::cout << "strREF |" << stringREF << "|"<< std::endl;
+
+
 
 	return (0);
 }

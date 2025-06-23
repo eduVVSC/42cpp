@@ -14,7 +14,20 @@
 
 int main(int ac, char **av)
 {
-	if (ac == 2)
+	if (ac == 1) {
+		Harl h;
+		std::cout << "============ DEBUG ============" << std::endl;
+		h.complain("DEBUG");
+		std::cout << "============ INFO ============" << std::endl;
+		h.complain("INFO");
+		std::cout << "============ WARNING ============" << std::endl;
+		h.complain("WARNING");
+		std::cout << "============ ERROR ============" << std::endl;
+		h.complain("ERROR");
+		std::cout << "============ NOT AVAILABLE MESSAGE ============" << std::endl;
+		h.complain("NOT AVAILABLE MESSAGE");
+	}
+	else if (ac == 2)
 	{
 		Harl h;
 		h.complain(av[1]);
