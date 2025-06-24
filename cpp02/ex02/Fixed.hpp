@@ -19,8 +19,8 @@ public:
     static Fixed& min(Fixed& fst, Fixed& scnd); // working
     static Fixed& max(Fixed& fst, Fixed& scnd); // working
 
-    static const Fixed& min(const Fixed& fst, const Fixed& scnd);
-    static const Fixed& max(const Fixed& fst, const Fixed& scnd);
+    static const Fixed& min(const Fixed& fst, const Fixed& scnd); // working
+    static const Fixed& max(const Fixed& fst, const Fixed& scnd); // working
 
     // Operations operators
     Fixed operator++( void ); // working
