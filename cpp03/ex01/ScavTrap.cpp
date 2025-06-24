@@ -51,7 +51,6 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	std::cout << " ScavTrap -> Constructor called for: " << name << std::endl;
 }
 
-// check if it is correct in here
 ScavTrap::ScavTrap(ScavTrap &cp) : ClapTrap(cp)
 {
 	std::cout << " ScavTrap -> Constructor called for: " << name << std::endl;

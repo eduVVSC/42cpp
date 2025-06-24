@@ -65,25 +65,29 @@ void ClapTrap::setAttackDamage(int attackDamage){
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << "ClapTrap -> Constructor has been called for: " + this->name << std::endl;
-
 	this->name = name;
 	this->hitPoints = 10;
 	this->energyPoint = 10;
 	this->attackDamage = 0;
+	std::cout << " ClapTrap -> Constructor has been called for: " << name << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap &cp)
 {
-	std::cout << "ClapTrap -> Constructor has been called for: " + this->name << std::endl;
-
-	this->name = cp.name;
-	this->hitPoints = cp.hitPoints;
-	this->energyPoint = cp.energyPoint;
-	this->attackDamage = cp.attackDamage;
+	*this = cp;
+	std::cout << " ClapTrap -> Copy Constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap -> destructor has been called for: " + this->name << std::endl;
+	std::cout << " ClapTrap -> destructor has been called for: " + this->name << std::endl;
+}
+
+ClapTrap &ClapTrap::operator=(ClapTrap const& other) {
+	std::cout << " ClapTrap ->Equal operator called" << std::endl;
+	this->name = other.name;
+	this->hitPoints = other.hitPoints;
+	this->energyPoint = other.energyPoint;
+	this->attackDamage = other.attackDamage;
+	return *this;
 }
