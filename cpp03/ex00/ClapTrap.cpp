@@ -28,7 +28,6 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
 	this->hitPoints -= amount;
 	std::cout << "ClapTrap " << name << " was attacked, it received " << amount << " hit points." << std::endl;
-	//std::cout << "Remaining live: " << hitPoints << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -45,25 +44,28 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 ClapTrap::ClapTrap(std::string name)
 {
+	std::cout << "Constructor has been called for " + name << std::endl;
 	this->name = name;
 	this->hitPoints = 10;
 	this->energyPoint = 10;
 	this->attackDamage = 0;
-
-	std::cout << "Constructor has been called for " + this->name << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap &cp)
 {
-	this->name = cp.name;
-	this->hitPoints = cp.hitPoints;
-	this->energyPoint = cp.energyPoint;
-	this->attackDamage = cp.attackDamage;
-
-	std::cout << "Constructor has been called for " + this->name << std::endl;
+	std::cout << "Copy constructors called" << std::endl;
+	*this = cp;
 }
 
-ClapTrap::~ClapTrap()
-{
+ClapTrap::~ClapTrap(){
 	std::cout << "Destructor has been called for " + this->name << std::endl;
+}
+
+ClapTrap &ClapTrap::operator=(ClapTrap const& other) {
+	std::cout << "Equal operator called" << std::endl;
+	this->name = other.name;
+	this->hitPoints = other.hitPoints;
+	this->energyPoint = other.energyPoint;
+	this->attackDamage = other.attackDamage;
+	return *this;
 }

@@ -33,7 +33,7 @@ class ClapTrap
 		ClapTrap(ClapTrap &cp);
 		~ClapTrap();
 
-		ClapTrap&	operator=(ClapTrap const&);
+		ClapTrap	&operator=(ClapTrap const&);
 };
 
 #endif

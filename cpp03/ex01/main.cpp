@@ -15,9 +15,16 @@
 
 int	main()
 {
-	ScavTrap *st1 = new ScavTrap("test");
+	std::cout << "\n ===== creating first ScavTrap ===== " << std::endl;
+	ScavTrap *st1 = new ScavTrap("testScavTrap");
+
+	std::cout << "\n ===== creating Seconf ScavTrap ===== " << std::endl;
 	ScavTrap *st2 = new ScavTrap(*st1);
 
+	std::cout << "\n ===== creating Third ScavTrap ===== " << std::endl;
+	ClapTrap *t = new ClapTrap("testClap");
+
+	std::cout << "\n ===== tests ===== " << std::endl;
 	st1->guardGate();
 	st1->attack("enemy");
 	st1->beRepaired(10);
@@ -29,5 +36,13 @@ int	main()
 	st2->attack("enemy");
 	st2->beRepaired(10);
 	st2->takeDamage(10);
+
+
 	delete st2;
+	std::cout << "\nnext test\n";
+	t->attack("enemy");
+	t->beRepaired(10);
+	t->takeDamage(10);
+
+	delete t;
 }

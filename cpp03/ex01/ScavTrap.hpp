@@ -22,13 +22,14 @@ class ScavTrap : public ClapTrap
 	public:
 		void guardGate();
 
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
+
 		ScavTrap(std::string name);
 		ScavTrap(ScavTrap &cp);
 		~ScavTrap();
 
-		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
 		ScavTrap&	operator=(ScavTrap const&);
 };
 

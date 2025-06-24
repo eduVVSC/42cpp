@@ -55,4 +55,7 @@ int	main(void)
 	std::cout << "\n========test neg values========" << std::endl;
 	cp3->takeDamage(-10);
 	cp3->beRepaired(-10);
+	delete cp1;
+	delete cp2;
+	delete cp3;
 }

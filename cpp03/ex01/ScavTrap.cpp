@@ -45,24 +45,33 @@ void ScavTrap::beRepaired(unsigned int amount)
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "ScavTrap -> Constructor called for: " << name << std::endl;
 	hitPoints = 100;
 	energyPoint = 50;
 	attackDamage = 20;
+	std::cout << " ScavTrap -> Constructor called for: " << name << std::endl;
 }
 
 // check if it is correct in here
 ScavTrap::ScavTrap(ScavTrap &cp) : ClapTrap(cp)
 {
-	std::cout << "ScavTrap -> Constructor called for: " << name << std::endl;
+	std::cout << " ScavTrap -> Constructor called for: " << name << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap -> Destructor called for: " << name << std::endl;
+	std::cout << " ScavTrap -> Destructor called for: " << name << std::endl;
 }
 
 void	ScavTrap::guardGate()
 {
 	std::cout << name << " ScavTrap is now in Gate keeper mode." << std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(ScavTrap const& other) {
+	std::cout << " ScavTrap -> Equal operator called" << std::endl;
+	this->name = other.name;
+	this->hitPoints = other.hitPoints;
+	this->energyPoint = other.energyPoint;
+	this->attackDamage = other.attackDamage;
+	return *this;
 }
