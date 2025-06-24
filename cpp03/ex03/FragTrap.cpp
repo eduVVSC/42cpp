@@ -66,4 +66,12 @@ FragTrap::~FragTrap()
 	std::cout << "FragTrap -> Destructor called for: " << name << std::endl;
 }
 
+FragTrap &FragTrap::operator=(FragTrap const& other) {
+	std::cout << " FragTrap -> Equal operator called" << std::endl;
+	this->name = other.name;
+	this->hitPoints = other.hitPoints;
+	this->energyPoint = other.energyPoint;
+	this->attackDamage = other.attackDamage;
+	return *this;
+}
 
