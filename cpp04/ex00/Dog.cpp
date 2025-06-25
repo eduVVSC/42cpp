@@ -19,8 +19,8 @@ void Dog::makeSound() const
 
 Dog::Dog(Dog &dog) : Animal()
 {
-	std::cout << "creating dog!" << std::endl;
 	*this = dog;
+	std::cout << "creating dog!" << std::endl;
 }
 
 Dog::Dog() : Animal()
