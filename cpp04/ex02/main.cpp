@@ -10,29 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 
 int	main(void)
 {
-	std::cout << "---------------------------------------" << std::endl;
+	std::cout << "\n------------- Constructing -------------" << std::endl;
 
-	Animal *a4[4];
-	a4[0] = new Dog();
-	a4[1] = new Cat();
-	a4[2] = new Dog();
-	a4[3] = new Dog();
+
+	Cat *a1 = new Cat();
+	Cat *a2 = new Cat(*a1);
+
+	std::cout << "\n------------- Making sound -------------" << std::endl;
 	std::cout << std::endl;
 
-	for (size_t i = 0; i < 4; i++)
-		a4[i]->makeSound();
+	a1->makeSound();
+	a2->makeSound();
 
-	std::cout << "---------------------------------------" << std::endl;
+	std::cout << "\n------------- Destroying -------------" << std::endl;
+	std::cout << std::endl;
 
-	for (size_t i = 0; i < 4; i++)
-		delete a4[i];
+	delete a1;
+	delete a2;
+
 	return (1);
 }
 

@@ -41,8 +41,7 @@ Dog &Dog::operator=(const Dog &other){
 
 Dog::~Dog()
 {
-	std::cout << "bf brain deletion dog!" << std::endl;
-		if (brain)
-			delete brain;
+	if (brain)
+		delete brain;
 	std::cout << "Destroying some Dog" << std::endl;
 }

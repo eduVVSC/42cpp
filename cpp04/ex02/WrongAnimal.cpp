@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:01:56 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:13:01 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-void Animal::makeSound() const
+void WrongAnimal::makeSound() const
 {
-	std::cout << "I do not know what sound do i make?!?!?!?" << std::endl;
+	std::cout << "Wrong: I do not know what sound do i make?!?!?!?" << std::endl;
 }
-std::string Animal::getType() const
+std::string WrongAnimal::getType() const
 {
 	return (this->type);
 }
 
-Animal::Animal()
+WrongAnimal::WrongAnimal()
 {
 	this->type = "I do not know what the fuck i am?!?!?!?";
-	this->brain = new Brain();
 	std::cout << "Creating some animal" << std::endl;
 }
 
-Animal::Animal(Animal &other)
+WrongAnimal::WrongAnimal(WrongAnimal &other)
 {
 	this->type = other.getType();
 }
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-	if (brain)
-		delete brain;
+	std::cout << "Destroying WrongAnimal!" << std::endl;
 }
 
-Animal &Animal::operator=(const Animal &other){
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other){
 	this->type = other.getType();
 	return (*this);
 }

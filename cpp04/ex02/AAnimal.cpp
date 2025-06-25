@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:51:24 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:01:56 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "AAnimal.hpp"
 
-
-void Dog::makeSound() const
+std::string AAnimal::getType() const
 {
-	std::cout << "Bark Bark Bark!" << std::endl;
+	return (this->type);
 }
 
-Brain *Dog::getBrain(){ return (this->brain); }
-
-Dog::Dog(const Dog &dog) : AAnimal(dog.type)
+AAnimal::AAnimal(std::string type)
 {
-	std::cout << "Copy creating dog!" << std::endl;
-}
-
-Dog::Dog() : AAnimal("Dog") {
-	std::cout << "creating dog!" << std::endl;
-}
-
-Dog &Dog::operator=(const Dog &other){
+	this->type = type;
 	this->brain = new Brain();
-	*this->brain = *other.brain;
+	std::cout << "Creating some animal" << std::endl;
+}
+
+AAnimal::AAnimal(AAnimal &other)
+{
+	this->type = other.getType();
+}
+
+AAnimal::~AAnimal()
+{
+	std::cout << "Destroying some animal" << std::endl;
+	if (brain)
+		delete brain;
+}
+
+AAnimal &AAnimal::operator=(const AAnimal &other){
 	this->type = other.getType();
 	return (*this);
-}
-
-Dog::~Dog()
-{
-	std::cout << "Destroying some Dog" << std::endl;
 }

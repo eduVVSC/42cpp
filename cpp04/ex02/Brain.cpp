@@ -12,10 +12,23 @@
 
 #include "Brain.hpp"
 
-void Brain::copyIdeas(std::string *oIdeas) {
-	for (size_t i = 0; i < 100; i++)
-	{
-		this->ideas[i] = oIdeas[i];
+void Brain::displayIdeas() {
+	std::cout << " --> displaying my ideas "<< std::endl;
+
+	for (int i = 0; i < 100; i++) {
+		if (ideas[i].empty())
+			return;
+		else
+			std::cout << ideas[i] << std::endl;
+	}
+}
+
+void Brain::copyIdeas(const Brain &other){
+	if (other.ideas[0].empty()) {
+		return;
+	}
+	for (size_t i = 0; i < 100; i++){
+		this->ideas[i] = other.ideas[i];
 	}
 }
 
@@ -37,6 +50,8 @@ void Brain::addIdea(std::string idea){
 	}
 	if (added == false)
 		std::cout << "Brain is already full!! Cannot keep more information!!" << std::endl;
+	else
+		std::cout << "idea added: " << idea << std::endl;
 }
 
 std::string *Brain::getIdeas(){ return (this->ideas);}
@@ -46,18 +61,17 @@ Brain::Brain()
 	std::cout << "🧠 Brain Created!"<< std::endl;
 }
 
-Brain &Brain::operator=(const Brain &other){
-	(void) other;
-	//copyIdeas(other.getIdeas());
-	return (*this);
-}
-
-Brain::Brain(Brain &other)
+Brain::Brain(const Brain &other)
 {
+	*this = other;
 	std::cout << "Brain Created!"<< std::endl;
-	copyIdeas(other.getIdeas());
 }
 
 Brain::~Brain(){
 	std::cout << "🧠 Brain Destroyed!"<< std::endl;
+}
+
+Brain &Brain::operator=(const Brain &other){
+	copyIdeas(other);
+	return (*this);
 }

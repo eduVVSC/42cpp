@@ -25,13 +25,14 @@ Cat::Cat(const Cat &cp) : Animal (){
 
 Cat::Cat() : Animal()
 {
-	this->brain = new Brain();
 	this->type = "cat";
+	this->brain = new Brain();
 	std::cout << "creating cat!" << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &other){
-	this->brain = other.brain;
+	this->brain = new Brain();
+	*this->brain = *other.brain;
 	this->type = other.getType();
 	return (*this);
 }

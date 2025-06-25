@@ -13,20 +13,20 @@
 #ifndef CAT_H
 # define CAT_H
 
-# include "Animal.hpp"
+# include "AAnimal.hpp"
 # include "Brain.hpp"
 
-class Cat: public Animal
+class Cat: public AAnimal
 {
 	private:
 
 	public:
-		virtual void makeSound() const;
+		void makeSound() const;
 		Brain *getBrain();
 
 		Cat&operator=(const Cat &other);
 
-		Cat(Cat &cp);
+		Cat(const Cat &cp);
 		Cat();
 
 		~Cat();

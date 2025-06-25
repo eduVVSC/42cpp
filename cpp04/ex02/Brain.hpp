@@ -19,14 +19,16 @@ class Brain
 {
 	private:
 		std::string ideas[100];
+		void copyIdeas(const Brain &other);
 
-		void copyIdeas(std::string *oIdeas);
 	public:
 		void addIdea(std::string idea);
 		std::string *getIdeas();
+		void displayIdeas();
+
 		Brain&operator=(const Brain &other);
 
-		Brain(Brain &copy);
+		Brain(const Brain &copy);
 		Brain();
 
 		~Brain();

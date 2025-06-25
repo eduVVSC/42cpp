@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:42:51 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:16:04 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_H
-# define DOG_H
+#ifndef AANIMAL_HPP
+# define AANIMAL_HPP
 
-# include "AAnimal.hpp"
+# include <string>
+# include <iostream>
 # include "Brain.hpp"
 
-class Dog: public AAnimal
+
+class AAnimal
 {
-	private:
+protected:
+	std::string type;
+	Brain *brain;
 
 public:
-	void makeSound() const;
-	Brain *getBrain();
+	virtual void makeSound() const = 0;
 
-	Dog&operator=(Dog const& other);
+	std::string getType() const;
 
-	Dog(const Dog &dog);
-	Dog();
+	AAnimal&operator=(const AAnimal &other);
 
-	~Dog();
+	AAnimal(std::string type);
+	AAnimal(AAnimal &other);
+	virtual ~AAnimal();
 };
-
 #endif
