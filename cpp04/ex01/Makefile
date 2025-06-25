@@ -12,7 +12,7 @@
 
 
 C++ = c++
-C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+C++_FLAGS = -Wall -Wextra -Werror -g -std=c++98 -pedantic
 INFILES = 	main.cpp Brain.cpp\
 			Animal.cpp Dog.cpp Cat.cpp
 

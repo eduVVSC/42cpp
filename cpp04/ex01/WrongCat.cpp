@@ -1,48 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:51:24 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:57:42 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 
-void Dog::makeSound() const
-{
-	std::cout << "Bark Bark Bark!" << std::endl;
+void WrongCat::makeSound() const {
+	std::cout << "Wrong Meow!!" << std::endl;
 }
 
-Brain *Dog::getBrain(){ return (this->brain); }
-
-Dog::Dog(const Dog &dog) : Animal()
-{
-	*this = dog;
-	std::cout << "creating dog!" << std::endl;
+WrongCat::WrongCat(WrongCat &cp) : WrongAnimal() {
+	this->type = cp.getType();
+	std::cout << "Copying WrongCat!" << std::endl;
 }
 
-Dog::Dog() : Animal()
-{
-	this->type = "Dog";
-	this->brain = new Brain();
-	std::cout << "creating dog!" << std::endl;
-}
-
-Dog &Dog::operator=(const Dog &other){
-	this->brain = new Brain();
-	*this->brain = *other.brain;
+WrongCat &WrongCat::operator=(const WrongCat &other){
 	this->type = other.getType();
 	return (*this);
 }
 
-Dog::~Dog()
+WrongCat::WrongCat() : WrongAnimal() {
+	this->type = "WrongCat";
+	std::cout << "creating WrongCat!" << std::endl;
+}
+
+WrongCat::~WrongCat()
 {
-	std::cout << "bf brain deletion dog!" << std::endl;
-		if (brain)
-			delete brain;
-	std::cout << "Destroying some Dog" << std::endl;
+	std::cout << "Destroying WrongCat!" << std::endl;
 }

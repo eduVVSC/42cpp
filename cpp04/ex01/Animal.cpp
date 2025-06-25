@@ -16,6 +16,7 @@ void Animal::makeSound() const
 {
 	std::cout << "I do not know what sound do i make?!?!?!?" << std::endl;
 }
+
 std::string Animal::getType() const
 {
 	return (this->type);
@@ -23,17 +24,19 @@ std::string Animal::getType() const
 
 Animal::Animal()
 {
+	std::cout << "Animal constructor" << std::endl;
 	this->type = "I do not know what the fuck i am?!?!?!?";
-	std::cout << "Creating some animal" << std::endl;
 }
 
 Animal::Animal(Animal &other)
 {
-	this->type = other.getType();
+	std::cout << "Animal Copy constructor called" << std::endl;
+	*this = other;
 }
 
 Animal::~Animal()
 {
+	std::cout << "Animal destroyer" << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &other){

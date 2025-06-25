@@ -18,9 +18,8 @@ void Cat::makeSound() const {
 
 Brain *Cat::getBrain(){ return (this->brain); }
 
-Cat::Cat(Cat &cp) : Animal (){
-	this->brain = cp.getBrain();
-	this->type = cp.getType();
+Cat::Cat(const Cat &cp) : Animal (){
+	*this = cp;
 	std::cout << "Copying cat!" << std::endl;
 }
 
@@ -32,6 +31,7 @@ Cat::Cat() : Animal()
 }
 
 Cat &Cat::operator=(const Cat &other){
+	this->brain = other.brain;
 	this->type = other.getType();
 	return (*this);
 }
@@ -40,4 +40,5 @@ Cat::~Cat()
 {
 	if (brain)
 		delete brain;
+	std::cout << "Destroying some cat" << std::endl;
 }

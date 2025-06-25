@@ -17,22 +17,44 @@
 
 int	main(void)
 {
-	std::cout << "---------------------------------------" << std::endl;
+	std::cout << "\n------------- Constructing -------------" << std::endl;
 
-	Animal *a4[4];
-	a4[0] = new Dog();
-	a4[1] = new Cat();
-	a4[2] = new Dog();
-	a4[3] = new Dog();
+	Dog *a1 = new Dog();
+	Dog *a2 = new Dog(*a1);
+
+	std::cout << "\n------------- Making sound -------------" << std::endl;
 	std::cout << std::endl;
 
-	for (size_t i = 0; i < 4; i++)
-		a4[i]->makeSound();
+	a1->makeSound();
+	a2->makeSound();
 
-	std::cout << "---------------------------------------" << std::endl;
+	std::cout << "\n------------- Adding things to brain -------------" << std::endl;
+	std::cout << std::endl;
 
-	for (size_t i = 0; i < 4; i++)
-		delete a4[i];
-	return (1);
+	//for (int i = 0; i < 100; i++) {
+	//	a1->getBrain()->addIdea("a");
+	//}
+
+	a1->getBrain()->addIdea("Idea1");
+	a1->getBrain()->addIdea("Idea2");
+	a1->getBrain()->addIdea("Idea3");
+
+	std::cout << "----- checking if both brains have different ideas!" << std::endl;
+
+	a1->getBrain()->displayIdeas();
+	a2->getBrain()->displayIdeas();
+
+	std::cout << "\n------------- Destroying -------------" << std::endl;
+	std::cout << std::endl;
+
+	delete a1;
+	delete a2;
+
+	std::cout << "\n------------- Equal assignment -------------" << std::endl;
+	Dog a;
+	Dog b = a;
+	std::cout << "\n------------- Destroying -------------" << std::endl;
+
+	return (0);
 }
 

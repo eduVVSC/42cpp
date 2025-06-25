@@ -1,48 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:47:47 by edvieira          #+#    #+#             */
-/*   Updated: 2025/05/09 15:51:24 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:13:01 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongAnimal.hpp"
 
-void Dog::makeSound() const
+void WrongAnimal::makeSound() const
 {
-	std::cout << "Bark Bark Bark!" << std::endl;
+	std::cout << "Wrong: I do not know what sound do i make?!?!?!?" << std::endl;
+}
+std::string WrongAnimal::getType() const
+{
+	return (this->type);
 }
 
-Brain *Dog::getBrain(){ return (this->brain); }
-
-Dog::Dog(const Dog &dog) : Animal()
+WrongAnimal::WrongAnimal()
 {
-	*this = dog;
-	std::cout << "creating dog!" << std::endl;
+	this->type = "I do not know what the fuck i am?!?!?!?";
+	std::cout << "Creating some animal" << std::endl;
 }
 
-Dog::Dog() : Animal()
+WrongAnimal::WrongAnimal(WrongAnimal &other)
 {
-	this->type = "Dog";
-	this->brain = new Brain();
-	std::cout << "creating dog!" << std::endl;
+	this->type = other.getType();
 }
 
-Dog &Dog::operator=(const Dog &other){
-	this->brain = new Brain();
-	*this->brain = *other.brain;
+WrongAnimal::~WrongAnimal()
+{
+	std::cout << "Destroying WrongAnimal!" << std::endl;
+}
+
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other){
 	this->type = other.getType();
 	return (*this);
-}
-
-Dog::~Dog()
-{
-	std::cout << "bf brain deletion dog!" << std::endl;
-		if (brain)
-			delete brain;
-	std::cout << "Destroying some Dog" << std::endl;
 }
