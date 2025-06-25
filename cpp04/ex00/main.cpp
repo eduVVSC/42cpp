@@ -11,58 +11,62 @@
 /* ************************************************************************** */
 
 #include "Animal.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-/* int main()
-{
-const Animal* meta = new Animal();
-const Animal* j = new Dog();
-const Animal* i = new Cat();
-std::cout << j->getType() << " " << std::endl;
-std::cout << i->getType() << " " << std::endl;
-i->makeSound(); //will output the cat sound!
-j->makeSound();
-meta->makeSound();
+ int main() {
+	const WrongAnimal* meta = new WrongAnimal();
+	const WrongAnimal* j = new WrongCat();
+	const WrongAnimal* i = new WrongCat();
+
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+
+ 	i->makeSound(); //will output the cat sound!
+	j->makeSound();
+	meta->makeSound();
+
+ 	delete meta;
+ 	delete j;
+ 	delete i;
 return 0;
-} */
+}
 
 
-int	main(void)
+/*int	main(void)
 {
-	const Animal *a = new Dog();
-	std::cout << a->getType() << std::endl;
-	a->makeSound();
-
-	std::cout << "---------------------------------------" << std::endl;
-
-	const Animal *a2 = new Cat();
-	std::cout << a2->getType() << std::endl;
-	a2->makeSound();
-
-	std::cout << "---------------------------------------" << std::endl;
-
-	const Animal *b = new Animal();
-	std::cout << b->getType() << std::endl;
-	b->makeSound();
-
-	std::cout << "---------------------------------------" << std::endl;
+	std::cout << "\n------------- Constructing -------------" << std::endl;
 
 	Animal *a4[4];
 	a4[0] = new Dog();
 	a4[1] = new Cat();
 	a4[2] = new Dog();
 	a4[3] = new Cat();
-	std::cout << std::endl;
 
+	std::cout << "\n------------- Making sound -------------" << std::endl;
+	std::cout << std::endl;
 	for (size_t i = 0; i < 4; i++)
 		a4[i]->makeSound();
 
-	delete a;
-	delete a2;
-	delete b;
+	std::cout << "\n------------- Destroying -------------" << std::endl;
 	for (size_t i = 0; i < 4; i++)
 		delete a4[i];
-	return (1);
-}
+
+	std::cout << "\n------------- WrongAnimals -------------" << std::endl;
+	std::cout << "------------- Constructing -------------" << std::endl;
+
+	WrongCat *b1 = new WrongCat();
+	WrongAnimal *b2 = new WrongCat();
+
+	std::cout << "\n------------- Making sound -------------" << std::endl;
+	b1->makeSound();
+	b2->makeSound();
+
+	std::cout << "\n------------- Destroying -------------" << std::endl;
+	delete b1;
+	delete b2;
+	return (0);
+}*/
 

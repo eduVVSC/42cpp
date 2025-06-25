@@ -14,7 +14,8 @@
 C++ = c++
 C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 INFILES = 	main.cpp\
-			Animal.cpp Dog.cpp Cat.cpp
+			Animal.cpp Dog.cpp Cat.cpp\
+			WrongAnimal.cpp WrongCat.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)
 

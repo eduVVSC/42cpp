@@ -19,8 +19,8 @@ void Dog::makeSound() const
 
 Dog::Dog(Dog &dog) : Animal()
 {
-	this->type = dog.getType();
 	std::cout << "creating dog!" << std::endl;
+	*this = dog;
 }
 
 Dog::Dog() : Animal()
@@ -31,4 +31,10 @@ Dog::Dog() : Animal()
 
 Dog::~Dog()
 {
+	std::cout << "Destroying some Dog" << std::endl;
+}
+
+Dog &Dog::operator=(const Dog &other){
+	this->type = other.getType();
+	return (*this);
 }

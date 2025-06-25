@@ -10,29 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-void Cat::makeSound() const {
-	std::cout << "Meow!!" << std::endl;
+void WrongCat::makeSound() const {
+	std::cout << "Wrong Meow!!" << std::endl;
 }
 
-Cat::Cat(Cat &cp) : Animal (){
-	std::cout << "Copying constructor cat!" << std::endl;
-	*this = cp;
+WrongCat::WrongCat(WrongCat &cp) : WrongAnimal() {
+	this->type = cp.getType();
+	std::cout << "Copying WrongCat!" << std::endl;
 }
 
-Cat::Cat() : Animal()
-{
-	this->type = "cat";
-	std::cout << "creating cat!" << std::endl;
-}
-
-Cat::~Cat()
-{
-	std::cout << "Destroying some cat" << std::endl;
-}
-
-Cat &Cat::operator=(const Cat &other){
+WrongCat &WrongCat::operator=(const WrongCat &other){
 	this->type = other.getType();
 	return (*this);
+}
+
+WrongCat::WrongCat() : WrongAnimal() {
+	this->type = "WrongCat";
+	std::cout << "creating WrongCat!" << std::endl;
+}
+
+WrongCat::~WrongCat()
+{
+	std::cout << "Destroying WrongCat!" << std::endl;
 }
