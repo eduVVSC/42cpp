@@ -20,7 +20,15 @@ int	main(void)
 	std::cout << "\n------------- Constructing -------------" << std::endl;
 
 	Dog *a1 = new Dog();
+
+	a1->getBrain()->addIdea("Idea1");
+	a1->getBrain()->addIdea("Idea2");
+	a1->getBrain()->addIdea("Idea3");
+
+	std::cout << std::endl;
+
 	Dog *a2 = new Dog(*a1);
+
 
 	std::cout << "\n------------- Making sound -------------" << std::endl;
 	std::cout << std::endl;
@@ -35,9 +43,9 @@ int	main(void)
 	//	a1->getBrain()->addIdea("a");
 	//}
 
-	a1->getBrain()->addIdea("Idea1");
-	a1->getBrain()->addIdea("Idea2");
-	a1->getBrain()->addIdea("Idea3");
+	a1->getBrain()->addIdea("Idea4");
+	a1->getBrain()->addIdea("Idea5");
+	a1->getBrain()->addIdea("Idea6");
 
 	std::cout << "----- checking if both brains have different ideas!" << std::endl;
 

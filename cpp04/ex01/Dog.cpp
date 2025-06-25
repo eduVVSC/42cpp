@@ -22,7 +22,7 @@ Brain *Dog::getBrain(){ return (this->brain); }
 Dog::Dog(const Dog &dog) : Animal()
 {
 	*this = dog;
-	std::cout << "creating dog!" << std::endl;
+	std::cout << "Copy creating dog!" << std::endl;
 }
 
 Dog::Dog() : Animal()

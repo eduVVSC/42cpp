@@ -24,13 +24,11 @@ void Brain::displayIdeas() {
 }
 
 void Brain::copyIdeas(const Brain &other){
-	std::string oIdeas = *other.ideas;
-
 	if (other.ideas[0].empty()) {
 		return;
 	}
 	for (size_t i = 0; i < 100; i++){
-		this->ideas[i] = oIdeas[i];
+		this->ideas[i] = other.ideas[i];
 	}
 }
 
