@@ -17,8 +17,8 @@
 
 int	main(void)
 {
+	//AAnimal a= new AAnimal("sadads"); // will give compilation error, as expected
 	std::cout << "\n------------- Constructing -------------" << std::endl;
-
 
 	Cat *a1 = new Cat();
 	Cat *a2 = new Cat(*a1);
