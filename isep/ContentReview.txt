@@ -1,0 +1,53 @@
+Content:
+
+-> Interfaces:
+    As interfaces sao compostas por um conjunto de metodos publicos e constantes(qualquer
+    variavel definida dentro de uma interface sera por definicao public e final),
+    seu objetivo eh padronizar comportamento entre classes instanciaveis, ja que, caso 
+    uma classe implemente determinada interface, ela tem de implementar os metodos definidos, se nao 
+    sera tranformada em abstrata(classes abstratas nao sao obrigadas a implementar os metodos, podem
+    ser implementados por seus filhos).
+    Uma classe pode implementar mais de um Interface.
+
+-> Excecoes:
+    Ha dois tipos de excecoes, checked e unchecked, esses nomes estao relacionadas a "obrigatoriedade"
+    dada pelo compilador de serem checadas, as checked sao checadas pelo compilador, caso nao estejam sendo 
+    tratadas, dara um erro de compilacao, ja as unchecked nao daram erro de compilacao, mas se nao forem 
+    tratadas poderam gerar erro em runtime.
+
+    Tipos especiais de classes que tem como objetivo indicar que ocorreu certo erro durante 
+    a execucao, sempre extendem a Exception.
+
+    Uma excecao eh composta pelos blocos:
+    <> Try - lugar aonde a excecao pode ocorrer esta;
+    <> Catch(ExceptionType e) - bloco de codigo que sera definido o que sera realizado caso 
+    uma excecao do tipo esplicitado seja detectada. (sempre fazer em ordem ascendente de execucao, 
+    caso nao o faca, vai gerar erro de compilacao) 
+    <> Finally - bloco que independentemente de uma excecao ser lancada ou nao, sera executado
+    
+    Throws, sintaxe que fica apos a definicao de um metodo indicando que aquele metodo pode gerar uma 
+    excecao e que essa deve ser tratada pela funcao que o chame.
+
+-> Heranca: 
+    Conceito que relaciona classes/conceitos que sao derividos do mesmo objeto, a classe base podendo ou nao 
+    ser uma abstrata. Por exemplo Automovel, pode ser um carro, um caminhao, uma moto, etc. 
+    Cada um deles tem caracteristicas partilhadas e caracteristicas unicas, as que sao
+    partilhadas(metodos e variaveis) estao declaradas na classe base. A classe base ainda pode declarar
+    metodos com os quais nao ha definicao de comportamento chamando eles de
+    abstratos("abstract public methodName();").   
+
+-> Agregacao e Composicao:
+
+-> Polimorfismo:
+
+-> JavaFX:
+
+-> Classes de Tipos Variaveis:
+
+-> Construtores:
+
+-> Serializacao:
+
+-> Enumeradores:
+
+

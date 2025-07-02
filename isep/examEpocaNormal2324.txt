@@ -1,0 +1,128 @@
+Erradas: nenhuma!
+Nota: 20 
+
+1 - (4) a,b,c,d
+
+2 - (3) 
+
+3 - (2)
+
+4 - (2) <=
+
+5 - (2) <=  classe automaticamente abstrata quando nao implementa o metodo da interface
+
+6 - (2)
+
+7 - (1)  <= ver melhor oque eh uma nested class(se n me engano mesmo conceito de inner class)
+
+8 - (2)
+
+9 - (3)
+
+10 - (3) b,c. Ja que nao pode ser delcarada classes variaveis sem o tipo de classe 
+
+11 - (4) a,c.   <= check later re-ask
+
+12 - 
+(
+abstract class Shape{
+    abstract public int calculateArea();
+}
+
+class Circle {
+    int radius;
+
+    public int calculateArea(){
+        return radius * radius * Math.PI;
+    }
+}
+
+class Rectangle {
+    int length;
+    int height;
+
+    public int calculateArea(){
+        return length * height;
+    }
+}
+)
+
+13 - (1)
+
+14 - (1) a,b,c
+
+15 - (
+class Car{
+private String brand ;
+private Person owner ;
+
+public Car ( S t r i n g brand , Person owner ) {
+    this.brand = brand;
+    this.owner = new Person(owner); // think so
+}
+
+public String toString(){
+return brand + " ␣owned␣by␣ " + owner . getName ( ) ;
+}
+
+}
+)
+
+16 - (1)
+
+17 - (
+    public classSalesController {
+private static final int DRINK_PRICE = 2 ;
+private static final int FOOD_PRICE = 5 ;
+private static final double DRINK_TAX = 0 . 2 3 ;
+private static final double FOOD_TAX = 0 . 0 6 ;
+@FXML
+private TextField drinksInput;
+@FXML
+private TextField foodInput;
+@FXML
+private Label priceOutput;
+@FXML
+protected void o n S e l l B u t t o n C l i c k ( ) {
+    double price;
+    try{
+        price = FOOD_PRICE * FOOD_TAX * Integer.parseInt(foodInput.getText()) + 
+                DRINK_PRICE * DRINK_TAX * Integer.parseInt(drinksInput.getText());
+        priceOutput.setText("$" + price); 
+    } catch (exception e) {
+        priceOutput.setText("error on parsing, try again!"); 
+    }
+}
+
+}
+)
+
+18 - (
+public enum Days {
+SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
+public boolean isWeekend ( ) {
+    if(this == SUNDAY || this == SATURDAY)
+        return true;
+    return false;
+}
+}
+
+
+public class ExampleEnum {
+
+public static void main ( S t r i n g [ ] a r g s ) {
+Days day = Days.SUNDAY
+if (day.isWeekend())
+    System.out.println("eh fim de semana");
+}
+
+}
+)
+
+Conceitos vistos:
+
+
+
+
+
+
