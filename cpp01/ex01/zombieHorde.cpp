@@ -14,7 +14,7 @@
 
 Zombie* zombieHorde(int N, std::string name)
 {
-	std::cout << "\n-------------Inside ZmHorde!!-------------\n" << std::endl;
+	//std::cout << "\n-------------Inside ZmHorde!!-------------\n" << std::endl;
 	if (N < 1) {
 		std::cout << "!!not valid num to create horde!!" << std::endl;
 		return (NULL);

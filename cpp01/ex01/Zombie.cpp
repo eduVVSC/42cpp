@@ -35,6 +35,8 @@ Zombie::Zombie(std::string name) {
 
 // Destructor
 
-Zombie::~Zombie() {
-	std::cout << "\t💀 Destroyer zombie " << name << std::endl;
+Zombie::~Zombie()
+{
+	std::cout << "\t💀 Zombie DESTROYER " << name << std::endl;
 }
+

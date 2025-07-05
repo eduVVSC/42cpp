@@ -15,52 +15,53 @@
 #include <cstring>
 #include <string>
 
-
-// s1 to be replaced by s2
-void writeLineChange(std::ofstream *writeFile, std:: string line, char *s1, char *s2)
+ void writeLineChange(std::ofstream *writeFile, std:: string line, std::string s1, std::string s2)
 {
-	(void) s2;
-	(void) writeFile;
-	for (size_t i = 0; i < line.length(); i++)
+	size_t positionFound = line.find(s1);
+	// std::string::npos, standard constant to did not find
+	if (positionFound == std::string::npos)
 	{
-		if (i == line.find(s1, i))
-		{
-			size_t wordLen = strlen(s2);
-			for (size_t i = 0; i < wordLen; i++)
-				writeFile->put(s2[i]);
-			i += strlen(s1) - 1;
-		}
-		else
-			writeFile->put(line.at(i));
+		writeFile->write(line.c_str(), line.length());
 	}
+	else
+	{
+		writeFile->write(line.c_str(), positionFound);
+		writeFile->write(s2.c_str(), s2.length());
+		if ((positionFound + s1.length()) < line.length()) {
+			std::string restOfLine = line.substr(positionFound + s1.length(), s1.length());
+			writeFile->write(restOfLine.c_str(), restOfLine.length());
+		}
+	}
+}
+
+void replace(std::string filename, std::string s1, std::string s2)
+{
+ 	std::ifstream readFile(filename.c_str());
+ 	if (readFile.is_open())
+ 	{
+ 		std::string line;
+ 		std::ofstream writeFile(filename.append(".replace").c_str()); // need to check if the file exists before!!
+		if (writeFile.fail()) {
+			std::cout << "Could not open file " << filename << ". Exiting." << std::endl;
+			return ;
+		}
+ 		while (getline(readFile, line))
+ 		{
+ 			writeLineChange(&writeFile, line, s1, s2);
+ 			writeFile.put('\n');
+ 		}
+ 		readFile.close();
+ 	}
+ 	else
+ 		std::cout << "You've inserted a bad filename!!!" << std::endl;
 }
 
 int	main(int ac, char **av)
 {
 	if (ac == 4)
-	{
-		std::string filename;
-		filename = av[1];
-
-		std::ifstream readFile(filename.c_str());
-		if (readFile.is_open())
-		{
-			std::string line;
-			std::ofstream writeFile(filename.append(".replace").c_str()); // need to check if the file exists before!!
-
-			std::cout << "file is opened" << std::endl;
-
-			while (getline(readFile, line))
-			{
-				std::cout << line << std::endl;
-				writeLineChange(&writeFile, line, av[2], av[3]);
-				writeFile.put('\n');
-			}
-
-			readFile.close();
-		}
-		else
-			std::cout << "You've inserted a bad file!!!" << std::endl;
+		replace(av[1], av[2], av[3]);
+	else {
+		std::cerr << "Bad Arguments! Correct usage:\n " << av[0] << " <filename> <to be replaced> <to replace with>" << std::endl;
 	}
 	return (0);
 }

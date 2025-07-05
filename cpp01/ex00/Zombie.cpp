@@ -20,11 +20,11 @@ Zombie::Zombie(std::string name)
 {
 	this->name = name;
 
-	std::cout << "\t ➕ Zombie CREATED" << name << std::endl;
+	std::cout << "\t ➕ Zombie CREATED " << name << std::endl;
 }
 
 Zombie::~Zombie()
 {
-	std::cout << "\t💀 Destroyer zombie " << name << std::endl;
+	std::cout << "\t💀 Zombie DESTROYER " << name << std::endl;
 }
 
