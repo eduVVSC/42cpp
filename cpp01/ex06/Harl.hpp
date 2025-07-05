@@ -34,6 +34,7 @@ class Harl
 		void warning( void );
 		void error( void );
 		int getHash(std::string level);
+		
 	public:
 
 		void complain( std::string level );

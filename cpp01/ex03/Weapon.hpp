@@ -24,11 +24,9 @@ class Weapon
 		void		setType(std::string type);
 		std::string	const &getType() const;
 
-		Weapon(const Weapon& cp); // take it of
 		Weapon(std::string type);
 		Weapon();
 
-		Weapon& operator=(const Weapon&); // take it of
 		~Weapon();
 };
 

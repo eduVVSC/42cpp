@@ -35,8 +35,7 @@ int Harl::getHash(std::string level) {
 	return ComplainType::NONE;
 }
 
-void Harl::complain( std::string level )
-{
+void Harl::complain( std::string level ) {
 	switch (getHash(level))
 	{
 		case ComplainType::DEBUG:

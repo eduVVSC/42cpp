@@ -18,7 +18,6 @@
  void writeLineChange(std::ofstream *writeFile, std:: string line, std::string s1, std::string s2)
 {
 	size_t positionFound = line.find(s1);
-	// std::string::npos, standard constant to did not find
 	if (positionFound == std::string::npos)
 	{
 		writeFile->write(line.c_str(), line.length());
@@ -40,7 +39,7 @@ void replace(std::string filename, std::string s1, std::string s2)
  	if (readFile.is_open())
  	{
  		std::string line;
- 		std::ofstream writeFile(filename.append(".replace").c_str()); // need to check if the file exists before!!
+ 		std::ofstream writeFile(filename.append(".replace").c_str());
 		if (writeFile.fail()) {
 			std::cout << "Could not open file " << filename << ". Exiting." << std::endl;
 			return ;
