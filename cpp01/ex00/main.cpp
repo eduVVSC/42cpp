@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:52:44 by edvieira          #+#    #+#             */
 /*   Updated: 2025/05/05 13:42:25 by edvieira         ###   ########.fr       */
@@ -12,9 +12,6 @@
 
 #include "Zombie.hpp"
 
-// goal of the exercise
-// see which cases are better to the memory to be allocated in heap and in stack
-//  and the difference between them.
 int main()
 {
 	std:: cout << " --> Test of stack memory! Going inside randomChump function:\n" << std::endl;
