@@ -4,7 +4,7 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          #+#  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-07-07 10:46:26 by edvieira          #+#    #+#             */
 /*   Updated: 2025-07-07 10:46:26 by edvieira         ###   ########.fr       */
@@ -44,4 +44,3 @@ Fixed &Fixed::operator=(Fixed const &other) {
     this->raw = other.getRawBits();
     return *this;
 }
-

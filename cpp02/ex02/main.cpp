@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          #+#  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-07-07 10:47:30 by edvieira          #+#    #+#             */
 /*   Updated: 2025-07-07 10:47:30 by edvieira         ###   ########.fr       */
@@ -67,6 +67,6 @@ int main( void ) {
   std::cout << b << std::endl;
   std::cout << Fixed::max( a, b ) << std::endl;
   // extra tests
-  tests();
+  //tests();
   return 0;
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          #+#  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-07-07 10:46:59 by edvieira          #+#    #+#             */
 /*   Updated: 2025-07-07 10:46:59 by edvieira         ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          #+#  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-07-07 10:46:45 by edvieira          #+#    #+#             */
 /*   Updated: 2025-07-07 10:46:45 by edvieira         ###   ########.fr       */
@@ -22,8 +22,8 @@ void Fixed::setRawBits(int const raw) {
 }
 
 int Fixed::toInt( void ) const {
-    int integerPart = this->rawBits >> this->fractBits;
-    return integerPart;
+    float intInFloat = toFloat();
+    return ((int) roundf(intInFloat));
 }
 
 float Fixed::toFloat( void ) const {
@@ -39,11 +39,9 @@ Fixed::Fixed() {
 
 Fixed::Fixed(float const val) {
     std::cout << "Float constructor called" << std::endl;
-    int intPart = (int) val;
-    float floatPart = val - intPart;
-
-    this->rawBits = intPart << 8;
-    this->rawBits += (int) (floatPart * (1 << fractBits));
+    float floatPart = roundf(val * (1 << fractBits));  
+    
+    this->rawBits = (int) floatPart;
 }
 
 Fixed::Fixed(int const val) {
