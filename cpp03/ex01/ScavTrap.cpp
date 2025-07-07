@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 08:09:28 by edvieira          #+#    #+#             */
 /*   Updated: 2025/04/10 16:46:36 by edvieira         ###   ########.fr       */

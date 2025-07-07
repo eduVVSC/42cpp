@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:40:31 by edvieira          #+#    #+#             */
 /*   Updated: 2025/04/10 16:49:55 by edvieira         ###   ########.fr       */

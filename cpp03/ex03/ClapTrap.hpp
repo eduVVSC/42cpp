@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:55:59 by edvieira          #+#    #+#             */
 /*   Updated: 2025/05/01 17:43:05 by edvieira         ###   ########.fr       */

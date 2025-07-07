@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edvieira <edvieira@student.42porto.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:55:35 by edvieira          #+#    #+#             */
 /*   Updated: 2025/05/01 17:45:43 by edvieira         ###   ########.fr       */
@@ -16,7 +16,7 @@ int	main(void)
 {
 	ClapTrap *cp1 = new ClapTrap("teste1");
 	ClapTrap *cp2 = new ClapTrap("teste2");
-	ClapTrap *cp3 = new ClapTrap("teste2");
+	ClapTrap *cp3 = new ClapTrap(*cp2); // testing copy constructor and equal assignment
 
 
 	// test to check if the subtraction of energyPoints is accured
@@ -51,7 +51,6 @@ int	main(void)
 	std::cout << "11th =>  ";
 	cp2->beRepaired(10);
 
-	// will execute because are unsigned int
 	std::cout << "\n========test neg values========" << std::endl;
 	cp3->takeDamage(-10);
 	cp3->beRepaired(-10);
