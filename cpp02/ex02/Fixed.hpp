@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42porto.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-07-07 10:47:23 by edvieira          #+#    #+#             */
-/*   Updated: 2025-07-07 10:47:23 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/07/07 16:11:29 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ public:
     bool operator>=(const Fixed& other);  // working
 
     // Print operator
-    friend std::ostream& operator<<(std::ostream& os, const Fixed& fst);
 
     Fixed();
     Fixed(int const val);
@@ -65,6 +64,6 @@ public:
     Fixed &operator=(Fixed const &other);
 };
 
-std::ostream& operator<<(std::ostream& os, const Fixed& other);
+std::ostream& operator<<(std::ostream& os, const Fixed& fst);
 
 #endif
