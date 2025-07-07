@@ -16,12 +16,12 @@ void ClapTrap::attack(const std::string& target)
 {
 	if(energyPoint > 0 && hitPoints > 0)
 	{
-		std::cout << "ClapTrap " + this->name + " attacks " + target + ", causing ";
-		std::cout << this->attackDamage + " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing ";
+		std::cout << this->attackDamage << " points of damage!" << std::endl;
 		energyPoint--;
 	}
 	else
-		std::cout << "ClapTrap " + this->name + " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
+		std::cout << "ClapTrap " << this->name << " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -35,12 +35,12 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (energyPoint > 0 && hitPoints > 0)
 	{
-		std::cout << "ClapTrap " << name <<" repairs itself, it regains " << amount << " hit points." << std::endl;
+		std::cout << "ClapTrap " << name << " repairs itself, it regains " << amount << " hit points." << std::endl;
 		this->hitPoints += amount;
 		energyPoint--;
 	}
 	else
-		std::cout << "ClapTrap " + this->name + " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
+		std::cout << "ClapTrap " << this->name << " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
 }
 
 std::string ClapTrap::getName() { return (this->name); }
@@ -80,7 +80,7 @@ ClapTrap::ClapTrap(ClapTrap &cp)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << " ClapTrap -> destructor has been called for: " + this->name << std::endl;
+	std::cout << " ClapTrap -> destructor has been called for: " << this->name << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(ClapTrap const& other) {

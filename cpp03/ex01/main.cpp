@@ -24,7 +24,7 @@ int	main()
 	std::cout << "\n ===== creating Third ScavTrap ===== " << std::endl;
 	ClapTrap *t = new ClapTrap("testClap");
 
-	std::cout << "\n ===== tests ===== " << std::endl;
+	std::cout << "\n\n\n ===== tests ===== " << std::endl;
 	st1->guardGate();
 	st1->attack("enemy");
 	st1->beRepaired(10);

@@ -40,7 +40,7 @@ class ClapTrap
 
 		ClapTrap(std::string name);
 		ClapTrap(ClapTrap &cp);
-		~ClapTrap();
+		virtual ~ClapTrap();
 
 		ClapTrap&	operator=(ClapTrap const&);
 };

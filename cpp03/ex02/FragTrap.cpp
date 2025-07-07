@@ -21,19 +21,18 @@ void FragTrap::attack(const std::string& target)
 {
 	if(energyPoint > 0 && hitPoints > 0)
 	{
-		std::cout << "FragTrap " + this->name + " attacks " + target + ", causing ";
-		std::cout << this->attackDamage + " points of damage!" << std::endl;
+		std::cout << "FragTrap " << this->name << " attacks " << target << ", causing ";
+		std::cout << this->attackDamage << " points of damage!" << std::endl;
 		energyPoint--;
 	}
 	else
-		std::cout << "FragTrap " + this->name + " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
+		std::cout << "FragTrap " << this->name << " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
 }
 
 void FragTrap::takeDamage(unsigned int amount)
 {
 	this->hitPoints -= amount;
 	std::cout << "FragTrap " << name << " was attacked, it received " << amount << " hit points." << std::endl;
-	//std::cout << "Remaining live: " << hitPoints << std::endl;
 }
 
 void FragTrap::beRepaired(unsigned int amount)
@@ -45,7 +44,7 @@ void FragTrap::beRepaired(unsigned int amount)
 		energyPoint--;
 	}
 	else
-		std::cout << "FragTrap " + this->name + " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
+		std::cout << "FragTrap " << this->name << " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)

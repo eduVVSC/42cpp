@@ -16,12 +16,12 @@ void ScavTrap::attack(const std::string& target)
 {
 	if(energyPoint > 0 && hitPoints > 0)
 	{
-		std::cout << "ScavTrap " + this->name + " attacks " + target + ", causing ";
-		std::cout << this->attackDamage + " points of damage!" << std::endl;
+		std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing ";
+		std::cout << this->attackDamage << " points of damage!" << std::endl;
 		energyPoint--;
 	}
 	else
-		std::cout << "ScavTrap " + this->name + " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
+		std::cout << "ScavTrap " << this->name << " could not attack because it doesn't have energyPoints or hitPoints" << std::endl;
 }
 
 void ScavTrap::takeDamage(unsigned int amount)
@@ -40,7 +40,7 @@ void ScavTrap::beRepaired(unsigned int amount)
 		energyPoint--;
 	}
 	else
-		std::cout << "ScavTrap " + this->name + " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
+		std::cout << "ScavTrap " << this->name << " could not repair because it doesn't have energyPoints or hitPoints" << std::endl;
 }
 
 void	ScavTrap::guardGate()
