@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_H
-# define ANIMAL_H
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
 # include <string>
 #include <iostream>
@@ -24,14 +24,13 @@ protected:
 
 public:
 	virtual void makeSound() const;
-
 	std::string getType() const;
 
-	Animal&operator=(const Animal &other);
-
+	
 	Animal(Animal &other);
 	Animal();
-
+	
 	virtual ~Animal();
+	Animal&operator=(const Animal &other);
 };
 #endif

@@ -47,7 +47,7 @@ int	main(void)
 	a1->getBrain()->addIdea("Idea5");
 	a1->getBrain()->addIdea("Idea6");
 
-	std::cout << "----- checking if both brains have different ideas!" << std::endl;
+	std::cout << "\n----- checking if both brains have different ideas!" << std::endl;
 
 	a1->getBrain()->displayIdeas();
 	a2->getBrain()->displayIdeas();

@@ -21,7 +21,7 @@ int	main(void)
 	std::cout << "\n------------- Constructing -------------" << std::endl;
 
 	Cat *a1 = new Cat();
-	Cat *a2 = new Cat(*a1);
+	Dog *a2 = new Dog();
 
 	std::cout << "\n------------- Making sound -------------" << std::endl;
 	std::cout << std::endl;

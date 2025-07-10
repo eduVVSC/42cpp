@@ -25,13 +25,12 @@ class Brain
 		void addIdea(std::string idea);
 		std::string *getIdeas();
 		void displayIdeas();
-
-		Brain&operator=(const Brain &other);
-
+		
 		Brain(const Brain &copy);
 		Brain();
-
+		
 		~Brain();
+		Brain&operator=(const Brain &other);
 };
 
 #endif

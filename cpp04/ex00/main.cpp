@@ -16,28 +16,11 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
- int main() {
-	const WrongAnimal* meta = new WrongAnimal();
-	const WrongAnimal* j = new WrongCat();
-	const WrongAnimal* i = new WrongCat();
-
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-
- 	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
-
- 	delete meta;
- 	delete j;
- 	delete i;
-	return 0;
-}
-
-
-/*int	main(void)
+/* int	otherTest(void)
 {
 	std::cout << "\n------------- Constructing -------------" << std::endl;
+
+	//Animal *test = new WrongCat();
 
 	Animal *a4[4];
 	a4[0] = new Dog();
@@ -68,5 +51,24 @@
 	delete b1;
 	delete b2;
 	return (0);
-}*/
+} */
 
+
+ int main() {
+	//otherTest();
+	const WrongAnimal* meta = new WrongAnimal();
+	const WrongAnimal* j = new WrongCat();
+	const WrongAnimal* i = new WrongCat();
+
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+
+ 	i->makeSound(); //will output the cat sound!
+	j->makeSound();
+	meta->makeSound();
+
+ 	delete meta;
+ 	delete j;
+ 	delete i;
+	return 0;
+}

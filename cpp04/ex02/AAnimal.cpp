@@ -27,6 +27,7 @@ AAnimal::AAnimal(std::string type)
 AAnimal::AAnimal(AAnimal &other)
 {
 	this->type = other.getType();
+	// missing 
 }
 
 AAnimal::~AAnimal()

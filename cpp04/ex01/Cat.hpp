@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_H
-# define CAT_H
+#ifndef CAT_HPP
+# define CAT_HPP
 
 # include "Animal.hpp"
 # include "Brain.hpp"
@@ -24,13 +24,12 @@ class Cat: public Animal
 	public:
 		void makeSound() const;
 		Brain *getBrain();
-
-		Cat&operator=(const Cat &other);
-
+		
 		Cat(const Cat &cp);
 		Cat();
-
+		
 		~Cat();
+		Cat&operator=(const Cat &other);
 };
 
 #endif

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_H
-# define CAT_H
+#ifndef CAT_HPP
+# define CAT_HPP
 
 # include "Animal.hpp"
 
@@ -22,12 +22,11 @@ class Cat: public Animal
 	public:
 		virtual void makeSound() const;
 
-		Cat&operator=(const Cat &other);
-
 		Cat(Cat &cp);
 		Cat();
-
+		
 		~Cat();
+		Cat&operator=(const Cat &other);
 };
 
 #endif
