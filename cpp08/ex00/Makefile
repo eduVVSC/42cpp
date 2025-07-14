@@ -6,7 +6,7 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/07/11 12:13:19 by edvieira         ###   ########.fr        #
+#    Updated: 2025/07/14 07:13:58 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INFILES = 	main.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)
 
-NAME = convertor
+NAME = a.out
 
 all: $(NAME)
 

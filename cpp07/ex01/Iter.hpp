@@ -1,7 +1,19 @@
-#ifndef ITER_HPP    
-# define ITER_HPP    
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Iter.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/11 10:53:36 by edvieira          #+#    #+#             */
+/*   Updated: 2025/07/11 10:53:38 by edvieira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string> 
+#ifndef ITER_HPP
+# define ITER_HPP
+
+#include <string>
 #include <iostream>
 #include <cctype>
 
