@@ -6,14 +6,14 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/04/24 16:15:54 by edvieira         ###   ########.fr        #
+#    Updated: 2025/07/15 13:24:30 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 C++ = c++
 C++_FLAGS = -Wall -Wextra -Werror -std=c++98
-INFILES = 	main.cpp
+INFILES = 	Span.cpp main.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)
 
