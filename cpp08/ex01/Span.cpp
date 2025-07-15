@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:23:42 by edvieira          #+#    #+#             */
-/*   Updated: 2025/07/15 14:21:07 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:50:07 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ void Span::addNumber(int num) {
 	}
 	else
 		throw FullSpanException("Span is already full!");
+}
+
+/// @brief Function will add all the numbers to the arr until it is not full, once it got to its max, it will not add more
+/// @param vector
+void Span::addNumber(std::vector<int> vector) {
+	size_t i = 0;
+	while (manyAdded < max && i < vector.size())
+	{
+		arr[manyAdded] = vector.at(i);
+		manyAdded++;
+		i++;
+	}
 }
 
 /// @brief Function searches for the shortestSpan in the array saved if possible

@@ -6,13 +6,14 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:23:52 by edvieira          #+#    #+#             */
-/*   Updated: 2025/07/15 14:20:07 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:44:55 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
+# include <vector>
 # include <iostream>
 # include <exception>
 # include <math.h>
@@ -29,6 +30,7 @@ public:
 	unsigned int getManyAdded() const;
 
 	void addNumber(int num);
+	void addNumber(std::vector<int> vector);
 	unsigned int shortestSpan();
 	unsigned int longestSpan();
 
