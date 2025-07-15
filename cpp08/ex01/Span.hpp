@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:23:52 by edvieira          #+#    #+#             */
-/*   Updated: 2025/07/15 13:25:40 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:20:07 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,46 @@ public:
 };
 
 std::ostream& operator<<(std::ostream &os, const Span& span);
+
+class FullSpanException : public std::exception{
+private:
+	std::string message;
+public:
+	FullSpanException(const std::string& msg){
+		this->message = msg;
+	}
+	virtual const char* what() const throw(){
+		return (this->message.c_str());
+	}
+	~FullSpanException() throw(){}
+};
+
+class IndexOutsideOfSpanException : public std::exception{
+private:
+	std::string message;
+public:
+	IndexOutsideOfSpanException(const std::string& msg){
+		this->message = msg;
+	}
+	virtual const char* what() const throw(){
+		return (this->message.c_str());
+	}
+	~IndexOutsideOfSpanException() throw(){}
+};
+
+class CannotCalculateException : public std::exception{
+private:
+	std::string message;
+public:
+	CannotCalculateException(const std::string& msg){
+		this->message = msg;
+	}
+	virtual const char* what() const throw(){
+		return (this->message.c_str());
+	}
+	~CannotCalculateException() throw(){}
+};
+
+
 
 #endif
