@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/17 11:49:34 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/17 12:13:30 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ Date::Date()
 Date::Date(std::string line)
 {
 	if (line.find(',') == std::string::npos)
-		throw new BadDateException("Line was not defined correctly, without ','.\n");
+		throw BadDateException("Line was not defined correctly, without ','.\n");
 	else
 	{
 		char* end;
@@ -82,11 +82,11 @@ Date::Date(std::string line)
 		// get date
 		std::string date = line.substr(0, (line.find(',') - 1));
 		if (!readDate(date))
-			throw new BadDateException("Date was not correctly defined!\n");
+			throw BadDateException("Date was not correctly defined!\n");
 		// get value
 		this->value = static_cast<double>(strtol(line.substr(line.find(','), line.size()).c_str(), &end, 10));
 		if (errno == ERANGE)
-			throw new BadDateException("Line was not defined correctly, without ','.\n");
+			throw BadDateException("Line was not defined correctly, without ','.\n");
 	}
 }
 
@@ -118,14 +118,19 @@ void BitcoinExchange::readDatabaseValues(std::ifstream& inFile)
 		while (std::getline (inFile, line))
 		{
 			if (line.empty())
-				throw new BadDateException("No date nor info in one line, fix your database!\n");
-			//db.push_back(Date(line));
-			std::cout << line << std::endl;
+				throw BadDateException("No date nor info in one line, fix your database!\n");
+		std::cout << "bf break" << std::endl;
+			Date tmp = Date(line);
+			db.push_back(tmp); // breaking here
+		std::cout << "after break" << std::endl;
+
+			std::cout << line << "\n" << std::endl;
 		}
 	}
 	catch (const std::exception& e) {
+		std::cout << "in exception in readDatabaseValues\n" << std::endl;
 		throw e;
-		}
+	}
 }
 
 Date BitcoinExchange::getDateRate(Date searchDate)
@@ -143,15 +148,16 @@ BitcoinExchange::BitcoinExchange()
 		try {
 			readDatabaseValues(inFile);
 		}
-		catch(const std::exception& e)
+		catch(std::exception& e)
 		{
+			std::cout << "in exception in BitcoinExchange" << std::endl;
 			// clean the database and finish program!
 			std::cerr << e.what() << '\n';
 			throw e;
 		}
 	}
 	else
-		throw new CouldNotOpenFileException("Database file could not be opened!\n");
+		throw CouldNotOpenFileException("Database file could not be opened!\n");
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)

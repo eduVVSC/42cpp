@@ -6,13 +6,13 @@
 #    By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 14:30:44 by edvieira          #+#    #+#              #
-#    Updated: 2025/09/17 09:10:02 by edvieira         ###   ########.fr        #
+#    Updated: 2025/09/17 12:09:55 by edvieira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 C++ = c++
-C++_FLAGS = -Wall -Wextra -Werror -std=c++98
+C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 INFILES = 	BitcoinExchange.cpp main.cpp
 
 OBJFILES = $(INFILES:.cpp=.o)
