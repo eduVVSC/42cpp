@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/17 12:13:30 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/18 07:59:55 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool Date::readDate(std::string line)
 	int		first = line.find('-');
 	int		last  = line.find_last_of('-');
 
-	this->year  = static_cast<int>(strtol(line.substr(0, (first - 1)).c_str(), &end, 10));
+	this->year  = static_cast<int>(strtol(line.substr(0, (first)).c_str(), &end, 10));
 	this->month = static_cast<int>(strtol(line.substr((first + 1), (last - 1)).c_str(), &end, 10));
 	this->day   = static_cast<int>(strtol(line.substr((last + 1), line.size()).c_str(), &end, 10));
 
@@ -80,11 +80,11 @@ Date::Date(std::string line)
 		errno = 0;
 
 		// get date
-		std::string date = line.substr(0, (line.find(',') - 1));
+		std::string date = line.substr(0, (line.find(',')));
 		if (!readDate(date))
 			throw BadDateException("Date was not correctly defined!\n");
 		// get value
-		this->value = static_cast<double>(strtol(line.substr(line.find(','), line.size()).c_str(), &end, 10));
+		this->value = static_cast<double>(strtod(line.substr((line.find(',') + 1), line.size()).c_str(), &end));
 		if (errno == ERANGE)
 			throw BadDateException("Line was not defined correctly, without ','.\n");
 	}
@@ -99,6 +99,9 @@ Date::Date(const Date &other)
 }
 
 Date::~Date() {}
+
+void Date::print() { std::cout << year << "-" << month << "-" << day << "," << value << std::endl; }
+
 
 /* ------------------------- ------------------------- -------------------------  */
 
@@ -115,16 +118,15 @@ void BitcoinExchange::readDatabaseValues(std::ifstream& inFile)
 	std::string line;
 	try
 	{
+		std::getline (inFile, line);
 		while (std::getline (inFile, line))
 		{
 			if (line.empty())
 				throw BadDateException("No date nor info in one line, fix your database!\n");
-		std::cout << "bf break" << std::endl;
 			Date tmp = Date(line);
 			db.push_back(tmp); // breaking here
-		std::cout << "after break" << std::endl;
-
-			std::cout << line << "\n" << std::endl;
+			//std::cout << line << "\t";
+			tmp.print();
 		}
 	}
 	catch (const std::exception& e) {
@@ -158,6 +160,11 @@ BitcoinExchange::BitcoinExchange()
 	}
 	else
 		throw CouldNotOpenFileException("Database file could not be opened!\n");
+
+	std::list<Date>::iterator it;
+	for (it = db.begin(); it != db.end(); ++it) {
+		it->print();
+	}
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)

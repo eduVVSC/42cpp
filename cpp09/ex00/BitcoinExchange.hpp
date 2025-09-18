@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:48:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/17 12:02:51 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:34:02 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ public:
 	int getMonth();
 	int getYear();
 	double getValue();
+
+	void print();
 
 	Date();
 	Date(std::string line);
