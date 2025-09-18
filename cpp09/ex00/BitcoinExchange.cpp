@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/18 10:44:22 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/18 10:55:16 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ Date::Date(std::string line, char separator)
 		this->value = static_cast<double>(strtod(line.substr((line.find(separator) + 1), line.size()).c_str(), &end));
 		if (value < VALUE_MIN)
 			throw BadValueException("not a positive number.");
-		if (separator == '-' && value > VALUE_MAX)
+		if (separator == '|' && value > VALUE_MAX)
 			throw BadValueException("too large a number.");
 	}
 }
