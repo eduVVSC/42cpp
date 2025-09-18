@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/18 07:59:55 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/18 08:40:11 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ int Date::compare(Date &other)
 	distance += 30 * (std::max(this->month, other.getMonth()) - std::min(this->month, other.getMonth()));
 	distance += 1 * (std::max(this->day, other.getDay()) - std::min(this->day, other.getDay()));
 	return (distance);
+}
+
+/// @brief Function validate if the date is corret according to the normal standards
+/// @return (true - valid date) (false - invalid date)
+bool Date::validDate(){
+	if (this->day > DAY_MAX)
+		return false;
+	if (this->month > MONTH_MAX)
+		return false;
+	if (this->year > YEAR_MAX)
+		return false;
+
+	// VALIDATE BETTER LATER!
+
+	return (true);
 }
 
 /// @brief Function will read the date section of the line and parse it
@@ -62,7 +77,7 @@ bool Date::readDate(std::string line)
 	this->month = static_cast<int>(strtol(line.substr((first + 1), (last - 1)).c_str(), &end, 10));
 	this->day   = static_cast<int>(strtol(line.substr((last + 1), line.size()).c_str(), &end, 10));
 
-	return (true);
+	return (validDate());
 }
 
 Date::Date()
@@ -72,21 +87,21 @@ Date::Date()
 Date::Date(std::string line)
 {
 	if (line.find(',') == std::string::npos)
-		throw BadDateException("Line was not defined correctly, without ','.\n");
+		throw BadDateException("Line was not defined correctly, without ','.");
 	else
 	{
 		char* end;
 
-		errno = 0;
 
-		// get date
+		// -- get date
 		std::string date = line.substr(0, (line.find(',')));
 		if (!readDate(date))
 			throw BadDateException("Date was not correctly defined!\n");
-		// get value
+
+		// -- get value
 		this->value = static_cast<double>(strtod(line.substr((line.find(',') + 1), line.size()).c_str(), &end));
-		if (errno == ERANGE)
-			throw BadDateException("Line was not defined correctly, without ','.\n");
+		if (value < 0)
+			throw BadValueException("Value is lower than 0, not allowed!");
 	}
 }
 
@@ -130,7 +145,7 @@ void BitcoinExchange::readDatabaseValues(std::ifstream& inFile)
 		}
 	}
 	catch (const std::exception& e) {
-		std::cout << "in exception in readDatabaseValues\n" << std::endl;
+		std::cout << e.what() << " -> in exception in readDatabaseValues\n" << std::endl;
 		throw e;
 	}
 }
@@ -152,19 +167,19 @@ BitcoinExchange::BitcoinExchange()
 		}
 		catch(std::exception& e)
 		{
-			std::cout << "in exception in BitcoinExchange" << std::endl;
 			// clean the database and finish program!
-			std::cerr << e.what() << '\n';
+
+			// no need to print in here, it's being printer the error in the readDatabseValues
+
 			throw e;
 		}
 	}
 	else
 		throw CouldNotOpenFileException("Database file could not be opened!\n");
-
-	std::list<Date>::iterator it;
+	/* std::list<Date>::iterator it;
 	for (it = db.begin(); it != db.end(); ++it) {
 		it->print();
-	}
+	} */
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
