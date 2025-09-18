@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:48:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/18 08:39:02 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/18 09:17:35 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@
 
 # define DAY_MAX 31
 # define MONTH_MAX 12
-# define YEAR_MAX 2020
+# define YEAR_MAX 2022
+# define VALUE_MAX 1000
+# define VALUE_MIN 0
 
 class CouldNotOpenFileException : public std::exception
 {
@@ -90,7 +92,7 @@ public:
 	void print();
 
 	Date();
-	Date(std::string line);
+	Date(std::string line, char separator);
 	Date(const Date &other);
 
 	Date operator=(const Date &other);
@@ -103,17 +105,15 @@ class BitcoinExchange
 private:
 	std::list<Date> db; // hold the read database
 
+	double getFullRate(Date searchDate);
 	bool valid_Num(std::string line, int i);    // 2nd
 	bool valid_Date(std::string line, int which);   // 3rd
 	bool valid_Format(std::string line); // 1st
-public:
-	std::string readAll(std::ifstream& inFile);
-
 	void readDatabaseValues(std::ifstream& inFile);
-
-	Date getDateRate(Date searchDate);
+public:
 
 	BitcoinExchange();
+	void convert(std::string filename);
 	BitcoinExchange(const BitcoinExchange &other);
 	~BitcoinExchange();
 
