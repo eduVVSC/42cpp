@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 07:25:29 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 08:47:57 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/19 10:18:22 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 # include <exception>
 # include <string>
 # include <stack>
-# include <queue>
+# include <cstdlib>
+
+# define NUM_MAX 9
+# define NUM_MIN 0
 
 class BadCharactersException : public std::exception
 {
@@ -30,25 +33,38 @@ public:
     virtual ~BadCharactersException() throw() {}
 };
 
-class SignedBadUsedException : public std::exception
+class SignBadUsedException : public std::exception
 {
 private:
     std::string message;
 public:
-    SignedBadUsedException(const std::string& msg){this->message = msg; }
+    SignBadUsedException(const std::string& msg){this->message = msg; }
 
     virtual const char* what() const throw(){ return this->message.c_str(); }
-    virtual ~SignedBadUsedException() throw() {}
+    virtual ~SignBadUsedException() throw() {}
+};
+
+class NumberOutOfLimitsException : public std::exception
+{
+private:
+    std::string message;
+public:
+    NumberOutOfLimitsException(const std::string& msg){this->message = msg; }
+
+    virtual const char* what() const throw(){ return this->message.c_str(); }
+    virtual ~NumberOutOfLimitsException() throw() {}
 };
 
 class RPN
 {
 private:
-	std::stack<std::string> stack;
-	std::queue<std::string> tokens; // fifo
+	std::stack<std::string> tokens;
 
-	void populateQueue(std::string s);
-	bool onlyAllowedCharacter(std::string s);
+	bool	isOperand(std::string s);
+	int		verifingAtoi(std::string s);
+	void	populateStack(std::string s);
+	bool	onlyAllowedCharacter(std::string s);
+	int		execute(std::stack<int>	nums, std::string c);
 public:
 
 	int makeCount(std::string s);
