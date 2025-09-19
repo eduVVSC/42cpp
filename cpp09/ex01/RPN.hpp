@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 07:25:29 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 10:18:22 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/19 10:41:14 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string>
 # include <stack>
 # include <cstdlib>
+# include <queue>
 
 # define NUM_MAX 9
 # define NUM_MIN 0
@@ -58,13 +59,13 @@ public:
 class RPN
 {
 private:
-	std::stack<std::string> tokens;
+	std::queue<std::string> tokens;
 
 	bool	isOperand(std::string s);
 	int		verifingAtoi(std::string s);
 	void	populateStack(std::string s);
 	bool	onlyAllowedCharacter(std::string s);
-	int		execute(std::stack<int>	nums, std::string c);
+	int		execute(std::stack<int> *nums, std::string c);
 public:
 
 	int makeCount(std::string s);

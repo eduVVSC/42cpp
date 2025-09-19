@@ -6,25 +6,20 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 07:31:26 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 10:18:53 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/19 10:41:49 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-
-/* Planning:
-
-- read first one, see if it is a number, if not crash
-
-- read first one, if number
-- read second
-	> if is a number, serach for the operator
-		>> search for the closest operator.
-	> if is a operator (check if there is something in the tmpSave)
-		>> if so, make the operation and save the result
-		>> if not, exception operation wrongfully architected
-*/
+/* void printStack(std::stack<int> s) {
+    std::cout << "Stack (top -> bottom): ";
+    while (!s.empty()) {
+        std::cout << s.top() << " ";
+        s.pop();
+    }
+    std::cout << "\n";
+} */
 
 /// @brief Check if the given string holds an math operator
 /// @param s
@@ -45,32 +40,33 @@ bool RPN::isOperand(std::string s)
 int RPN::makeCount(std::string s)
 {
 	std::stack<int>	nums;
-	int				tmpSave = 0;
-	bool			initialized = false;
 
 	populateStack(s);
 	while (!tokens.empty())
 	{
-		std::string tmp = tokens.top();
+		std::string tmp = tokens.front();
+		//std::cout << tmp << std::endl;
 
 		if (isOperand(tmp))
-			nums.push(execute(nums, tmp));
+			nums.push(execute(&nums, tmp));
 		else
 			nums.push(verifingAtoi(tmp));
+		tokens.pop();
 	}
-
-	return (1);
+	return (nums.top());
 }
 
-int RPN::execute(std::stack<int> nums, std::string operation)
+int RPN::execute(std::stack<int> *nums, std::string operation)
 {
-	if (nums.size() < 2)
+
+	if (nums->size() < 2)
 		throw SignBadUsedException("Operator '" + operation + "', was used whithout enought numbers in stack! Review your input!");
 
-	int n1 = nums.top();	nums.pop();
-	int n2 = nums.top();	nums.pop();
+	int n1 = nums->top();	nums->pop();
+	int n2 = nums->top();	nums->pop();
 
 	char o = operation.at(0);
+	std::cout << "Operation: " << n2 << o << n1 << std::endl;
 	if (o == '+')
 		return (n2 + n1);
 	else if (o == '-')
@@ -79,6 +75,7 @@ int RPN::execute(std::stack<int> nums, std::string operation)
 		return (n2 / n1);
 	else if (o == '*')
 		return (n2 * n1);
+	return (-1); // never getting in here!
 }
 
 /// @brief Make the Atoi function and return it number
@@ -90,7 +87,7 @@ int	RPN::verifingAtoi(std::string s)
 	long i = atol(s.c_str());
 	if (i > NUM_MAX)
 		throw NumberOutOfLimitsException((int)i + " of the numbers given is far away from my computational capacity!");
-	if (i > NUM_MIN)
+	if (i < NUM_MIN)
 		throw NumberOutOfLimitsException((int)i + " of the numbers given is far away from my computational capacity!");
 	else
 		return (int)(i);

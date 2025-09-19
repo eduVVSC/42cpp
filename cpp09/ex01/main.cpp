@@ -6,24 +6,28 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 08:58:20 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/19 10:35:47 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "RPN.hpp"
 
-int main()
+int main(int ac, char **av)
 {
-	RPN a = RPN();
+	if (ac == 2)
+	{
+		RPN a = RPN();
+		try
+		{
+			//std::cout << "result is: " << a.makeCount("8 9 * 9 - 9 - 9 - 4 - 1 +") << std::endl;
 
-	try
-	{
-		a.makeCount("-1 0 1 2 3 4 5 6");
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
+			std::cout << "result is: " << a.makeCount(av[1]) << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 	}
 
 	return 0;
