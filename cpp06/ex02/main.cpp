@@ -13,10 +13,10 @@ int main(void) {
 
     std::cout << "««««««««««««««««««««««««««" << std::endl;
 
-    t1->identify(t1);
-    t2->identify(t2);
-    t3->identify(t3);
-    t4->identify(t4);
+    t1->identify(&t1);
+    t2->identify(&t2);
+    t3->identify(&t3);
+    t4->identify(NULL);
 
     delete t1;
     delete t2;

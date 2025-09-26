@@ -1,7 +1,3 @@
-//
-// Created by edvieira on 6/19/25.
-//
-
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
@@ -26,6 +22,11 @@ enum Pattern {
 
 class ScalarConverter {
 private:
+    ScalarConverter() {};
+    ScalarConverter(const ScalarConverter &other){ (void)other; };
+    ~ScalarConverter() {};
+
+    ScalarConverter& operator=(const ScalarConverter& other) { (void)other; return (*this); };
 
 public:
     static void convert(std::string input);

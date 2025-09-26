@@ -52,7 +52,7 @@ bool isNonDisplayable(int asciiValue) {
  * @param i var value it integer
  * @param c var value it char
  */
-void print (double d, float f, int i, char c) {
+void print(double d, float f, int i, char c) {
     if (isNonDisplayable(static_cast<char>(c))) // printable char!
         std::cout << "char: Non displayable" << std::endl;
     else

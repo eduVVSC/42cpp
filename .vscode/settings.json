@@ -58,7 +58,8 @@
 		"format": "cpp",
 		"fstream": "cpp",
 		"span": "cpp",
-		"text_encoding": "cpp"
+		"text_encoding": "cpp",
+		"list": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

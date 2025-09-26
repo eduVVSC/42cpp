@@ -46,27 +46,23 @@ Base *Base::generate() {
 }
 
 void Base::identify(Base *p) {
-    if (typeid(*p) == typeid(A)) {
+    if (dynamic_cast<A*>(p)) 
         std::cout << " -> Class is of type 🇦" << std::endl;
-    }
-    else if (typeid(*p) == typeid(B)) {
+    else if (dynamic_cast<B*>(p)) 
         std::cout << " -> Class is of type 🇧" << std::endl;
-    }
-    else if (typeid(*p) == typeid(C)) {
+    else if (dynamic_cast<C*>(p)) 
         std::cout << " -> Class is of type 🇨" << std::endl;
-    }
+    else 
+        std::cout << "Cannot identify a NULL pointer" << std::endl;
 }
 
 void Base::identify(Base &p) {
-    if (typeid(p) == typeid(A)) {
-        std::cout << " -> Class is of type 🇦" << std::endl;
-    }
-    else if (typeid(p) == typeid(B)) {
-        std::cout << " -> Class is of type 🇧" << std::endl;
-    }
-    else if (typeid(p) == typeid(C)) {
-        std::cout << " -> Class is of type 🇨" << std::endl;
-    }
+    try { dynamic_cast<A*>(p); std::cout << " -> Class is of type 🇦" << std::endl;}     catch(const std::exception& e) { }
+    try { dynamic_cast<B*>(p); std::cout << " -> Class is of type 🇧" << std::endl;}     catch(const std::exception& e) { }
+    try { dynamic_cast<C*>(p); std::cout << " -> Class is of type 🇨" << std::endl;}     catch(const std::exception& e) { }            
+
+
+        
 }
 
 Base::~Base() {
