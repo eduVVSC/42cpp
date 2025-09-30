@@ -5,6 +5,7 @@
 # include <iostream>
 # include <string>
 # include <typeinfo>
+# include <algorithm>
 
 class NotFoundException : public std::exception {
 private:
@@ -21,32 +22,18 @@ public:
 	~NotFoundException() throw(){}
 };
 
-class NotValidTypeException : public std::exception {
-private:
-	std::string message;
-public:
-	NotValidTypeException(const std::string& msg){
-		this->message = msg;
-	}
 
-	virtual const char* what() const throw(){
-		return (this->message.c_str());
-	}
+template < typename T >
+typename T::iterator easyfind(T &array, int num){
 
-	~NotValidTypeException() throw(){}
-};
+	typename T::iterator it;
 
-template <typename T>
-int easyfind(T *array, int num){
-	if (typeid(*array) != typeid(int))
-		throw NotValidTypeException("The entered array is not an integer holder!");
-	while (array)
-	{
-		if (*array == num)
-			return (num);
-		array++;
-	}
-	throw NotFoundException("The wanted number was not found!");
+	it = std::find(array.begin(), array.end(), num);
+
+	if (it == array.end())
+		throw NotFoundException("The wanted number was not found!");
+
+	return (it);
 }
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:23:52 by edvieira          #+#    #+#             */
-/*   Updated: 2025/07/15 14:44:55 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/30 08:41:21 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,42 @@
 # include <iostream>
 # include <exception>
 # include <math.h>
+# include <iterator>
 
 class Span{
+
 private:
-	unsigned int manyAdded;
-	unsigned int max;
-	int *arr;
+
+	unsigned int	manyAdded;
+	unsigned int	max;
+	int				*arr;
 
 public:
+
 	int get(unsigned int i) const;
 	unsigned int getMax() const;
 	unsigned int getManyAdded() const;
 
 	void addNumber(int num);
-	void addNumber(std::vector<int> vector);
+
+	//void addNumber(std::vector<int> vector);
+
+	template <typename T >
+	void addNumber(T &cont) {
+		typename T::iterator beg = cont.begin();
+		typename T::iterator last = cont.end();
+
+		while (beg != last)
+		{
+			if (manyAdded == max)
+				break;
+			arr[manyAdded] = *beg;
+
+			manyAdded++;
+			beg++;
+		}
+	};
+
 	unsigned int shortestSpan();
 	unsigned int longestSpan();
 

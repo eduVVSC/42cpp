@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2025/07/15 14:58:40 by edvieira         ###   ########.fr       */
+/*   Updated: 2025/09/30 08:42:03 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int main()
 		numbers.push_back(3); numbers.push_back(3);
 
 		Span testNums = Span(5);
+		//testNums.addNumber(0);
 		testNums.addNumber(numbers);
 		std::cout << testNums << std::endl;
-
 
 		std::cout << "\n=============== exception test ===============" << std::endl;
 		Span sp2 = Span();
