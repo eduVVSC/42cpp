@@ -11,13 +11,7 @@
 
 class Base {
 private:
-    bool fstGenerated;
 public:
-    Base();
-    Base *generate(void);
-    void identify(Base* p);
-    void identify(Base& p);
-
     virtual ~Base();
 };
 

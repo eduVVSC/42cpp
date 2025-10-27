@@ -11,5 +11,6 @@ int main(void) {
   uintptr_t res = Serializer::serialize(&a);
   Data *b = Serializer::deserialize(res);
   std::cout << "b = "<< b->n1 << b->d1 << b->f1 << std::endl;
+  std::cout << "A address=" << &a << "   -   B address=" << b << std::endl;
   return 0;
 }
