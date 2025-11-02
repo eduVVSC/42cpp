@@ -35,23 +35,7 @@ public:
 
 	void addNumber(int num);
 
-	//void addNumber(std::vector<int> vector);
-
-	template <typename T >
-	void addNumber(T &cont) {
-		typename T::iterator beg = cont.begin();
-		typename T::iterator last = cont.end();
-
-		while (beg != last)
-		{
-			if (manyAdded == max)
-				break;
-			arr[manyAdded] = *beg;
-
-			manyAdded++;
-			beg++;
-		}
-	};
+	void addNumber(std::vector<int> vector);
 
 	unsigned int shortestSpan();
 	unsigned int longestSpan();
