@@ -6,12 +6,12 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2026/01/08 11:52:22 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/01/08 11:59:46 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Span.hpp"
+
 void testBasicSpanOperations() {
 	std::cout << "=== Test 1: Basic Span Operations ===" << std::endl;
 	try {
@@ -38,9 +38,6 @@ void testBasicSpanOperations() {
 		std::cout << sp << std::endl;
 		std::cout << std::endl;
 
-
-		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
-		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
 		std::cout << "✓ Test passed" << std::endl;
 	} catch(const std::exception& e) {
 		std::cerr << "✗ Exception: " << e.what() << '\n';
@@ -93,10 +90,70 @@ void testExceptionHandling() {
 	std::cout << std::endl;
 }
 
+void testSpan() {
+	std::cout << "=== Test 1: Positive Values ===" << std::endl;
+	try {
+		Span sp = Span(5);
+		sp.addNumber(3);
+		sp.addNumber(6);
+		sp.addNumber(9);
+		sp.addNumber(11);
+
+		std::cout << "Span: " << sp << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
+		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
+		std::cout << "✓ Test passed" << std::endl;
+	} catch(const std::exception& e) {
+		std::cerr << "✗ Exception: " << e.what() << '\n';
+	}
+	std::cout << std::endl;
+
+	std::cout << "=== Test 2: Negative Values ===" << std::endl;
+	try {
+		Span sp = Span(5);
+		sp.addNumber(-3);
+		sp.addNumber(-6);
+		sp.addNumber(-9);
+		sp.addNumber(-11);
+
+		std::cout << "Span: " << sp << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
+		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
+		std::cout << "✓ Test passed" << std::endl;
+	} catch(const std::exception& e) {
+		std::cerr << "✗ Exception: " << e.what() << '\n';
+	}
+	std::cout << std::endl;
+
+	std::cout << "=== Test 2: Mixed Values ===" << std::endl;
+	try {
+		Span sp = Span(5);
+		sp.addNumber(3);
+		sp.addNumber(-6);
+		sp.addNumber(9);
+		sp.addNumber(-11);
+
+		std::cout << "Span: " << sp << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
+		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
+		std::cout << "✓ Test passed" << std::endl;
+	} catch(const std::exception& e) {
+		std::cerr << "✗ Exception: " << e.what() << '\n';
+	}
+	std::cout << std::endl;
+}
+
 int main() {
 	testBasicSpanOperations();
 	testFastAdditionWithVector();
 	testExceptionHandling();
+	testSpan();
 
 	return 0;
 }
