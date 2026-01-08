@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2026/01/08 16:55:52 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:59:06 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,31 @@ void testSpan() {
 
 		std::cout << "Span: " << sp << std::endl;
 		std::cout << std::endl;
+
+		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
+		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
+		std::cout << "✓ Test passed" << std::endl;
+	} catch(const std::exception& e) {
+		std::cerr << "✗ Exception: " << e.what() << '\n';
+	}
+	std::cout << std::endl;
+
+	std::cout << "=== Test: Large Span with 10000 Numbers (using vector) ===" << std::endl;
+	try {
+		Span sp = Span(10000);
+		std::vector<int> numbers;
+
+		for (int i = 0; i < 10000; i++)
+		{
+			if (i % 3 == 0)
+				numbers.push_back(i);
+			else if (i % 3 == 1)
+				numbers.push_back(-i);
+			else
+				numbers.push_back(i / 2);
+		}
+
+		sp.addNumber(numbers);
 
 		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
 		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
