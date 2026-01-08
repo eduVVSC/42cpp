@@ -6,72 +6,74 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:23:42 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/30 08:40:53 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:51:22 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
 /// @brief Function will add a number to the arr if it is not full
+/// @brief and will sort it inside
 /// @param num
-void Span::addNumber(int num) {
-	if (manyAdded < max) {
-		arr[manyAdded] = num;
+void Span::addNumber(int num)
+{
+	if (manyAdded < max)
+	{
+		lst->push_back(num);
+		sorted = false;
 		manyAdded++;
 	}
 	else
 		throw FullSpanException("Span is already full!");
 }
 
-/// @brief Function will add all the numbers to the arr until it is not full, once it got to its max, it will not add more
-/// @param vector
-void Span::addNumber(std::vector<int> vector) {
-	size_t i = 0;
-
-	while (i < vector.size())
-	{
-		addNumber(vector.at(i));
-		i++;
-	}
-}
-
 /// @brief Function searches for the shortestSpan in the array saved if possible
 /// @brief  If it isn't possible it will throw and exception
 /// @return (shortestSpan)
 unsigned int Span::shortestSpan(){
-	int shortestSpan = __INT_MAX__;
+	std::list<int>::iterator it;
+	unsigned int shortestSpan = UINT_MAX;
+	int num1;
+	int num2;
+
+	if (!sorted)
+		lst->sort();
+	sorted = true;
 
 	if (max <= 1 || manyAdded <= 1)
-		throw CannotCalculateException("Not enought items to calculate span!");
-	for (size_t i = 0; i < manyAdded; i++)
+		throw CannotCalculateException("Not enough items to calculate span!");
+	it = lst->begin();
+
+	for (unsigned int i = 0; i < (manyAdded - 1); i++)
 	{
-		for (size_t j = (i + 1); j < manyAdded; j++)
-		{
-			if (std::abs(arr[i] - arr[j]) < shortestSpan)
-				shortestSpan = std::abs(arr[i] - arr[j]);
-		}
+		num1 = *it;
+		it++;
+		num2 = *it;
+
+		unsigned int diff = num2 - num1;
+		if (diff < shortestSpan)
+			shortestSpan = diff;
 	}
 	return (shortestSpan);
 }
-
 
 /// @brief Function searches for the longestSpan in the array saved if possible
 /// @brief  If it isn't possible it will throw and exception
 /// @return (longestSpan)
 unsigned int Span::longestSpan(){
-	int longestSpan = 0;
+	int	minVal;
+	int	maxVal;
 
-	if (max == 1 || manyAdded == 1)
-		throw CannotCalculateException("Not enought items to calculate span!");
-	for (size_t i = 0; i < manyAdded; i++)
-	{
-		for (size_t j = (i + 1); j < manyAdded; j++)
-		{
-			if (std::abs(arr[i] - arr[j]) > longestSpan)
-				longestSpan = std::abs(arr[i] - arr[j]);
-		}
-	}
-	return (longestSpan);
+	if (!sorted)
+		lst->sort();
+
+	sorted = true;
+	if (max <= 1 || manyAdded <= 1)
+		throw CannotCalculateException("Not enough items to calculate span!");
+
+	minVal = lst->front();
+	maxVal = lst->back();
+	return (static_cast<unsigned int> (std::abs(maxVal - minVal)));
 }
 
 unsigned int Span::getMax() const { return (max);}
@@ -79,50 +81,65 @@ unsigned int Span::getMax() const { return (max);}
 unsigned int Span::getManyAdded() const { return (manyAdded);}
 
 int Span::get(unsigned int i) const {
-	if (i >= max)
+	if (i < manyAdded)
+	{
+		std::list<int>::iterator it = lst->begin();
+		for (unsigned int j = 0; j < i; j++)
+			++it;
+		return *it;
+	}
+	else if (i < max)
+		return (0); // all values are started to 0
+	else
 		throw IndexOutsideOfSpanException("Index outside of span size");
-	return (arr[i]);
+}
+
+void Span::copy_values(Span const &span)
+{
+	int to_copy = span.getManyAdded();
+
+	for (int i = 0; i < to_copy; i++)
+		addNumber(span.get(i));
 }
 
 Span::Span(){
-	manyAdded = 0;
 	max = 1;
-	arr = new int[1];
+	manyAdded = 0;
+	sorted = false;
+	lst = new std::list<int> ();
 }
 
 Span::Span(unsigned int N){
-	manyAdded = 0;
 	max = N;
-	arr = new int[N];
+	manyAdded = 0;
+	sorted = false;
+	lst = new std::list<int> ();
 }
 
 Span::Span(const Span &other){
-	this->arr = NULL;
+	this->lst = NULL;
+	sorted = false;
 	*this = other;
 }
 
 Span::~Span(){
-	delete [] arr;
+	delete lst;
 }
 
 Span& Span::operator=(Span const &other)
 {
-	//std::cout << "inside equal operator" << std::endl;
-	if (this->arr && this->arr != NULL)
-	{
-		//std::cout << "inside if " << std::endl;
-		delete [] this->arr;
-	}
+    sorted = false;
+    if (this != &other)
+    {
+        if (this->lst != NULL)
+            delete lst;
 
-	//std::cout << "array deleted" << std::endl;
-	this->arr = new int[other.max];
-	//std::cout << "array created" << std::endl;
-	this->manyAdded = other.manyAdded;
-	this->max = other.max;
-
-	for (size_t i = 0; i < manyAdded; i++)
-		this->arr[i] = other.arr[i];
-	return *this;
+        this->max = other.max;
+        this->manyAdded = 0;
+        lst = new std::list<int> ();
+        copy_values(other);
+    }
+    return *this;
 }
 
 std::ostream& operator<<(std::ostream &os, const Span& s) {
