@@ -16,10 +16,11 @@ void testBasicSpanOperations() {
 	std::cout << "=== Test 1: Basic Span Operations ===" << std::endl;
 	try {
 		Span sp = Span(5);
-		sp.addNumber(3);
+		sp.addNumber(-3);
 		sp.addNumber(6);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		
 
 		std::cout << "=============== 1st created Span ===============" << std::endl;
 		std::cout << sp << std::endl;
