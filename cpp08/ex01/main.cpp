@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2026/01/08 11:59:46 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:55:52 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void testBasicSpanOperations() {
 		sp.addNumber(9);
 		sp.addNumber(11);
 
+		std::cout << "=============== 1st created Span ===============" << std::endl;
+		std::cout << sp << std::endl;
+
 		Span test;
 		test = sp;
-
-		std::cout << "=============== 1st created Span ===============" << std::endl;
-		std::cout << test << std::endl;
 		std::cout << "=============== Copy created Span ===============" << std::endl;
-		std::cout << sp << std::endl;
+		std::cout << test << std::endl;
 		std::cout << std::endl;
 
 		sp.addNumber(17);
@@ -49,11 +49,14 @@ void testFastAdditionWithVector() {
 	std::cout << "=== Test 2: Fast Addition with Vector ===" << std::endl;
 	try {
 		std::vector<int> numbers;
-		numbers.push_back(1); numbers.push_back(1);
-		numbers.push_back(2); numbers.push_back(2);
-		numbers.push_back(3); numbers.push_back(3);
+		numbers.push_back(1);
+		numbers.push_back(1);
+		numbers.push_back(2);
+		numbers.push_back(2);
+		numbers.push_back(3);
+		numbers.push_back(3);
 
-		Span testNums = Span(5);
+		Span testNums = Span(6);
 		testNums.addNumber(numbers);
 
 		std::cout << testNums << std::endl;
