@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:23:52 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/30 08:41:21 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/01/08 11:46:52 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ public:
 
 	void addNumber(int num);
 
-	//void addNumber(std::vector<int> vector);
-
+	/// @brief Function will add all the numbers to the arr until it is not full, once it
+	/// @brief got to its max, it will not add more
+	/// @param vector
 	template <typename T >
 	void addNumber(T &cont) {
 		typename T::iterator beg = cont.begin();
