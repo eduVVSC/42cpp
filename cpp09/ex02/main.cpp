@@ -10,53 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "PmergeMe.hpp"
 
-#include "Span.hpp"
-
-int main()
+int	ft_atoi_w_valid(char *str)
 {
-	try
+	int	num = 0;
+	int	i = 0;
+
+	if (str[i] == 0) // * validation of empty str
+		return (-1);
+	while (str[i])
 	{
-		Span sp = Span(5);
-		sp.addNumber(3);
-		sp.addNumber(6);
-		sp.addNumber(9);
-		sp.addNumber(11);
+		if(str[i] > '9' || str[i] < '0')
+			return (-1);
 
-		Span test;
-		test = sp;
-
-		sp.addNumber(17);
-		std::cout << "=============== 1st created Span ===============" << std::endl;
-		std::cout << test << std::endl;
-
-		std::cout << "=============== Copy created Span ===============" << std::endl;
-		std::cout << sp << std::endl;
-
-		std::cout << std::endl;
-		std::cout << "shortestSpan = " << sp.shortestSpan() << std::endl;
-		std::cout << "longestSpan = " << sp.longestSpan() << std::endl;
-
-
-
-		std::cout << "\n=============== Fast adition with vector test ===============" << std::endl;
-		std::vector<int> numbers;
-		numbers.push_back(1); numbers.push_back(1);
-		numbers.push_back(2); numbers.push_back(2);
-		numbers.push_back(3); numbers.push_back(3);
-
-		Span testNums = Span(5);
-		testNums.addNumber(numbers);
-		std::cout << testNums << std::endl;
-
-
-		std::cout << "\n=============== exception test ===============" << std::endl;
-		Span sp2 = Span();
-		sp2.shortestSpan();
+		num = num * 10 + str[i] - '0';
+		i++;
 	}
-	catch(const std::exception& e)
+	return (num);
+}
+
+std::list	atoiAllEntries(int ac, char **av)
+{
+	std::list<int> list;
+	int	temp;
+
+	for (int i = 0; i < ac; i++)
 	{
-		std::cerr << "Exception: Could not complete task!"  << '\n';
+		temp = ft_atoi_w_valid(av);
+		if (temp == -1)
+			return (list.clear());
+		list.push_back(temp);
+	}
+	return (list);
+}
+
+void displayValues(std::list<int> val)
+{
+	for (std::list<int>::iterator it = val.front(); *it != val.end(); it++)
+		std::cout << (*it) << " ";
+	std::cout << std::endl;
+}
+
+int main(int ac, char **av)
+{
+	std::list<int> enteredValues;
+
+	if (ac > 1)
+	{
+		enteredValues = atoiAllEntries(ac, av);
+		if (enteredValues.empty())
+			return (std::cerr << "You need to enter positive integer(without sign) to the program work!" << std::endl, 1);
+		displayValues(val);
+		time_t startTime = time(NULL);
+
 	}
 	return 0;
 }
