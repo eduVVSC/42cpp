@@ -19,7 +19,7 @@ int	ft_atoi_w_valid(char *str)
 
 	if (str[i] == 0) // * validation of empty str
 		return (-1);
-	while (str[i])
+	while (str[i] != '\0')
 	{
 		if(str[i] > '9' || str[i] < '0')
 			return (-1);
@@ -30,16 +30,19 @@ int	ft_atoi_w_valid(char *str)
 	return (num);
 }
 
-std::list	atoiAllEntries(int ac, char **av)
+std::list<int>	atoiAllEntries(int ac, char **av)
 {
 	std::list<int> list;
 	int	temp;
 
-	for (int i = 0; i < ac; i++)
+	for (int i = 1; i < ac; i++)
 	{
-		temp = ft_atoi_w_valid(av);
+		temp = ft_atoi_w_valid(av[i]);
 		if (temp == -1)
-			return (list.clear());
+		{
+			list.clear();
+			return (list);
+		}
 		list.push_back(temp);
 	}
 	return (list);
@@ -54,6 +57,7 @@ int main(int ac, char **av)
 		enteredValues = atoiAllEntries(ac, av);
 		if (enteredValues.empty())
 			return (std::cerr << "You need to enter positive integer(without sign) to the program work!" << std::endl, 1);
+		PmergeMe p(enteredValues);
 	}
 	return 0;
 }
