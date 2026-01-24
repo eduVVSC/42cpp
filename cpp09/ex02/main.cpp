@@ -45,13 +45,6 @@ std::list	atoiAllEntries(int ac, char **av)
 	return (list);
 }
 
-void displayValues(std::list<int> val)
-{
-	for (std::list<int>::iterator it = val.front(); *it != val.end(); it++)
-		std::cout << (*it) << " ";
-	std::cout << std::endl;
-}
-
 int main(int ac, char **av)
 {
 	std::list<int> enteredValues;
@@ -61,9 +54,6 @@ int main(int ac, char **av)
 		enteredValues = atoiAllEntries(ac, av);
 		if (enteredValues.empty())
 			return (std::cerr << "You need to enter positive integer(without sign) to the program work!" << std::endl, 1);
-		displayValues(val);
-		time_t startTime = time(NULL);
-
 	}
 	return 0;
 }
