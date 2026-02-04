@@ -20,6 +20,18 @@ void PmergeMe::displayValues(std::list< std::list<int> > val)
 	std::cout << std::endl;
 }
 
+void PmergeMe::displayValues(std::vector< std::vector<int> > val)
+{
+	for (std::vector< std::vector<int> >::iterator it = val.begin(); it != val.end(); it++)
+	{
+		std::cout << (*it).front();
+		if ((*it).back() != (*it).front())
+			std::cout << " - " << (*it).back();
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 int PmergeMe::listAt(std::list<int> l, int index)
 {
 	std::list<int>::iterator it;
@@ -69,7 +81,12 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::list<int> num)
 	std::vector< int > c;
 
 	(void) num;
-	// populate(&a, num);
+	populate(&a, num);
+
+	displayValues(a);
+	a = sortVecOfVec(a);
+	displayValues(a);
+
 	// // ! deal with odd number here, separate it to go into
 	// // ! the recursvie method withtout it
 	// if (a.size() > 2)
@@ -152,6 +169,49 @@ std::list<int> PmergeMe::execListAlgorithm(std::list<int> num)
 	return (c);
 }
 
+
+// ====================== Sort container of containers methods ====================== //
+
+/**
+ * @brief Function will sort the duos inside the list
+ * in ascending order defined by the head(greater value) of
+ * each duo, and if it has a "duo" with only one value, it
+ * will be put as first
+ *
+ * @c list with the duos to be used
+ * @return list of duos ordered
+ */
+std::vector< std::vector<int> >	PmergeMe::sortVecOfVec(std::vector< std::vector<int> > c)
+{
+	std::vector< std::vector<int> >::iterator iter;
+	std::vector< std::vector<int> > sorted;
+	std::vector< int >	smallerDuo;
+	int					smallerVal;
+
+	int size = c.size();
+	int i = 0;
+
+	while (i < size)
+	{
+		iter = c.begin();
+		smallerDuo = *iter;
+		smallerVal = (*iter).front();
+
+		for (; iter != c.end(); iter++)
+		{
+			if ((*iter).front() < smallerVal && (*iter).size() > 1)
+			{
+				smallerVal = (*iter).front();
+				smallerDuo = *iter;
+			}
+		}
+		removeVec(&c, smallerVal);
+		sorted.push_back(smallerDuo);
+		i++;
+	}
+	return (sorted);
+}
+
 /**
  * @brief Function will sort the duos inside the list
  * in ascending order defined by the head(greater value) of
@@ -203,31 +263,48 @@ void	PmergeMe::insertList(std::list<int> *c, int insert)
 {
 	int start = 0;
 	int end = c->size() - 1;
-	int i = c->size() / 2;
+	int pos = c->size(); // default: insert at end
 
 	while (start <= end)
 	{
-		i = (start + end) / 2;
+		int mid = (start + end) / 2;
+		int valueAt = listAt(*c, mid);
 
-		int valueAt = listAt(*c, i);
-		if (valueAt == insert)
-			break;
-		if (valueAt > insert)
-			end = i - 1;
-		else if (valueAt < insert)
-			start = i + 1;
+		if (valueAt >= insert)
+		{
+			pos = mid;      // Found a position where we could insert
+			end = mid - 1;  // Look for earlier position
+		}
+		else
+			start = mid + 1;
 	}
 
-	if (i == static_cast<int> (c->size() - 1))
-		c->push_back(insert);
-	else
+	// Insert at position 'pos'
+	std::list<int>::iterator it = c->begin();
+	std::advance(it, pos);
+	c->insert(it, insert);
+}
+
+// ====================== Remove method ====================== //
+
+void PmergeMe::removeVec(std::vector< std::vector<int> > *c, int removeVal)
+{
+	std::vector< std::vector<int> > temp;
+
+	while (!c->empty())
 	{
-		std::list<int>::iterator it = c->begin();
-		for (int j = 0; j < i; ++j)
-		++it;
-		c->insert(it, insert);
+		if (c->back().front() != removeVal)
+			temp.push_back(c->back());
+		c->pop_back();
+	}
+
+	while (!temp.empty())
+	{
+		c->push_back(temp.back());
+		temp.pop_back();
 	}
 }
+
 // ====================== Constructor used  ====================== //
 
 PmergeMe::PmergeMe(std::list<int> num)
@@ -241,6 +318,7 @@ PmergeMe::PmergeMe(std::list<int> num)
 	execListAlgorithm(num);
 	endTime = time(NULL);
 	std::cout << "----- finished exec list algorithm at " << endTime << " -----" << std::endl;
+	execVecAlgorithm(num);
 }
 
 // ====================== never used stuff ====================== //

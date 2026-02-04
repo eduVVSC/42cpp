@@ -24,7 +24,13 @@ private:
 				int temp = num.front();
 				// sorting the duos
 				if (b.front() < temp)
-					b.push_front(temp);
+				{
+					// swapping elements
+					temp = b.front();
+					b.pop_back();
+					b.push_back(num.front());
+					b.push_back(temp);
+				}
 				else
 					b.push_back(temp);
 				num.pop_front();
@@ -42,13 +48,16 @@ private:
 	void	insertVec(std::vector<int> *c, int insert);
 	void	insertList(std::list<int> *c, int insert);
 
-
-	std::list< std::list<int> >	sortListOfList(std::list< std::list<int> > c);
+	std::list< std::list    <int> >		sortListOfList(std::list< std::list<int> > c);
+	std::vector< std::vector<int> >		sortVecOfVec(std::vector< std::vector<int> > c);
 
 	int		listAt(std::list<int> l, int index);
 
 	void	displayValues(std::list<int> val);
 	void	displayValues(std::list< std::list<int> > val);
+	void	displayValues(std::vector< std::vector<int> > val);
+
+	void	removeVec(std::vector< std::vector<int> > *c, int removeVal);
 
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
