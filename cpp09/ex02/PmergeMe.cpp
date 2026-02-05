@@ -8,6 +8,13 @@ void PmergeMe::displayValues(std::list<int> val)
 	std::cout << std::endl;
 }
 
+void PmergeMe::displayValues(std::vector<int> val)
+{
+	for (std::vector<int>::iterator it = val.begin(); it != val.end(); it++)
+		std::cout << (*it) << " ";
+	std::cout << std::endl;
+}
+
 void PmergeMe::displayValues(std::list< std::list<int> > val)
 {
 	for (std::list< std::list<int> >::iterator it = val.begin(); it != val.end(); it++)
@@ -32,6 +39,8 @@ void PmergeMe::displayValues(std::vector< std::vector<int> > val)
 	std::cout << std::endl;
 }
 
+// ====================== At methods ====================== //
+
 int PmergeMe::listAt(std::list<int> l, int index)
 {
 	std::list<int>::iterator it;
@@ -46,26 +55,42 @@ int PmergeMe::listAt(std::list<int> l, int index)
 	return (*it); // will never hit here
 }
 
+int PmergeMe::vecAt(std::vector<int> v, int index)
+{
+	std::vector<int>::iterator it;
+	int	i = 0;
+
+	for (it = v.begin(); it != v.end(); it++)
+	{
+		if (i == index)
+			return (*it);
+		i++;
+	}
+	return (*it); // will never hit here
+}
+
 // ====================== Vector algorithm methods ====================== //
 
-std::vector<int> PmergeMe::execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a)
+void PmergeMe::execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a)
 {
 	if (a.empty())
-		return (*c);
+		return ;
 
-	// std::vector<int> duo1 = a.front();	a.pop_front();
-	// std::vector<int> duo2 = a.front();	a.pop_front(); // add validation
+	std::vector<int> duo1 = a.back();	a.pop_back();
+	std::vector<int> duo2 = a.back();	a.pop_back(); // add validation
 
-	// // * 1 - insert the first element of the next duo
-	// c.push_back(duo1.front()); duo1.pop_front(); // adding duo1 greatest - duo1 only has the smallest value now
-	// // * 2 - insert the second element of the 2nd closest duo
-	// insertList(c, duo2.back()); duo2.pop_back(); // adding duo2 smallest - duo 2 only have the greatest value now
-	// // * 3 - insert the second element of the closest duo
-	// insertList(c, duo1.back()); duo1.pop_back(); // adding duo1 smallest - duo 1 is empty
-	// // * 3 - insert the first(remaining) element of the 2nd closest duo
-	// insertList(c, duo2.back()); duo2.pop_back(); // adding duo2 greatest - duo 2 is empty
-	// execListAlgorithmHelper(c, a); // recursive call to the algorithm
-	return (*c);
+	std::cout << " --------------- " << std::endl;
+	displayValues(*c);
+	// * 1 - insert the first element of the next duo
+	 c->push_back(duo1.front()); // adding duo1 greatest(a1) - duo1 only has the smallest value now
+	// * 2 - insert the second element of the 2nd closest duo
+	binInsertVec(c, duo2.back()); // adding duo2 smallest(b2) - duo 2 only have the greatest value now
+	// * 3 - insert the second element of the closest duo
+	binInsertVec(c, duo1.back()); // adding duo1 smallest(b1) - duo 1 is empty
+	// * 4 - insert the first(remaining) element of the 2nd closest duo
+	binInsertVec(c, duo2.front()); // adding duo2 greatest(a2) - duo 2 is empty
+	duo1.clear(); duo2.clear();
+	execVecAlgorithmHelper(c, a); // recursive call to the algorithm
 }
 
 /**
@@ -79,35 +104,40 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::list<int> num)
 {
 	std::vector< std::vector<int> >  a;
 	std::vector< int > c;
+	std::vector< int >  odd;
 
-	(void) num;
 	populate(&a, num);
-
-	displayValues(a);
+		displayValues(a);
 	a = sortVecOfVec(a);
-	displayValues(a);
+		displayValues(a);
 
-	// // ! deal with odd number here, separate it to go into
-	// // ! the recursvie method withtout it
-	// if (a.size() > 2)
-	// {
-	// 	std::list<int> addToMain = a.front();
-	// 	a.pop_front();
-	// 	c.push_front(a.front());
-	// 	addToMain.pop_front();
-	// 	c.push_front(a.front());
-	// 	addToMain.pop_front(); 		//  c = b0 - a0
-	// }
-	// execListAlgorithmHelper(&c, a);
+	if (a.back().size() == 1)
+	{
+		odd = a.back();
+		a.pop_back();
+	}
+	if (a.size() > 2)
+	{
+		std::vector<int> addToMain = a.back();
+		a.pop_back();
+		c.push_back(addToMain.back()); 	// b0
+		c.push_back(addToMain.front());	// a0
+	}
+	//c = [b0 - a0]
+	execVecAlgorithmHelper(&c, a);
+	displayValues(c);
+	std::cout << " --------------- " << std::endl;
+	// binInsertList(&c, odd.back());
+	// displayValues(c);
 	return (c);
 }
 
 // ====================== list algorithm methods ====================== //
 
-std::list<int> PmergeMe::execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a)
+void PmergeMe::execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a)
 {
 	if (a.empty())
-		return (*c);
+		return ;
 
 	std::list<int> duo1 = a.front();	a.pop_front();
 	std::list<int> duo2 = a.front();	a.pop_front(); // add validation
@@ -118,16 +148,14 @@ std::list<int> PmergeMe::execListAlgorithmHelper(std::list<int> *c, std::list<st
 	c->push_back(duo1.front()); duo1.pop_front(); // adding duo1 greatest(a1) - duo1 only has the smallest value now
 	// * 2 - insert the second element of the 2nd closest duo
 	displayValues(*c);
-	insertList(c, duo2.back()); duo2.pop_back(); // adding duo2 smallest(b2) - duo 2 only have the greatest value now
+	binInsertList(c, duo2.back()); duo2.pop_back(); // adding duo2 smallest(b2) - duo 2 only have the greatest value now
 	// * 3 - insert the second element of the closest duo
 	displayValues(*c);
-	insertList(c, duo1.back()); duo1.pop_back(); // adding duo1 smallest(b1) - duo 1 is empty
-	// * 3 - insert the first(remaining) element of the 2nd closest duo
+	binInsertList(c, duo1.back()); duo1.pop_back(); // adding duo1 smallest(b1) - duo 1 is empty
+	// * 4 - insert the first(remaining) element of the 2nd closest duo
 	displayValues(*c);
-	insertList(c, duo2.back()); duo2.pop_back(); // adding duo2 greatest(a2) - duo 2 is empty
+	binInsertList(c, duo2.back()); duo2.pop_back(); // adding duo2 greatest(a2) - duo 2 is empty
 	execListAlgorithmHelper(c, a); // recursive call to the algorithm
-
-	return (duo1); // take it of later!
 }
 
 /**
@@ -160,11 +188,12 @@ std::list<int> PmergeMe::execListAlgorithm(std::list<int> num)
 		c.push_front(addToMain.front()); 	// a0
 		c.push_front(addToMain.back()); 	// b0
 	}
+	displayValues(c);
 	//c = [b0 - a0]
 	execListAlgorithmHelper(&c, a);
 	displayValues(c);
 	std::cout << " --------------- " << std::endl;
-	insertList(&c, odd.front());
+	binInsertList(&c, odd.front());
 	displayValues(c);
 	return (c);
 }
@@ -173,13 +202,14 @@ std::list<int> PmergeMe::execListAlgorithm(std::list<int> num)
 // ====================== Sort container of containers methods ====================== //
 
 /**
- * @brief Function will sort the duos inside the list
- * in ascending order defined by the head(greater value) of
+ * @brief Function will sort the duos inside the vector
+ * in descending order defined by the tail(greater value) of
  * each duo, and if it has a "duo" with only one value, it
- * will be put as first
+ * will be put as first. this is reverse than what is done in
+ * the list because of hopw we access it, to make it more efficient
  *
- * @c list with the duos to be used
- * @return list of duos ordered
+ * @c vector with the duos to be used
+ * @return vector of duos ordered
  */
 std::vector< std::vector<int> >	PmergeMe::sortVecOfVec(std::vector< std::vector<int> > c)
 {
@@ -199,7 +229,7 @@ std::vector< std::vector<int> >	PmergeMe::sortVecOfVec(std::vector< std::vector<
 
 		for (; iter != c.end(); iter++)
 		{
-			if ((*iter).front() < smallerVal && (*iter).size() > 1)
+			if ((*iter).front() > smallerVal && (*iter).size() > 1)
 			{
 				smallerVal = (*iter).front();
 				smallerDuo = *iter;
@@ -254,12 +284,49 @@ std::list< std::list<int> >	PmergeMe::sortListOfList(std::list< std::list<int> >
 
 // ====================== Inserts methods ====================== //
 
-void	PmergeMe::insertVec(std::vector<int> *c, int insert)
+void	PmergeMe::binInsertVec(std::vector<int> *c, int insert)
 {
-	(void) c;	(void) insert;
+	int start = 0;
+	int end = c->size() - 1;
+	int pos = c->size(); // default: insert at end
+
+	while (start <= end)
+	{
+		int mid = (start + end) / 2;
+		int valueAt = vecAt(*c, mid);
+
+		if (valueAt >= insert)
+		{
+			pos = mid;      // Found a position where we could insert
+			end = mid - 1;  // Look for earlier position
+		}
+		else
+			start = mid + 1;
+	}
+	insertVec(c, pos, insert);
 }
 
-void	PmergeMe::insertList(std::list<int> *c, int insert)
+void	PmergeMe::insertVec(std::vector<int> *c, int pos, int insert)
+{
+	std::vector<int> temp;
+
+	for (int last = c->size(); last > pos; last--)
+	{
+		temp.push_back(c->back());
+		c->pop_back();
+	}
+
+	c->push_back(insert);
+
+	int size = temp.size();
+	for (int i = 0; i < size; i++)
+	{
+		c->push_back(temp.back());
+		temp.pop_back();
+	}
+}
+
+void	PmergeMe::binInsertList(std::list<int> *c, int insert)
 {
 	int start = 0;
 	int end = c->size() - 1;

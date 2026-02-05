@@ -9,6 +9,35 @@
 
 class PmergeMe{
 private:
+
+	std::vector <int> execVecAlgorithm(std::list<int> num);
+	std::list   <int> execListAlgorithm(std::list<int> num);
+
+	void execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a);
+	void execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a);
+
+	void	insertVec(std::vector<int> *c, int pos, int insert);
+
+	void	binInsertVec(std::vector<int> *c, int insert);
+	void	binInsertList(std::list<int> *c, int insert);
+
+	std::list< std::list    <int> >		sortListOfList(std::list< std::list<int> > c);
+	std::vector< std::vector<int> >		sortVecOfVec(std::vector< std::vector<int> > c);
+
+	int		listAt(std::list<int> l, int index);
+	int		vecAt(std::vector<int> v, int index);
+
+	void	displayValues(std::list<int> val);
+	void	displayValues(std::vector<int> val);
+	void	displayValues(std::list< std::list<int> > val);
+	void	displayValues(std::vector< std::vector<int> > val);
+
+	void	removeVec(std::vector< std::vector<int> > *c, int removeVal);
+
+	PmergeMe();
+	PmergeMe(const PmergeMe &other);
+
+
 	template <typename OuterContainer>
 	void populate(OuterContainer *out, std::list<int>& num) {
 		typedef typename OuterContainer::value_type InnerContainer;
@@ -38,29 +67,6 @@ private:
 			out->push_back(b);
 		}
 	};
-
-	std::vector <int> execVecAlgorithm(std::list<int> num);
-	std::list   <int> execListAlgorithm(std::list<int> num);
-
-	std::vector <int> execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a);
-	std::list   <int> execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a);
-
-	void	insertVec(std::vector<int> *c, int insert);
-	void	insertList(std::list<int> *c, int insert);
-
-	std::list< std::list    <int> >		sortListOfList(std::list< std::list<int> > c);
-	std::vector< std::vector<int> >		sortVecOfVec(std::vector< std::vector<int> > c);
-
-	int		listAt(std::list<int> l, int index);
-
-	void	displayValues(std::list<int> val);
-	void	displayValues(std::list< std::list<int> > val);
-	void	displayValues(std::vector< std::vector<int> > val);
-
-	void	removeVec(std::vector< std::vector<int> > *c, int removeVal);
-
-	PmergeMe();
-	PmergeMe(const PmergeMe &other);
 
 public:
 	PmergeMe(std::list<int> num);
