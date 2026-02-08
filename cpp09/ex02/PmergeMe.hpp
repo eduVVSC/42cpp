@@ -6,6 +6,7 @@
 # include <iostream>
 # include <iterator>
 # include <ctime>
+# include <sys/time.h>
 
 class PmergeMe{
 private:
@@ -18,8 +19,8 @@ private:
 
 	void	insertVec(std::vector<int> *c, int pos, int insert);
 
-	void	binInsertVec(std::vector<int> *c, int insert);
-	void	binInsertList(std::list<int> *c, int insert);
+	void	binInsertVec(std::vector<int> *c, int end, int insert);
+	void	binInsertList(std::list<int> *c, int end, int insert);
 
 	std::list< std::list    <int> >		sortListOfList(std::list< std::list<int> > c);
 	std::vector< std::vector<int> >		sortVecOfVec(std::vector< std::vector<int> > c);
