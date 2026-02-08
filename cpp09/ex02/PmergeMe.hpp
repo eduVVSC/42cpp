@@ -14,6 +14,9 @@ private:
 	std::vector <int> execVecAlgorithm(std::list<int> num);
 	std::list   <int> execListAlgorithm(std::list<int> num);
 
+	std::list <int> calc_jacobsthallSequence(int listSize);
+	std::list < std::list <int> > generateGroups(int listSize);
+
 	void execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a);
 	void execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a);
 

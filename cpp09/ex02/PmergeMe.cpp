@@ -54,6 +54,62 @@ void PmergeMe::displayValues(std::vector< std::vector<int> > val)
 	std::cout << std::endl;
 }
 
+// ====================== JacobStahll methods ====================== //
+
+/**
+ * @brief function will generate the jacobsthallSequence needed to
+ * be used to divide the groups to sort the list of elements
+ */
+std::list<int> PmergeMe::calc_jacobsthallSequence(int listSize)
+{
+	std::list<int> jacobsthal;
+	int curr = 1;
+	int j0 = 0;
+	int j1 = 1;
+
+	if (listSize <= 0)
+		return (jacobsthal);
+	jacobsthal.push_back(j1);  // Start with J(1) = 1
+
+	while (true)
+	{
+		curr = j1 + 2 * j0;  // Jacobsthal recurrence: J(n) = J(n-1) + 2*J(n-2)
+
+		// checking the before, because the value could be between the interval
+		// could be in the between of the smaller and greater than listSize
+		if (j1 >= listSize)
+			break;
+
+		jacobsthal.push_back(curr);
+		j0 = j1;
+		j1 = curr;
+	}
+
+	return jacobsthal;
+}
+
+std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
+{
+	std::list<int> jacobsthal = calc_jacobsthallSequence(listSize);
+	std::list< std::list<int> > groups;
+	std::list<int> add;
+
+	add.push_back(1); add.push_back(1); // adding [1, 1]
+	groups.push_back(add);
+	// * groups are formated of [ j(i) + 1 -j (i+1) ] then reverse the order
+	for (size_t i = 1; i < jacobsthal.size() - 1; i++)
+	{
+		add.clear();
+		add.push_back( listAt(jacobsthal, i) + 1 ); // * j(i) + 1
+		add.push_back( listAt(jacobsthal, i + 1)  ); // * j(i + 1)
+		// std::cout << " ----- group ----- " << std::endl;
+		// std::cout << add.front() << " - " << add.back() << std::endl;
+		groups.push_back(add);
+	}
+	return (groups);
+}
+
+
 // ====================== At methods ====================== //
 
 int PmergeMe::listAt(std::list<int> l, int index)
@@ -388,45 +444,29 @@ void PmergeMe::removeVec(std::vector< std::vector<int> > *c, int removeVal)
 
 PmergeMe::PmergeMe(std::list<int> num)
 {
-	time_t startTime;
-	time_t endTime;
-	long long startMs;
-	long long endMs;
+	time_t startTime, endTime;
+	long long startMs,endMs;
 
-	// ---- LIST ----
 	std::cout << "----- List algorithm -----" << std::endl;
 
-	startTime = time(NULL);
-	startMs = getTimeMs();
+	startTime = time(NULL);		startMs = getTimeMs();
 	printTime("Start time: ", startTime);
 
 	execListAlgorithm(num);
 
-	endTime = time(NULL);
-	endMs = getTimeMs();
+	endTime = time(NULL);		endMs = getTimeMs();
 	printTime("End time:   ", endTime);
+	std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl << std::endl;
 
-	std::cout << "Elapsed:    "
-			<< (endMs - startMs)
-			<< " ms" << std::endl << std::endl;
-
-	// ---- VECTOR ----
 	std::cout << "----- Vector algorithm -----" << std::endl;
-
-	startTime = time(NULL);
-	startMs = getTimeMs();
+	startTime = time(NULL);		startMs = getTimeMs();
 	printTime("Start time: ", startTime);
 
 	execVecAlgorithm(num);
 
-	endTime = time(NULL);
-	endMs = getTimeMs();
+	endTime = time(NULL);		endMs = getTimeMs();
 	printTime("End time:   ", endTime);
-
-	std::cout << "Elapsed:    "
-			<< (endMs - startMs)
-			<< " ms" << std::endl;
-
+	std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl;
 }
 
 // ====================== never used stuff ====================== //
