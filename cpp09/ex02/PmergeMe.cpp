@@ -112,32 +112,24 @@ std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
 
 // ====================== At methods ====================== //
 
-int PmergeMe::listAt(std::list<int> l, int index)
+int PmergeMe::listAt(std::list<int>& l, int index)
 {
-	std::list<int>::iterator it;
-	int	i = 0;
+    if (index < 0 || index >= static_cast<int>(l.size()))
+        throw std::out_of_range("Index out of bounds");
 
-	for (it = l.begin(); it != l.end(); it++)
-	{
-		if (i == index)
-			return (*it);
-		i++;
-	}
-	return (*it); // will never hit here
+    std::list<int>::iterator it = l.begin();
+    std::advance(it, index);
+    return *it;
 }
 
-int PmergeMe::vecAt(std::vector<int> v, int index)
+std::list<int> PmergeMe::lisOftListAt(std::list< std::list<int> >& l, int index)
 {
-	std::vector<int>::iterator it;
-	int	i = 0;
+    if (index < 0 || index >= static_cast<int>(l.size()))
+        throw std::out_of_range("Index out of bounds");
 
-	for (it = v.begin(); it != v.end(); it++)
-	{
-		if (i == index)
-			return (*it);
-		i++;
-	}
-	return (*it); // will never hit here
+    std::list< std::list<int> >::iterator it = l.begin();
+    std::advance(it, index);
+    return *it;
 }
 
 // ====================== Vector algorithm methods ====================== //
@@ -236,36 +228,45 @@ void PmergeMe::execListAlgorithmHelper(std::list<int> *c, std::list<std::list<in
  * @param num with the numbers entered by the user
  * @return list with sorted numbers
  */
-std::list<int> PmergeMe::execListAlgorithm(std::list<int> num)
+std::list<int> PmergeMe::execListAlgorithm(std::list< std::list<int> > jacGroups, std::list<int> num)
 {
+	std::list< std::list<int> >::iterator groupIter;
+	std::list< std::list<int> >::iterator tempIter;
+	std::list< std::list<int> >  temp;
 	std::list< std::list<int> >  a;
-	std::list< int >  odd;
+	std::list< int >  gpNow;
 	std::list< int >  c;
 
-	populate(&a, num);
-		displayValues(a);
-	a = sortListOfList(a);
-		displayValues(a);
+	populate(&a, num);			displayValues(a);
+	a = sortListOfList(a);		displayValues(a);
 
-	if (a.front().size() == 1)
+	// * 1 interaction is always add a0 - a1 - a2
+	for (groupIter = jacGroups.begin(); groupIter != jacGroups.end(); groupIter++)
 	{
-		odd = a.front();
-		a.pop_front();
+		gpNow = *groupIter;
+
+		int from = std::min((int) a.size() - 1, gpNow.back());	// greater than until
+		int until = gpNow.front();
+
+		// generate a temp list, taking of the duos from the main one
+
+		// * insert As
+		temp.push_front(a.front()); a.pop_front();	c.push_back(a.front().front());
+		for (int i = from; i > until; i--)
+		{
+			temp.push_front(a.front()); a.pop_front();
+			c.push_back(a.front().front()); // A(n) to list C
+		}
+
+		// * insert Bs (reverse order than originaly on the array)
+		for (tempIter = temp.begin(); tempIter != temp.end(); tempIter++)
+		{
+			binInsertList(&c, *(std::upper_bound(c.begin(), c.end(), (*tempIter).front())), (*tempIter).back());
+		}
+		temp.clear();
 	}
-	if (a.size() > 2)
-	{
-		std::list<int> addToMain = a.front();
-		a.pop_front();
-		c.push_front(addToMain.front()); 	// a0
-		c.push_front(addToMain.back()); 	// b0
-	}
-	displayValues(c);
-	//c = [b0 - a0]
-	execListAlgorithmHelper(&c, a);
-	displayValues(c);
-	std::cout << " --------------- " << std::endl;
-	binInsertList(&c, c.size() - 1, odd.front());
-	displayValues(c);
+
+	// binInsertList(&c, c.size() - 1, odd.front());
 	return (c);
 }
 
@@ -354,15 +355,20 @@ std::list< std::list<int> >	PmergeMe::sortListOfList(std::list< std::list<int> >
 
 // ====================== Inserts methods ====================== //
 
+/**
+ * @brief Binary insert with the improvement given from the merge insert
+ * algorithm where the end is given based on the position in c from the
+ * greatest number in the duo
+ */
 void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
 {
 	int start = 0;
-	int pos = c->size(); // default: insert at end
+	int pos = c->size(); // default: insert at end // ! check it later
 
 	while (start <= end)
 	{
 		int mid = (start + end) / 2;
-		int valueAt = vecAt(*c, mid);
+		int valueAt = c->at(mid);
 
 		if (valueAt >= insert)
 		{
@@ -372,33 +378,18 @@ void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
 		else
 			start = mid + 1;
 	}
-	insertVec(c, pos, insert);
+	c->insert(c->begin() + pos, insert);
 }
 
-void	PmergeMe::insertVec(std::vector<int> *c, int pos, int insert)
-{
-	std::vector<int> temp;
-
-	for (int last = c->size(); last > pos; last--)
-	{
-		temp.push_back(c->back());
-		c->pop_back();
-	}
-
-	c->push_back(insert);
-
-	int size = temp.size();
-	for (int i = 0; i < size; i++)
-	{
-		c->push_back(temp.back());
-		temp.pop_back();
-	}
-}
-
+/**
+ * @brief Binary insert with the improvement given from the merge insert
+ * algorithm where the end is given based on the position in c from the
+ * greatest number in the duo
+ */
 void	PmergeMe::binInsertList(std::list<int> *c, int end, int insert)
 {
 	int start = 0;
-	int pos = c->size(); // default: insert at end
+	int pos = c->size(); // default: insert at end  // ! check it later, maybe it will be (end + 1)
 
 	while (start <= end)
 	{
@@ -444,6 +435,7 @@ void PmergeMe::removeVec(std::vector< std::vector<int> > *c, int removeVal)
 
 PmergeMe::PmergeMe(std::list<int> num)
 {
+	std::list< std::list<int> > groups = generateGroups(num.size());
 	time_t startTime, endTime;
 	long long startMs,endMs;
 
@@ -452,21 +444,21 @@ PmergeMe::PmergeMe(std::list<int> num)
 	startTime = time(NULL);		startMs = getTimeMs();
 	printTime("Start time: ", startTime);
 
-	execListAlgorithm(num);
+	execListAlgorithm(groups, num);
 
 	endTime = time(NULL);		endMs = getTimeMs();
 	printTime("End time:   ", endTime);
 	std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl << std::endl;
 
-	std::cout << "----- Vector algorithm -----" << std::endl;
-	startTime = time(NULL);		startMs = getTimeMs();
-	printTime("Start time: ", startTime);
+	// std::cout << "----- Vector algorithm -----" << std::endl;
+	// startTime = time(NULL);		startMs = getTimeMs();
+	// printTime("Start time: ", startTime);
 
-	execVecAlgorithm(num);
+	// execVecAlgorithm(num);
 
-	endTime = time(NULL);		endMs = getTimeMs();
-	printTime("End time:   ", endTime);
-	std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl;
+	// endTime = time(NULL);		endMs = getTimeMs();
+	// printTime("End time:   ", endTime);
+	// std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl;
 }
 
 // ====================== never used stuff ====================== //
