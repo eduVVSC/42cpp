@@ -77,7 +77,7 @@ std::list<int> PmergeMe::calc_jacobsthallSequence(int listSize)
 
 		// checking the before, because the value could be between the interval
 		// could be in the between of the smaller and greater than listSize
-		if (j1 >= listSize)
+		if (j1 >= listSize / 2)
 			break;
 
 		jacobsthal.push_back(curr);
@@ -102,8 +102,8 @@ std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
 		add.clear();
 		add.push_back( listAt(jacobsthal, i) + 1 ); // * j(i) + 1
 		add.push_back( listAt(jacobsthal, i + 1)  ); // * j(i + 1)
-		// std::cout << " ----- group ----- " << std::endl;
-		// std::cout << add.front() << " - " << add.back() << std::endl;
+		std::cout << " ----- group ----- " << std::endl;
+		std::cout << add.front() << " - " << add.back() << std::endl;
 		groups.push_back(add);
 	}
 	return (groups);
@@ -114,12 +114,12 @@ std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
 
 int PmergeMe::listAt(std::list<int>& l, int index)
 {
-    if (index < 0 || index >= static_cast<int>(l.size()))
-        throw std::out_of_range("Index out of bounds");
+	if (index < 0 || index >= static_cast<int>(l.size()))
+		throw std::out_of_range("Index out of bounds");
 
-    std::list<int>::iterator it = l.begin();
-    std::advance(it, index);
-    return *it;
+	std::list<int>::iterator it = l.begin();
+	std::advance(it, index);
+	return *it;
 }
 
 std::list<int> PmergeMe::lisOftListAt(std::list< std::list<int> >& l, int index)
@@ -197,30 +197,6 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::list<int> num)
 
 // ====================== list algorithm methods ====================== //
 
-void PmergeMe::execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a)
-{
-	if (a.empty())
-		return ;
-
-	std::list<int> duo1 = a.front();	a.pop_front();
-	std::list<int> duo2 = a.front();	a.pop_front(); // add validation
-
-	std::cout << " --------------- " << std::endl;
-	displayValues(*c);
-	// * 1 - insert the first element of the next duo
-	c->push_back(duo1.front()); duo1.pop_front(); // adding duo1 greatest(a1) - duo1 only has the smallest value now
-	// * 2 - insert the second element of the 2nd closest duo
-	displayValues(*c);
-	binInsertList(c, c->size() - 1, duo2.back()); duo2.pop_back(); // adding duo2 smallest(b2) - duo 2 only have the greatest value now
-	// * 3 - insert the second element of the closest duo
-	displayValues(*c);
-	binInsertList(c, c->size() - 1, duo1.back()); duo1.pop_back(); // adding duo1 smallest(b1) - duo 1 is empty
-	// * 4 - insert the first(remaining) element of the 2nd closest duo
-	displayValues(*c);
-	binInsertList(c, c->size() - 1, duo2.back()); duo2.pop_back(); // adding duo2 greatest(a2) - duo 2 is empty
-	execListAlgorithmHelper(c, a); // recursive call to the algorithm
-}
-
 /**
  * @brief Start the list with the three numbers(a0,b0 and a1) and call the recursive
  * function to execute the algorithm
@@ -245,27 +221,45 @@ std::list<int> PmergeMe::execListAlgorithm(std::list< std::list<int> > jacGroups
 	{
 		gpNow = *groupIter;
 
-		int from = std::min((int) a.size() - 1, gpNow.back());	// greater than until
+		int from = gpNow.back();	// greater than until
 		int until = gpNow.front();
-
-		// generate a temp list, taking of the duos from the main one
+		//std::cout << "--------- GROUP " << from << " " << until << " --------- "  << std::endl;
+		//std::cout << "--------- GROUP " << gpNow.front() << " " << gpNow.back() << " --------- "  << std::endl;
 
 		// * insert As
-		temp.push_front(a.front()); a.pop_front();	c.push_back(a.front().front());
-		for (int i = from; i > until; i--)
+		temp.push_front(a.front()); a.pop_front();	c.push_back(temp.front().front());
+		//std::cout << " - Inserting A" << std::endl;
+		for (int i = from; i > until; i--) // ! problem, never getting inside the loop error in the logic of from and until
 		{
-			temp.push_front(a.front()); a.pop_front();
-			c.push_back(a.front().front()); // A(n) to list C
-		}
+			if (a.size() == 0)
+				break ;
 
+			//std::cout << "1st loop: " << a.front().front() <<  std::endl;
+			temp.push_back(a.front()); a.pop_front();
+			c.push_back(temp.back().front()); // A(n) to list C
+		}
+		// std::cout << "OUT" << std::endl;
+		// std::cout << "temp: " << temp.front().front() << " - " << temp.front().back() << std::endl;
+		// std::cout << "list after A:" << std::endl;
+
+		displayValues(c);
+
+		// std::cout << "\n - Inserting B" << std::endl;
 		// * insert Bs (reverse order than originaly on the array)
 		for (tempIter = temp.begin(); tempIter != temp.end(); tempIter++)
 		{
-			binInsertList(&c, *(std::upper_bound(c.begin(), c.end(), (*tempIter).front())), (*tempIter).back());
+			displayValues(c);
+			std::list<int>::iterator it = std::upper_bound(c.begin(), c.end(), (*tempIter).front());
+			int pos = std::distance(c.begin(), it);
+
+			binInsertList(&c, pos, (*tempIter).back());
 		}
+		// std::cout << "list after B:" << std::endl;
+		displayValues(c);
 		temp.clear();
 	}
-
+	// std::cout << "\nSORTED FINAL LIST:" << std::endl;
+	// displayValues(c);
 	// binInsertList(&c, c.size() - 1, odd.front());
 	return (c);
 }
@@ -388,8 +382,11 @@ void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
  */
 void	PmergeMe::binInsertList(std::list<int> *c, int end, int insert)
 {
+	// std::cout << "\n-- INSIDE BINARY INSERT --" << std::endl;
+	// std::cout << "end =" <<  end << std::endl;
+	// std::cout << "c size =" <<  c->size() << std::endl;
 	int start = 0;
-	int pos = c->size(); // default: insert at end  // ! check it later, maybe it will be (end + 1)
+	int pos = end; // default: insert at end  // ! check it later, maybe it will be (end + 1)
 
 	while (start <= end)
 	{
@@ -436,6 +433,7 @@ void PmergeMe::removeVec(std::vector< std::vector<int> > *c, int removeVal)
 PmergeMe::PmergeMe(std::list<int> num)
 {
 	std::list< std::list<int> > groups = generateGroups(num.size());
+
 	time_t startTime, endTime;
 	long long startMs,endMs;
 

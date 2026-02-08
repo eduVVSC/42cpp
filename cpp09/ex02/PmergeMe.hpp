@@ -19,7 +19,6 @@ private:
 	std::list < std::list <int> > generateGroups(int listSize);
 
 	void execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a);
-	void execListAlgorithmHelper(std::list<int> *c, std::list<std::list<int> > a);
 
 	void	binInsertVec(std::vector<int> *c, int end, int insert);
 	void	binInsertList(std::list<int> *c, int end, int insert);
