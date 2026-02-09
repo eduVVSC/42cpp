@@ -109,6 +109,28 @@ std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
 	return (groups);
 }
 
+std::vector< std::vector<int> > PmergeMe::generateGroupsVector(int vectorSize)
+{
+	std::list<int> jacobsthal = calc_jacobsthallSequence(vectorSize);
+	std::vector< std::vector<int> > groups;
+	std::vector<int> add;
+
+	add.push_back(1); add.push_back(1); // adding [1, 1]
+	groups.push_back(add);
+	// * groups are formated of [ j(i) + 1 -j (i+1) ] then reverse the order
+	for (size_t i = 1; i < jacobsthal.size() - 1; i++)
+	{
+		add.clear();
+		add.push_back( listAt(jacobsthal, i) + 1 ); // * j(i) + 1
+		add.push_back( listAt(jacobsthal, i + 1)  ); // * j(i + 1)
+		std::cout << " ----- group ----- " << std::endl;
+		std::cout << add.front() << " - " << add.back() << std::endl;
+		groups.push_back(add);
+	}
+	return (groups);
+}
+
+
 
 // ====================== At methods ====================== //
 
@@ -134,64 +156,66 @@ std::list<int> PmergeMe::lisOftListAt(std::list< std::list<int> >& l, int index)
 
 // ====================== Vector algorithm methods ====================== //
 
-void PmergeMe::execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a)
-{
-	if (a.empty())
-		return ;
-
-	std::vector<int> duo1 = a.back();	a.pop_back();
-	std::vector<int> duo2 = a.back();	a.pop_back(); // add validation
-
-	std::cout << " --------------- " << std::endl;
-	displayValues(*c);
-	// * 1 - insert the first element of the next duo
-	 c->push_back(duo1.front()); // adding duo1 greatest(a1) - duo1 only has the smallest value now
-	// * 2 - insert the second element of the 2nd closest duo
-	binInsertVec(c,  c->size() - 1, duo2.back()); // adding duo2 smallest(b2) - duo 2 only have the greatest value now
-	// * 3 - insert the second element of the closest duo
-	binInsertVec(c,  c->size() - 1, duo1.back()); // adding duo1 smallest(b1) - duo 1 is empty
-	// * 4 - insert the first(remaining) element of the 2nd closest duo
-	binInsertVec(c,  c->size() - 1, duo2.front()); // adding duo2 greatest(a2) - duo 2 is empty
-	duo1.clear(); duo2.clear();
-	execVecAlgorithmHelper(c, a); // recursive call to the algorithm
-}
 
 /**
- * @brief Start the vector with the three numbers(a0,b0 and a1) and call the recursive
- * function to execute the algorithm
+ * @brief Start the vector with the Jacobsthal groups and execute the algorithm
+ * similar to the list implementation
  *
+ * @param jacGroups Jacobsthal groups for insertion order
  * @param num with the numbers entered by the user
- * @return list with sorted numbers
+ * @return vector with sorted numbers
  */
-std::vector<int> PmergeMe::execVecAlgorithm(std::list<int> num)
+std::vector<int> PmergeMe::execVecAlgorithm(std::vector< std::vector<int> > jacGroups, std::list<int> num)
 {
+	std::vector< std::vector<int> >::iterator groupIter;
+	std::vector< std::vector<int> >::iterator tempIter;
+	std::vector< std::vector<int> >  temp;
 	std::vector< std::vector<int> >  a;
-	std::vector< int > c;
-	std::vector< int >  odd;
+	std::vector< int >  gpNow;
+	std::vector< int >  c;
 
-	populate(&a, num);
-		displayValues(a);
-	a = sortVecOfVec(a);
-		displayValues(a);
+	populate(&a, num);			displayValues(a);
+	a = sortVecOfVec(a);		displayValues(a);
 
-	if (a.back().size() == 1)
+	// * 1 interaction is always add a0 - a1 - a2
+	for (groupIter = jacGroups.begin(); groupIter != jacGroups.end(); groupIter++)
 	{
-		odd = a.back();
-		a.pop_back();
+		gpNow = *groupIter;
+
+		int from = gpNow.back();	// greater than until
+		int until = gpNow.front();
+
+		// * insert As
+		temp.insert(temp.begin(), a.back()); 
+		a.pop_back();	
+		c.push_back(temp.front().front());
+		
+		for (int i = from; i > until; i--)
+		{
+			if (a.size() == 0)
+				break;
+
+			temp.push_back(a.back()); 
+			a.pop_back();
+			c.push_back(temp.back().front()); // A(n) to vector C
+		}
+
+		displayValues(c);
+
+		// * insert Bs (reverse order)
+		for (tempIter = temp.begin(); tempIter != temp.end(); tempIter++)
+		{
+			displayValues(c);
+			std::vector<int>::iterator it = std::upper_bound(c.begin(), c.end(), (*tempIter).front());
+			int pos = std::distance(c.begin(), it);
+
+			binInsertVec(&c, pos, (*tempIter).back());
+		}
+		
+		displayValues(c);
+		temp.clear();
 	}
-	if (a.size() > 2)
-	{
-		std::vector<int> addToMain = a.back();
-		a.pop_back();
-		c.push_back(addToMain.back()); 	// b0
-		c.push_back(addToMain.front());	// a0
-	}
-	//c = [b0 - a0]
-	execVecAlgorithmHelper(&c, a);
-	displayValues(c);
-	std::cout << " --------------- " << std::endl;
-	binInsertVec(&c, c.size(), odd.back());
-	displayValues(c);
+	
 	return (c);
 }
 
@@ -227,7 +251,7 @@ std::list<int> PmergeMe::execListAlgorithm(std::list< std::list<int> > jacGroups
 		//std::cout << "--------- GROUP " << gpNow.front() << " " << gpNow.back() << " --------- "  << std::endl;
 
 		// * insert As
-		temp.push_front(a.front()); a.pop_front();	c.push_back(temp.front().front());
+ 		temp.push_front(a.front()); a.pop_front();	c.push_back(temp.front().front());
 		//std::cout << " - Inserting A" << std::endl;
 		for (int i = from; i > until; i--) // ! problem, never getting inside the loop error in the logic of from and until
 		{
@@ -433,6 +457,7 @@ void PmergeMe::removeVec(std::vector< std::vector<int> > *c, int removeVal)
 PmergeMe::PmergeMe(std::list<int> num)
 {
 	std::list< std::list<int> > groups = generateGroups(num.size());
+	std::vector< std::vector<int> > groupsV = generateGroupsVector(num.size());
 
 	time_t startTime, endTime;
 	long long startMs,endMs;
@@ -448,15 +473,15 @@ PmergeMe::PmergeMe(std::list<int> num)
 	printTime("End time:   ", endTime);
 	std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl << std::endl;
 
-	// std::cout << "----- Vector algorithm -----" << std::endl;
-	// startTime = time(NULL);		startMs = getTimeMs();
-	// printTime("Start time: ", startTime);
+	std::cout << "----- Vector algorithm -----" << std::endl;
+	startTime = time(NULL);		startMs = getTimeMs();
+	printTime("Start time: ", startTime);
 
-	// execVecAlgorithm(num);
+	execVecAlgorithm(groupsV, num);
 
-	// endTime = time(NULL);		endMs = getTimeMs();
-	// printTime("End time:   ", endTime);
-	// std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl;
+	endTime = time(NULL);		endMs = getTimeMs();
+	printTime("End time:   ", endTime);
+	std::cout << "Elapsed:    " << (endMs - startMs) << " ms" << std::endl;
 }
 
 // ====================== never used stuff ====================== //

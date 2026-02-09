@@ -12,13 +12,13 @@
 class PmergeMe{
 private:
 
-	std::vector <int> execVecAlgorithm(std::list<int> num);
 	std::list   <int> execListAlgorithm(std::list< std::list<int> > jacGroups, std::list<int> num);
-
-	std::list <int> calc_jacobsthallSequence(int listSize);
-	std::list < std::list <int> > generateGroups(int listSize);
-
-	void execVecAlgorithmHelper(std::vector<int> *c, std::vector<std::vector<int> > a);
+	std::vector	<int> execVecAlgorithm(std::vector< std::vector<int> > jacGroups, std::list<int> num);
+	
+	
+	std::list < std::list <int> > 	generateGroups(int listSize);
+	std::vector< std::vector<int> > generateGroupsVector(int vectorSize);
+	std::list <int> 				calc_jacobsthallSequence(int listSize);
 
 	void	binInsertVec(std::vector<int> *c, int end, int insert);
 	void	binInsertList(std::list<int> *c, int end, int insert);
