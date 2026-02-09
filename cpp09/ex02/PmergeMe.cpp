@@ -172,10 +172,17 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::vector< std::vector<int> > jacG
 	std::vector< std::vector<int> >  temp;
 	std::vector< std::vector<int> >  a;
 	std::vector< int >  gpNow;
+	std::vector< int >  odd;
 	std::vector< int >  c;
 
-	populate(&a, num);			displayValues(a);
+	populate(&a, num);			// displayValues(a);
 	a = sortVecOfVec(a);		displayValues(a);
+
+	if (a.back().size() == 1)
+	{
+		odd = a.back();
+		a.pop_back();
+	}
 
 	// * 1 interaction is always add a0 - a1 - a2
 	for (groupIter = jacGroups.begin(); groupIter != jacGroups.end(); groupIter++)
@@ -200,22 +207,26 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::vector< std::vector<int> > jacG
 			c.push_back(temp.back().front()); // A(n) to vector C
 		}
 
-		displayValues(c);
+		//displayValues(c);
 
 		// * insert Bs (reverse order)
 		for (tempIter = temp.begin(); tempIter != temp.end(); tempIter++)
 		{
-			displayValues(c);
+			//displayValues(c);
 			std::vector<int>::iterator it = std::upper_bound(c.begin(), c.end(), (*tempIter).front());
 			int pos = std::distance(c.begin(), it);
 
 			binInsertVec(&c, pos, (*tempIter).back());
 		}
 		
-		displayValues(c);
+		//displayValues(c);
 		temp.clear();
 	}
-	
+	if (odd.size() > 0)
+		binInsertVec(&c, c.size(), odd.back());
+		
+	std::cout << "\nSORTED FINAL LIST:" << std::endl;
+	displayValues(c);
 	return (c);
 }
 
@@ -235,10 +246,17 @@ std::list<int> PmergeMe::execListAlgorithm(std::list< std::list<int> > jacGroups
 	std::list< std::list<int> >  temp;
 	std::list< std::list<int> >  a;
 	std::list< int >  gpNow;
+	std::list< int >  odd;
 	std::list< int >  c;
 
-	populate(&a, num);			displayValues(a);
+	populate(&a, num);			//displayValues(a);
 	a = sortListOfList(a);		displayValues(a);
+
+	if (a.front().size() == 1)
+	{
+		odd = a.front();
+		a.pop_front();
+	}
 
 	// * 1 interaction is always add a0 - a1 - a2
 	for (groupIter = jacGroups.begin(); groupIter != jacGroups.end(); groupIter++)
@@ -266,24 +284,27 @@ std::list<int> PmergeMe::execListAlgorithm(std::list< std::list<int> > jacGroups
 		// std::cout << "temp: " << temp.front().front() << " - " << temp.front().back() << std::endl;
 		// std::cout << "list after A:" << std::endl;
 
-		displayValues(c);
+		//displayValues(c);
 
 		// std::cout << "\n - Inserting B" << std::endl;
 		// * insert Bs (reverse order than originaly on the array)
 		for (tempIter = temp.begin(); tempIter != temp.end(); tempIter++)
 		{
-			displayValues(c);
+			//displayValues(c);
 			std::list<int>::iterator it = std::upper_bound(c.begin(), c.end(), (*tempIter).front());
 			int pos = std::distance(c.begin(), it);
 
 			binInsertList(&c, pos, (*tempIter).back());
 		}
 		// std::cout << "list after B:" << std::endl;
-		displayValues(c);
+		//displayValues(c);
 		temp.clear();
 	}
-	// std::cout << "\nSORTED FINAL LIST:" << std::endl;
-	// displayValues(c);
+	if (odd.size() > 0)
+		binInsertList(&c, c.size(), odd.back());
+		
+	std::cout << "\nSORTED FINAL LIST:" << std::endl;
+	displayValues(c);
 	// binInsertList(&c, c.size() - 1, odd.front());
 	return (c);
 }
