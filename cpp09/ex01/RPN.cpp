@@ -66,7 +66,7 @@ int RPN::execute(std::stack<int> *nums, std::string operation)
 	int n2 = nums->top();	nums->pop();
 
 	char o = operation.at(0);
-	std::cout << "Operation: " << n2 << o << n1 << std::endl;
+	std::cout << "Operation: " << n2 << " " << o << " " << n1 << std::endl;
 	if (o == '+')
 		return (n2 + n1);
 	else if (o == '-')
@@ -85,12 +85,13 @@ int RPN::execute(std::stack<int> *nums, std::string operation)
 int	RPN::verifingAtoi(std::string s)
 {
 	long i = atol(s.c_str());
+
 	if (i > NUM_MAX)
-		throw NumberOutOfLimitsException((int)i + " of the numbers given is far away from my computational capacity!");
+		throw NumberOutOfLimitsException("Numbers given is far away from my computational capacity, values should be [0, 9] !");
 	if (i < NUM_MIN)
-		throw NumberOutOfLimitsException((int)i + " of the numbers given is far away from my computational capacity!");
+		throw NumberOutOfLimitsException("Numbers given is far away from my computational capacity, values should be [0, 9] !");
 	else
-		return (int)(i);
+		return (static_cast<int>(i));
 }
 
 /// @brief Function will populate the queue with the tokens
