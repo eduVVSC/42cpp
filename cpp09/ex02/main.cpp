@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2025/07/15 14:58:40 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:24:02 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int ac, char **av)
 		enteredValues = atoiAllEntries(ac, av);
 		if (enteredValues.empty())
 			return (std::cerr << "You need to enter positive integer(without sign) to the program work!" << std::endl, 1);
-		PmergeMe p(enteredValues);
+		PmergeMe p(&enteredValues);
 	}
 	return 0;
 }

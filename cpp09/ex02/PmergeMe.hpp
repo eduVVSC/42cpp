@@ -3,6 +3,7 @@
 
 # include <list>
 # include <ctime>
+# include <cmath>
 # include <vector>
 # include <iostream>
 # include <iterator>
@@ -12,8 +13,9 @@
 class PmergeMe{
 private:
 
-	std::list   <int> execListAlgorithm(std::list< std::list<int> > jacGroups, std::list<int> num);
-	std::vector	<int> execVecAlgorithm(std::vector< std::vector<int> > jacGroups, std::list<int> num);
+	std::list   <int> execListAlgorithm (std::list<int> *num);
+	std::vector	<int> execVecAlgorithm (std::vector<int> *num);
+	void insertSmallerValues(std::vector<int> *sortedList, std::vector<int> *smaller, std::vector< std::vector<int> > *pairs);
 	
 	
 	std::list < std::list <int> > 	generateGroups(int listSize);
@@ -23,18 +25,12 @@ private:
 	void	binInsertVec(std::vector<int> *c, int end, int insert);
 	void	binInsertList(std::list<int> *c, int end, int insert);
 
-	std::list< std::list    <int> >		sortListOfList(std::list< std::list<int> > c);
-	std::vector< std::vector<int> >		sortVecOfVec(std::vector< std::vector<int> > c);
-
-	std::list<int> lisOftListAt(std::list< std::list<int> >& l, int index);
 	int		listAt(std::list<int> &l, int index);
 
 	void	displayValues(std::list<int> val);
 	void	displayValues(std::vector<int> val);
 	void	displayValues(std::list< std::list<int> > val);
 	void	displayValues(std::vector< std::vector<int> > val);
-
-	void	removeVec(std::vector< std::vector<int> > *c, int removeVal);
 
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
@@ -44,38 +40,63 @@ private:
 	 * @brief funtion will separate the input into duos to the
 	 * execution of the algorithm
 	 */
-	template <typename OuterContainer>
-	void populate(OuterContainer *out, std::list<int>& num) {
-		typedef typename OuterContainer::value_type InnerContainer;
+	template <typename OuterContainer, typename InnerContainer>
+	void populate(OuterContainer *out, InnerContainer *greater, InnerContainer *smaller, InnerContainer *num) {
+		typename InnerContainer::iterator it, end;
+		int val1, val2;
 
-		while (!num.empty())
+		it = num->begin(); end = num->end();
+		while (it != end && (it + 1) != end)  // ✓
 		{
 			InnerContainer b;
-			b.push_back(num.front());
-			num.pop_front();
-
-			if (!num.empty())
+			val1 = *it++;
+			val2 = *it;
+			if (val1 < val2) // n / 2
 			{
-				int temp = num.front();
-				// sorting the duos
-				if (b.front() < temp)
-				{
-					// swapping elements
-					temp = b.front();
-					b.pop_back();
-					b.push_back(num.front());
-					b.push_back(temp);
-				}
-				else
-					b.push_back(temp);
-				num.pop_front();
+				b.push_back(val2); greater->push_back(val2);
+				b.push_back(val1); smaller->push_back(val1);
+			}
+			else
+			{
+				b.push_back(val1); greater->push_back(val1);
+				b.push_back(val2); smaller->push_back(val2);
 			}
 			out->push_back(b);
+			it++;
+		}
+		if (it != end)
+		{
+			InnerContainer b;
+			b.push_back(*it);
+			out->push_back(b);
+			smaller->push_back(*it);
 		}
 	};
 
+	template <typename OuterContainer, typename InnerContainer>
+	OuterContainer reorderPairs(OuterContainer &pairs, InnerContainer &sortedGreater)
+	{
+		OuterContainer reordered;
+		
+		for (size_t i = 0; i < sortedGreater.size(); i++)
+		{
+			int winner = sortedGreater[i];
+			
+			// Find pair with this winner (using == only, doesn't count!)
+			for (size_t j = 0; j < pairs.size(); j++)
+			{
+				if (pairs[j].front() == winner)
+				{
+					reordered.push_back(pairs[j]);
+					break;
+				}
+			}
+		}
+		return reordered;
+	}
+
 public:
-	PmergeMe(std::list<int> num);
+	PmergeMe(std::list<int> *num);
 	~PmergeMe();
 };
 
