@@ -32,52 +32,63 @@ int PmergeMe::listAt(std::list<int>& l, int index)
 
 void PmergeMe::insertSmallerValues(std::vector<int> *sortedList, std::vector<int> *smaller, std::vector< std::vector<int> > *pairs)
 {
-    std::cout << "\n====== inside smaller values ======"<< std::endl;
-    std::cout << "size of sorted list and smaller and pairs " << sortedList->size() << " " << smaller->size() << " " << pairs->size() << std::endl;
-	
+	std::cout << "\n====== inside smaller values ======"<< std::endl;
+	displayValues(*sortedList);
+	displayValues(*smaller);
+	displayValues(*pairs);
 
-    bool oddNumbers = (smaller->size() > pairs->size());
-    // Insert first loser at front
-    if (!pairs->empty())
-        sortedList->insert(sortedList->begin(), (*pairs)[0].back());
-    
-    std::vector< std::vector<int> > jacGroups = generateGroupsVector(pairs->size());
-    size_t lastInserted = 0;
-    
-    for (size_t g = 1; g < jacGroups.size(); g++)
-    {
-		
-        int from = jacGroups[g].back();
-        int until = jacGroups[g].front();
-    
+	bool oddNumbers = (smaller->size() > pairs->size());
+	// Insert first loser at front
+	if (!pairs->empty())
+	{
+		sortedList->insert(sortedList->begin(), (*pairs)[0].back());
+		std::cout << " * INSERTED: " << (*pairs)[0].back() << std::endl;
+	}
+
+	std::vector< std::vector<int> > jacGroups = generateGroupsVector(pairs->size());
+	size_t lastInserted = 0;
+
+	for (size_t g = 1; g < jacGroups.size(); g++)
+	{
+		std::cout << "-- first for --"<< std::endl;
+
+		int from = jacGroups[g].back();
+		int until = jacGroups[g].front();
+
 		std::cout << "- From AND until " << from << " " << until << std::endl;
-        
-        for (int i = from; i >= until && i > static_cast<int>(lastInserted); i--)
-        {
-            if (i >= static_cast<int>(pairs->size()))
-                continue;
-            
-            int winner = (*pairs)[i].front();  // ✓ Now correct because pairs are reordered!
-            int loser = (*pairs)[i].back();
+
+		for (int i = from; i >= until && i > static_cast<int>(lastInserted); i--)
+		{
+			std::cout << "-- second for --"<< std::endl;
+			std::cout << i << " i x pair_size() " <<  pairs->size() << std::endl;
+
+			if (i >= static_cast<int>(pairs->size()))
+				continue;
+
+			std::cout << "bf " << std::endl;
+			int winner = (*pairs)[i].front();  // ✓ Now correct because pairs are reordered!
+			int loser = (*pairs)[i].back();
+			std::cout << "aft " << std::endl;
 			std::cout << "- inserting looser " << loser << " paired with " << winner << std::endl;
-            
-            // Find winner's position in sortedList
-            std::vector<int>::iterator it = 
-                std::lower_bound(sortedList->begin(), sortedList->end(), winner);
-            int winnerPos = std::distance(sortedList->begin(), it);
-			
+
+			// Find winner's position in sortedList
+			std::vector<int>::iterator it =
+				std::lower_bound(sortedList->begin(), sortedList->end(), winner);
+			int winnerPos = std::distance(sortedList->begin(), it);
+
 			std::cout << "< loop insert > ";
-            binInsertVec(sortedList, winnerPos, loser);  // ✓ Your original signature!
-        }
-        lastInserted = from;
-    }
-    
-    // Handle odd element
-    if (oddNumbers)
-    {
+			std::cout << " * INSERTED: " << loser << std::endl;
+			binInsertVec(sortedList, winnerPos, loser);  // ✓ Your original signature!
+		}
+		lastInserted = from;
+	}
+
+	// Handle odd element
+	if (oddNumbers)
+	{
 		std::cout << "< odd insert > ";
-        binInsertVec(sortedList, sortedList->size() - 1, smaller->back());
-    }
+		binInsertVec(sortedList, sortedList->size() - 1, smaller->back());
+	}
 }
 
 /**
@@ -90,28 +101,28 @@ void PmergeMe::insertSmallerValues(std::vector<int> *sortedList, std::vector<int
  */
 std::vector<int> PmergeMe::execVecAlgorithm(std::vector<int> *num)
 {
-    std::cout << " --====== inside execVecAlgorithm ====== -- "<< std::endl;
+	std::cout << " --====== inside execVecAlgorithm ====== -- "<< std::endl;
 	std::cout << "num :"<< std::endl;	displayValues(*num);
 
-    if (num->size() <= 1)
-        return (*num);
-    
-    std::vector< std::vector<int> > pairs;
-    std::vector<int> greater;
-    std::vector<int> smaller;
-    
-    populate(&pairs, &greater, &smaller, num);
-	
+	if (num->size() <= 1)
+		return (*num);
+
+	std::vector< std::vector<int> > pairs;
+	std::vector<int> greater;
+	std::vector<int> smaller;
+
+	populate(&pairs, &greater, &smaller, num);
+
 	std::cout << "greater :"<< std::endl;	displayValues(greater);
 
-    std::cout << "pairs :"<< std::endl;	displayValues(pairs);
+	std::cout << "pairs :"<< std::endl;	displayValues(pairs);
 
-    greater = execVecAlgorithm(&greater);    
-    pairs = reorderPairs(pairs, greater);
-    
-    insertSmallerValues(&greater, &smaller, &pairs);
-    
-    return greater;
+	greater = execVecAlgorithm(&greater);
+	pairs = reorderPairs(pairs, greater);
+
+	insertSmallerValues(&greater, &smaller, &pairs);
+
+	return greater;
 }
 
 // ====================== list algorithm methods ====================== //
@@ -155,7 +166,7 @@ void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
 			start = mid + 1;
 	}
 
-	std::cout << "inserting : " << insert << " at " << pos << std::endl; 
+	std::cout << "inserting : " << insert << " at " << pos << std::endl;
 	c->insert(c->begin() + pos, insert);
 }
 
@@ -166,30 +177,30 @@ void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
  */
 void PmergeMe::binInsertList(std::list<int> *c, int end, int insert)
 {
-    int start = 0;
-    int pos = end;
-    
-    while (start <= end)
-    {
-        int mid = (start + end) / 2;
-        
-        // Get iterator to mid position
-        std::list<int>::iterator midIt = c->begin();
-        std::advance(midIt, mid);
-        int valueAt = *midIt;
-        
-        if (valueAt >= insert)
-        {
-            pos = mid;
-            end = mid - 1;
-        }
-        else
-            start = mid + 1;
-    }
-    
-    std::list<int>::iterator it = c->begin();
-    std::advance(it, pos);
-    c->insert(it, insert);
+	int start = 0;
+	int pos = end;
+
+	while (start <= end)
+	{
+		int mid = (start + end) / 2;
+
+		// Get iterator to mid position
+		std::list<int>::iterator midIt = c->begin();
+		std::advance(midIt, mid);
+		int valueAt = *midIt;
+
+		if (valueAt >= insert)
+		{
+			pos = mid;
+			end = mid - 1;
+		}
+		else
+			start = mid + 1;
+	}
+
+	std::list<int>::iterator it = c->begin();
+	std::advance(it, pos);
+	c->insert(it, insert);
 }
 
 // ====================== Constructor used  ====================== //
@@ -215,7 +226,7 @@ PmergeMe::PmergeMe(std::list<int> *num)
 	printTime("Start time: ", startTime);
 
 	std::vector<int> v (num->begin(), num->end());
-	displayValues(execVecAlgorithm(&v)); // ! change it 
+	displayValues(execVecAlgorithm(&v)); // ! change it
 
 	endTime = time(NULL);		endMs = getTimeMs();
 	printTime("\n\nEnd time:   ", endTime);
@@ -245,7 +256,7 @@ std::list<int> PmergeMe::calc_jacobsthallSequence(int listSize)
 
 		// checking the before, because the value could be between the interval
 		// could be in the between of the smaller and greater than listSize
-		if (j1 >  std::ceil(listSize / 2))
+		if (j1 >  listSize) // ! do not know if it needs to stay like this
 			break;
 
 		jacobsthal.push_back(curr);
@@ -288,19 +299,22 @@ std::vector< std::vector<int> > PmergeMe::generateGroupsVector(int vectorSize)
 
 	add.push_back(1); add.push_back(1); // adding [1, 1]
 	groups.push_back(add);
-	
-	std::cout << " ----- group ----- " << std::endl;
-	std::cout << add.front() << " - " << add.back() << std::endl;
+
+	std::cout << "| ----- ----- ----- |" << std::endl;
+	std::cout << "| ----- group ----- |" << std::endl;
+	std::cout << "    " << add.front() << " - " << add.back() << std::endl;
 	// * groups are formated of [ j(i) + 1 -j (i+1) ] then reverse the order
 	for (size_t i = 1; i < jacobsthal.size() - 1; i++)
 	{
 		add.clear();
-		add.push_back( listAt(jacobsthal, i) + 1 ); // * j(i) + 1
-		add.push_back( listAt(jacobsthal, i + 1)  ); // * j(i + 1)
-		std::cout << " ----- group ----- " << std::endl;
-		std::cout << add.front() << " - " << add.back() << std::endl;
+		add.push_back( (listAt(jacobsthal, i) + 1) -1 ); // * j(i) + 1  (-1 becuase of index )
+		add.push_back( listAt(jacobsthal, i + 1)  - 1); // * j(i + 1) (-1 becuase of index )
+		std::cout << "| ----- group ----- |" << std::endl;
+		std::cout << "    " << add.front() << " - " << add.back() << std::endl;
 		groups.push_back(add);
 	}
+	std::cout << "| ----- ----- ----- |" << std::endl;
+
 	return (groups);
 }
 
