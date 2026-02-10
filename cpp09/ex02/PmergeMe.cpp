@@ -299,6 +299,7 @@ PmergeMe::PmergeMe(std::vector<int> *num)
 
 	std::deque<int> d(num->begin(), num->end());
 	std::deque<int> resD = execDequeAlgorithm(&d);
+	displayValues(resD);
 
 	endTime = time(NULL);
 	endNs = getTimeUs();
@@ -313,6 +314,7 @@ PmergeMe::PmergeMe(std::vector<int> *num)
 
 	std::vector<int> v(num->begin(), num->end());
 	std::vector<int> resV =execVecAlgorithm(&v);
+	displayValues(resV);
 
 	endTime = time(NULL);
 	endNs = getTimeUs();
@@ -432,8 +434,6 @@ std::deque< std::deque<int> > PmergeMe::generateGroupsDeque(int dequeSize)
 
 	return (groups);
 }
-
-
 
 // ====================== never used stuff ====================== //
 

@@ -12,37 +12,30 @@
 
 #include "PmergeMe.hpp"
 
-int	ft_atoi_w_valid(char *str)
-{
-	int	num = 0;
-	int	i = 0;
-
-	if (str[i] == 0) // * validation of empty str
-		return (-1);
-	while (str[i] != '\0')
-	{
-		if(str[i] > '9' || str[i] < '0')
-			return (-1);
-
-		num = num * 10 + str[i] - '0';
-		i++;
-	}
-	return (num);
-}
-
 std::vector<int> atoiAllEntries(int ac, char **av)
 {
 	std::vector<int> vec;
-	int	temp;
 
 	for (int i = 1; i < ac; i++)
 	{
-		temp = ft_atoi_w_valid(av[i]);
-		if (temp == -1)
-		{
-			vec.clear();
-			return (vec);
-		}
+		char *endptr;
+		errno = 0;
+		long num = strtol(av[i], &endptr, 10);
+
+		// Check for overflow/underflow or out of int range
+		if (errno == ERANGE || num > INT_MAX || num < 0)
+			return (vec.clear(), vec);
+
+		// Check if the entire string was converted (no invalid characters)
+		if (*endptr != '\0' || endptr == av[i])
+			return (vec.clear(), vec);
+
+		int temp = static_cast<int>(num);
+
+		// Check for duplicates
+		if (std::find(vec.begin(), vec.end(), temp) != vec.end())
+			return (vec.clear(), vec);
+
 		vec.push_back(temp);
 	}
 	return (vec);
@@ -56,7 +49,7 @@ int main(int ac, char **av)
 	{
 		enteredValues = atoiAllEntries(ac, av);
 		if (enteredValues.empty())
-			return (std::cerr << "You need to enter positive integer(without sign) to the program work!" << std::endl, 1);
+			return (std::cerr << "You need to enter unique positive integers to the program work!" << std::endl, 1);
 		PmergeMe p(&enteredValues);
 	}
 	return 0;

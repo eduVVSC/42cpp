@@ -6,6 +6,9 @@
 # include <ctime>
 # include <cmath>
 # include <vector>
+# include <cerrno>
+# include <climits>
+# include <cstdlib>
 # include <iostream>
 # include <iterator>
 # include <algorithm>
