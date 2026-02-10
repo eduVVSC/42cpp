@@ -21,12 +21,12 @@ int main(int ac, char **av)
 		try
 		{
 			//std::cout << "result is: " << a.makeCount("8 9 * 9 - 9 - 9 - 4 - 1 +") << std::endl;
-
-			std::cout << "result is: " << a.makeCount(av[1]) << std::endl;
+			int count = a.makeCount(av[1]);
+			std::cout << "result is: " << count << std::endl;
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << '\n';
+			std::cerr << "Error" << '\n';
 		}
 	}
 
