@@ -66,15 +66,15 @@ private:
 	void	populateStack(std::string s);
 	bool	onlyAllowedCharacter(std::string s);
 	int		execute(std::stack<int> *nums, std::string c);
-public:
 
+	RPN(const RPN &other);
+	RPN operator=(const RPN &other);
+
+public:
 	int makeCount(std::string s);
 
 	RPN();
-	RPN(const RPN &other);
 	~RPN();
-
-	RPN operator=(const RPN &other);
 };
 
 #endif

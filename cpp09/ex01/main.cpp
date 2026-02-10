@@ -17,7 +17,7 @@ int main(int ac, char **av)
 {
 	if (ac == 2)
 	{
-		RPN a = RPN();
+		RPN a;
 		try
 		{
 			//std::cout << "result is: " << a.makeCount("8 9 * 9 - 9 - 9 - 4 - 1 +") << std::endl;
