@@ -2,6 +2,7 @@
 # define PMERGEME_HPP
 
 # include <list>
+# include <deque>
 # include <ctime>
 # include <cmath>
 # include <vector>
@@ -13,24 +14,29 @@
 class PmergeMe{
 private:
 
-	std::list   <int> execListAlgorithm (std::list<int> *num);
+	long long	getTimeUs();
+	void		printTime(const char* label, time_t t);
+
+	std::deque	<int> execDequeAlgorithm (std::deque<int> *num);
 	std::vector	<int> execVecAlgorithm (std::vector<int> *num);
+
 	void insertSmallerValues(std::vector<int> *sortedList, std::vector<int> *smaller, std::vector< std::vector<int> > *pairs);
-	
-	
-	std::list < std::list <int> > 	generateGroups(int listSize);
-	std::vector< std::vector<int> > generateGroupsVector(int vectorSize);
-	std::list <int> 				calc_jacobsthallSequence(int listSize);
+	void insertSmallerValues(std::deque<int> *sortedList, std::deque<int> *smaller, std::deque< std::deque<int> > *pairs);
+
+	std::list	< std::list <int> > 	generateGroups(int listSize);
+	std::deque	< std::deque<int> >		generateGroupsDeque(int dequeSize);
+	std::vector	< std::vector<int> >	generateGroupsVector(int vectorSize);
+	std::list				 <int>		calc_jacobsthallSequence(int listSize);
 
 	void	binInsertVec(std::vector<int> *c, int end, int insert);
-	void	binInsertList(std::list<int> *c, int end, int insert);
+	void	binInsertDeque(std::deque<int> *c, int end, int insert);
 
 	int		listAt(std::list<int> &l, int index);
 
-	void	displayValues(std::list<int> val);
+	void	displayValues(std::deque<int> val);
 	void	displayValues(std::vector<int> val);
-	void	displayValues(std::list< std::list<int> > val);
-	void	displayValues(std::vector< std::vector<int> > val);
+	void	displayValues(std::deque < std::deque<int> > val);
+	void	displayValues(std::vector < std::vector<int> > val);
 
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
@@ -77,11 +83,11 @@ private:
 	OuterContainer reorderPairs(OuterContainer &pairs, InnerContainer &sortedGreater)
 	{
 		OuterContainer reordered;
-		
+
 		for (size_t i = 0; i < sortedGreater.size(); i++)
 		{
 			int winner = sortedGreater[i];
-			
+
 			// Find pair with this winner (using == only, doesn't count!)
 			for (size_t j = 0; j < pairs.size(); j++)
 			{
@@ -96,7 +102,7 @@ private:
 	}
 
 public:
-	PmergeMe(std::list<int> *num);
+	PmergeMe(std::vector<int> *num);
 	~PmergeMe();
 };
 

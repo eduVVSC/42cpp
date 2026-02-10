@@ -30,9 +30,9 @@ int	ft_atoi_w_valid(char *str)
 	return (num);
 }
 
-std::list<int>	atoiAllEntries(int ac, char **av)
+std::vector<int> atoiAllEntries(int ac, char **av)
 {
-	std::list<int> list;
+	std::vector<int> vec;
 	int	temp;
 
 	for (int i = 1; i < ac; i++)
@@ -40,17 +40,17 @@ std::list<int>	atoiAllEntries(int ac, char **av)
 		temp = ft_atoi_w_valid(av[i]);
 		if (temp == -1)
 		{
-			list.clear();
-			return (list);
+			vec.clear();
+			return (vec);
 		}
-		list.push_back(temp);
+		vec.push_back(temp);
 	}
-	return (list);
+	return (vec);
 }
 
 int main(int ac, char **av)
 {
-	std::list<int> enteredValues;
+	std::vector<int> enteredValues;
 
 	if (ac > 1)
 	{
