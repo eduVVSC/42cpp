@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:46:41 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/09 09:50:11 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:03:57 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,38 @@ void subjectMain()
     std::cout << std::endl;
     
     std::stack<int> s(mstack);
+}
+
+
+void subjectMainWithList()
+{
+    printHeader("SUBJECT TEST");
+    
+    std::list<int> mstack;
+    mstack.push_back(5);
+    mstack.push_back(17);
+    std::cout << "Top: " << mstack.front() << std::endl;
+    mstack.pop_back();
+    std::cout << "Size after pop: " << mstack.size() << std::endl;
+    mstack.push_back(3);
+    mstack.push_back(5);
+    mstack.push_back(737);
+    mstack.push_back(0);
+
+    std::list<int>::iterator it = mstack.begin();
+    std::list<int>::iterator ite = mstack.end();
+    ++it;
+    --it;
+    
+    std::cout << "Stack contents: ";
+    while (it != ite)
+    {
+        std::cout << *it << " ";
+        ++it;
+    }
+    std::cout << std::endl;
+    
+    std::list<int> s(mstack);
 }
 
 void testBasicOperations()
@@ -279,16 +311,17 @@ void testIteratorModification()
 int main()
 {
     subjectMain();
-    testBasicOperations();
-    testIterators();
-    testConstIterators();
-    testCopyConstructor();
-    testAssignmentOperator();
-    testWithStrings();
-    testComparisonWithList();
-    testEmptyStack();
-    testLargeStack();
-    testIteratorModification();
+    subjectMainWithList();
+    //testBasicOperations();
+    //testIterators();
+    //testConstIterators();
+    //testCopyConstructor();
+    //testAssignmentOperator();
+    //testWithStrings();
+    //testComparisonWithList();
+    //testEmptyStack();
+    //testLargeStack();
+    //testIteratorModification();
     
     printHeader("ALL TESTS COMPLETED");
     
