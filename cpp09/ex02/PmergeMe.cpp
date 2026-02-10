@@ -258,7 +258,7 @@ void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
 void PmergeMe::binInsertDeque(std::deque<int> *c, int end, int insert)
 {
 	int start = 0;
-	int pos = end;
+	int pos = end + 1;
 
 	while (start <= end)
 	{
