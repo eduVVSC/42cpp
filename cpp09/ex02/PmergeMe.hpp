@@ -55,12 +55,12 @@ private:
 		int val1, val2;
 
 		it = num->begin(); end = num->end();
-		while (it != end && (it + 1) != end)  // ✓
+		while (it != end && (it + 1) != end) 
 		{
 			InnerContainer b;
 			val1 = *it++;
 			val2 = *it;
-			if (val1 < val2) // n / 2
+			if (val1 < val2) 
 			{
 				b.push_back(val2); greater->push_back(val2);
 				b.push_back(val1); smaller->push_back(val1);

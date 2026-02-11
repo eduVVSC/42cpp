@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 07:25:29 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 10:41:14 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/11 12:18:18 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ private:
 	std::queue<std::string> tokens;
 
 	bool	isOperand(std::string s);
-	int		verifingAtoi(std::string s);
+	float	verifingAtoi(std::string s);
 	void	populateStack(std::string s);
 	bool	onlyAllowedCharacter(std::string s);
-	int		execute(std::stack<int> *nums, std::string c);
+	float  execute(std::stack<float> *nums, std::string c);
 
 	RPN(const RPN &other);
 	RPN operator=(const RPN &other);
 
 public:
-	int makeCount(std::string s);
+	float makeCount(std::string s);
 
 	RPN();
 	~RPN();

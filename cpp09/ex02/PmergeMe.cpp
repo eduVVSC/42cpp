@@ -1,94 +1,82 @@
 
 #include "PmergeMe.hpp"
 
-long long PmergeMe::getTimeUs()
+// ====================== Constructor used  ====================== //
+
+PmergeMe::PmergeMe(std::vector<int> *num)
 {
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000000LL) + tv.tv_usec;
-}
+	time_t startTime, endTime;
+	long long startNs, endNs;
 
-void PmergeMe::printTime(const char* label, time_t t)
-{
-	char buffer[64];
-	std::tm* tm_info = std::localtime(&t);
-	std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", tm_info);
-	std::cout << label << buffer << std::endl;
-}
+	std::cout << "----- Deque algorithm -----" << std::endl;
 
-// ====================== At method ====================== //
+	startTime = time(NULL);
+	startNs = getTimeUs();
+	printTime("Start time: ", startTime);
 
-int PmergeMe::listAt(std::list<int>& l, int index)
-{
-	if (index < 0 || index >= static_cast<int>(l.size()))
-		throw std::out_of_range("Index out of bounds");
+	std::deque<int> d(num->begin(), num->end());
+	std::deque<int> resD = execDequeAlgorithm(&d);
 
-	std::list<int>::iterator it = l.begin();
-	std::advance(it, index);
-	return *it;
+	endTime = time(NULL);
+	endNs = getTimeUs();
+	printTime("End time:   ", endTime);
+	std::cout << "Elapsed:    " << (endNs - startNs) << " µs" << std::endl << std::endl;
+
+	std::cout << "----- Vector algorithm -----" << std::endl;
+
+	startTime = time(NULL);
+	startNs = getTimeUs();
+	printTime("Start time: ", startTime);
+
+	std::vector<int> v(num->begin(), num->end());
+	std::vector<int> resV = execVecAlgorithm(&v);
+
+	endTime = time(NULL);
+	endNs = getTimeUs();
+	printTime("End time:   ", endTime);
+	std::cout << "Elapsed:    " << (endNs - startNs) << " µs" << std::endl;
 }
 
 // ====================== Vector algorithm methods ====================== //
 
 void PmergeMe::insertSmallerValues(std::vector<int> *sortedList, std::vector<int> *smaller, std::vector< std::vector<int> > *pairs)
 {
-	// std::cout << "\n====== inside smaller values ======"<< std::endl;
-	// displayValues(*sortedList);
-	// displayValues(*smaller);
-	// displayValues(*pairs);
-
 	bool oddNumbers = (smaller->size() > pairs->size());
-	// Insert first loser at front
+	
 	if (!pairs->empty())
-	{
 		sortedList->insert(sortedList->begin(), (*pairs)[0].back());
-		// std::cout << " * INSERTED: " << (*pairs)[0].back() << std::endl;
-	}
 
 	std::vector< std::vector<int> > jacGroups = generateGroupsVector(pairs->size());
 	size_t lastInserted = 0;
 
 	for (size_t g = 1; g < jacGroups.size(); g++)
 	{
-		// std::cout << "-- first for --"<< std::endl;
 
 		int from = jacGroups[g].back();
 		int until = jacGroups[g].front();
 
-		// std::cout << "- From AND until " << from << " " << until << std::endl;
 
 		for (int i = from; i >= until && i > static_cast<int>(lastInserted); i--)
 		{
-			// std::cout << "-- second for --"<< std::endl;
-			// std::cout << i << " i x pair_size() " <<  pairs->size() << std::endl;
 
 			if (i >= static_cast<int>(pairs->size()))
 				continue;
 
-			// std::cout << "bf " << std::endl;
-			int winner = (*pairs)[i].front();  // ✓ Now correct because pairs are reordered!
+			int winner = (*pairs)[i].front(); 
 			int loser = (*pairs)[i].back();
-			// std::cout << "aft " << std::endl;
-			// std::cout << "- inserting looser " << loser << " paired with " << winner << std::endl;
 
 			// Find winner's position in sortedList
 			std::vector<int>::iterator it =
 				std::lower_bound(sortedList->begin(), sortedList->end(), winner);
 			int winnerPos = std::distance(sortedList->begin(), it);
 
-			// std::cout << "< loop insert > ";
-			// std::cout << " * INSERTED: " << loser << std::endl;
-			binInsertVec(sortedList, winnerPos, loser);  // ✓ Your original signature!
+			binInsertVec(sortedList, winnerPos, loser);
 		}
 		lastInserted = from;
 	}
 
-	// Handle odd element
 	if (oddNumbers)
-	{
-		// std::cout << "< odd insert > ";
 		binInsertVec(sortedList, sortedList->size() - 1, smaller->back());
-	}
 }
 
 /**
@@ -101,8 +89,6 @@ void PmergeMe::insertSmallerValues(std::vector<int> *sortedList, std::vector<int
  */
 std::vector<int> PmergeMe::execVecAlgorithm(std::vector<int> *num)
 {
-	// std::cout << " --====== inside execVecAlgorithm ====== -- "<< std::endl;
-	// std::cout << "num :"<< std::endl;	displayValues(*num);
 
 	if (num->size() <= 1)
 		return (*num);
@@ -112,10 +98,6 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::vector<int> *num)
 	std::vector<int> smaller;
 
 	populate(&pairs, &greater, &smaller, num);
-
-	// std::cout << "greater :"<< std::endl;	displayValues(greater);
-
-	// std::cout << "pairs :"<< std::endl;	displayValues(pairs);
 
 	greater = execVecAlgorithm(&greater);
 	pairs = reorderPairs(pairs, greater);
@@ -129,63 +111,42 @@ std::vector<int> PmergeMe::execVecAlgorithm(std::vector<int> *num)
 
 void PmergeMe::insertSmallerValues(std::deque<int> *sortedList, std::deque<int> *smaller, std::deque< std::deque<int> > *pairs)
 {
-	// std::cout << "\n====== inside smaller values ======"<< std::endl;
-	//displayValues(*sortedList);
-	//displayValues(*smaller);
-	//displayValues(*pairs);
-
 	bool oddNumbers = (smaller->size() > pairs->size());
-	// Insert first loser at front
+
 	if (!pairs->empty())
-	{
 		sortedList->insert(sortedList->begin(), (*pairs)[0].back());
-		// std::cout << " * INSERTED: " << (*pairs)[0].back() << std::endl;
-	}
 
 	std::deque< std::deque<int> > jacGroups = generateGroupsDeque(pairs->size());
 	size_t lastInserted = 0;
 
 	for (size_t g = 1; g < jacGroups.size(); g++)
 	{
-		// std::cout << "-- first for --"<< std::endl;
 
 		int from = jacGroups[g].back();
 		int until = jacGroups[g].front();
 
-		// std::cout << "- From AND until " << from << " " << until << std::endl;
 
 		for (int i = from; i >= until && i > static_cast<int>(lastInserted); i--)
 		{
-			// std::cout << "-- second for --"<< std::endl;
-			// std::cout << i << " i x pair_size() " <<  pairs->size() << std::endl;
 
 			if (i >= static_cast<int>(pairs->size()))
 				continue;
 
-			// std::cout << "bf " << std::endl;
-			int winner = (*pairs)[i].front();  // ✓ Now correct because pairs are reordered!
+			int winner = (*pairs)[i].front(); 
 			int loser = (*pairs)[i].back();
-			// std::cout << "aft " << std::endl;
-			// std::cout << "- inserting looser " << loser << " paired with " << winner << std::endl;
 
 			// Find winner's position in sortedList
 			std::deque<int>::iterator it =
 				std::lower_bound(sortedList->begin(), sortedList->end(), winner);
 			int winnerPos = std::distance(sortedList->begin(), it);
 
-			// std::cout << "< loop insert > ";
-			// std::cout << " * INSERTED: " << loser << std::endl;
-			binInsertDeque(sortedList, winnerPos, loser);  // ✓ Your original signature!
+			binInsertDeque(sortedList, winnerPos, loser);
 		}
 		lastInserted = from;
 	}
 
-	// Handle odd element
 	if (oddNumbers)
-	{
-		// std::cout << "< odd insert > ";
 		binInsertDeque(sortedList, sortedList->size() - 1, smaller->back());
-	}
 }
 
 /**
@@ -197,9 +158,6 @@ void PmergeMe::insertSmallerValues(std::deque<int> *sortedList, std::deque<int> 
  */
 std::deque<int> PmergeMe::execDequeAlgorithm(std::deque<int> *num)
 {
-	//std::cout << " --====== inside execVecAlgorithm ====== -- "<< std::endl;
-	//std::cout << "num :"<< std::endl;	displayValues(*num);
-
 	if (num->size() <= 1)
 		return (*num);
 
@@ -208,10 +166,6 @@ std::deque<int> PmergeMe::execDequeAlgorithm(std::deque<int> *num)
 	std::deque<int> smaller;
 
 	populate(&pairs, &greater, &smaller, num);
-
-	//std::cout << "greater :"<< std::endl;	displayValues(greater);
-
-	//std::cout << "pairs :"<< std::endl;	displayValues(pairs);
 
 	greater = execDequeAlgorithm(&greater);
 	pairs = reorderPairs(pairs, greater);
@@ -240,8 +194,8 @@ void	PmergeMe::binInsertVec(std::vector<int> *c, int end, int insert)
 
 		if (valueAt >= insert)
 		{
-			pos = mid;      // Found a position where we could insert
-			end = mid - 1;  // Look for earlier position
+			pos = mid;      
+			end = mid - 1; 
 		}
 		else
 			start = mid + 1;
@@ -264,7 +218,6 @@ void PmergeMe::binInsertDeque(std::deque<int> *c, int end, int insert)
 	{
 		int mid = (start + end) / 2;
 
-		// Get iterator to mid position in deque
 		std::deque<int>::iterator midIt = c->begin();
 		std::advance(midIt, mid);
 		int valueAt = *midIt;
@@ -278,48 +231,9 @@ void PmergeMe::binInsertDeque(std::deque<int> *c, int end, int insert)
 			start = mid + 1;
 	}
 
-	// Insert at the correct position
 	std::deque<int>::iterator it = c->begin();
 	std::advance(it, pos);
 	c->insert(it, insert);
-}
-
-// ====================== Constructor used  ====================== //
-
-PmergeMe::PmergeMe(std::vector<int> *num)
-{
-	time_t startTime, endTime;
-	long long startNs, endNs;
-
-	std::cout << "----- Deque algorithm -----" << std::endl;
-
-	startTime = time(NULL);
-	startNs = getTimeUs();
-	printTime("Start time: ", startTime);
-
-	std::deque<int> d(num->begin(), num->end());
-	std::deque<int> resD = execDequeAlgorithm(&d);
-	displayValues(resD);
-
-	endTime = time(NULL);
-	endNs = getTimeUs();
-	printTime("End time:   ", endTime);
-	std::cout << "Elapsed:    " << (endNs - startNs) << " µs" << std::endl << std::endl;
-
-	std::cout << "----- Vector algorithm -----" << std::endl;
-
-	startTime = time(NULL);
-	startNs = getTimeUs();
-	printTime("Start time: ", startTime);
-
-	std::vector<int> v(num->begin(), num->end());
-	std::vector<int> resV =execVecAlgorithm(&v);
-	displayValues(resV);
-
-	endTime = time(NULL);
-	endNs = getTimeUs();
-	printTime("End time:   ", endTime);
-	std::cout << "Elapsed:    " << (endNs - startNs) << " µs" << std::endl;
 }
 
 // ====================== JacobStahll methods ====================== //
@@ -343,9 +257,8 @@ std::list<int> PmergeMe::calc_jacobsthallSequence(int listSize)
 	{
 		curr = j1 + 2 * j0;  // Jacobsthal recurrence: J(n) = J(n-1) + 2*J(n-2)
 
-		// checking the before, because the value could be between the interval
-		// could be in the between of the smaller and greater than listSize
-		if (j1 >  listSize) // ! do not know if it needs to stay like this
+
+		if (j1 > listSize) 
 			break;
 
 		jacobsthal.push_back(curr);
@@ -372,8 +285,6 @@ std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
 		add.clear();
 		add.push_back( listAt(jacobsthal, i) + 1 ); // * j(i) + 1
 		add.push_back( listAt(jacobsthal, i + 1)  ); // * j(i + 1)
-		// std::cout << " ----- group ----- " << std::endl;
-		// std::cout << add.front() << " - " << add.back() << std::endl;
 		groups.push_back(add);
 	}
 	return (groups);
@@ -381,7 +292,6 @@ std::list< std::list<int> > PmergeMe::generateGroups(int listSize)
 
 std::vector< std::vector<int> > PmergeMe::generateGroupsVector(int vectorSize)
 {
-	// std::cout << "vector size is " << vectorSize << std::endl;
 	std::list<int> jacobsthal = calc_jacobsthallSequence(vectorSize);
 	std::vector< std::vector<int> > groups;
 	std::vector<int> add;
@@ -389,27 +299,20 @@ std::vector< std::vector<int> > PmergeMe::generateGroupsVector(int vectorSize)
 	add.push_back(1); add.push_back(1); // adding [1, 1]
 	groups.push_back(add);
 
-	// std::cout << "| ----- ----- ----- |" << std::endl;
-	// std::cout << "| ----- group ----- |" << std::endl;
-	// std::cout << "    " << add.front() << " - " << add.back() << std::endl;
 	// * groups are formated of [ j(i) + 1 -j (i+1) ] then reverse the order
 	for (size_t i = 1; i < jacobsthal.size() - 1; i++)
 	{
 		add.clear();
-		add.push_back( (listAt(jacobsthal, i) + 1) -1 ); // * j(i) + 1  (-1 becuase of index )
+		add.push_back( (listAt(jacobsthal, i) + 1) - 1); // * j(i) + 1  (-1 becuase of index )
 		add.push_back( listAt(jacobsthal, i + 1)  - 1); // * j(i + 1) (-1 becuase of index )
-		// std::cout << "| ----- group ----- |" << std::endl;
-		// std::cout << "    " << add.front() << " - " << add.back() << std::endl;
 		groups.push_back(add);
 	}
-	// std::cout << "| ----- ----- ----- |" << std::endl;
 
 	return (groups);
 }
 
 std::deque< std::deque<int> > PmergeMe::generateGroupsDeque(int dequeSize)
 {
-	// std::cout << "deque size is " << dequeSize << std::endl;
 	std::list<int> jacobsthal = calc_jacobsthallSequence(dequeSize);
 	std::deque< std::deque<int> > groups;
 	std::deque<int> add;
@@ -417,20 +320,14 @@ std::deque< std::deque<int> > PmergeMe::generateGroupsDeque(int dequeSize)
 	add.push_back(1); add.push_back(1); // adding [1, 1]
 	groups.push_back(add);
 
-	// std::cout << "| ----- ----- ----- |" << std::endl;
-	// std::cout << "| ----- group ----- |" << std::endl;
-	// std::cout << "    " << add.front() << " - " << add.back() << std::endl;
 	// * groups are formated of [ j(i) + 1 -j (i+1) ] then reverse the order
 	for (size_t i = 1; i < jacobsthal.size() - 1; i++)
 	{
 		add.clear();
 		add.push_back( (listAt(jacobsthal, i) + 1) -1 ); // * j(i) + 1  (-1 becuase of index )
 		add.push_back( listAt(jacobsthal, i + 1)  - 1); // * j(i + 1) (-1 becuase of index )
-		// std::cout << "| ----- group ----- |" << std::endl;
-		// std::cout << "    " << add.front() << " - " << add.back() << std::endl;
 		groups.push_back(add);
 	}
-	// std::cout << "| ----- ----- ----- |" << std::endl;
 
 	return (groups);
 }
@@ -444,6 +341,31 @@ PmergeMe::PmergeMe(const PmergeMe &other) { (void) other; }
 PmergeMe::~PmergeMe() {}
 
 // ====================== Utils Methods ====================== //
+
+long long PmergeMe::getTimeUs()
+{
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000000LL) + tv.tv_usec;
+}
+
+void PmergeMe::printTime(const char* label, time_t t)
+{
+	char buffer[64];
+	std::tm* tm_info = std::localtime(&t);
+	std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", tm_info);
+	std::cout << label << buffer << std::endl;
+}
+
+int PmergeMe::listAt(std::list<int>& l, int index)
+{
+	if (index < 0 || index >= static_cast<int>(l.size()))
+		throw std::out_of_range("Index out of bounds");
+
+	std::list<int>::iterator it = l.begin();
+	std::advance(it, index);
+	return *it;
+}
 
 void PmergeMe::displayValues(std::deque<int> val)
 {

@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:37:00 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 10:35:47 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/11 12:21:52 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int ac, char **av)
 		try
 		{
 			//std::cout << "result is: " << a.makeCount("8 9 * 9 - 9 - 9 - 4 - 1 +") << std::endl;
-			int count = a.makeCount(av[1]);
+			float count = a.makeCount(av[1]);
 			std::cout << "result is: " << count << std::endl;
 		}
 		catch(const std::exception& e)

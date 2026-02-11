@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:48:19 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/18 09:17:35 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/11 11:32:34 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 #include <cstdlib>
 #include <climits>
+#include <string.h>
 #include <cerrno>
 #include <algorithm>
 
@@ -70,7 +71,7 @@ public:
 
 // class will have the responsability to validate the input from the line and throw
 // the exception in case the line doesn't follow the requirements
-class Date
+class Date	
 {
 private:
 	int day;
@@ -81,6 +82,14 @@ private:
 
 	bool readDate(std::string line);
 	bool validDate();
+
+	std::string	trim(const std::string& str);
+	std::string	trimLeft(const std::string& str);
+	std::string	trimRight(const std::string& str);
+	std::string concatChar(const std::string& s, char c);
+	bool		hasOnlyNumbersAndDots(const std::string& str);
+
+
 public:
 	int compare(Date &other);
 
@@ -95,7 +104,9 @@ public:
 	Date(std::string line, char separator);
 	Date(const Date &other);
 
-	Date operator=(const Date &other);
+	Date operator=(const Date &other);   
+	
+	bool operator==(const Date& other) const;
 
 	~Date();
 };
@@ -104,6 +115,7 @@ class BitcoinExchange
 {
 private:
 	std::list<Date> db; // hold the read database
+	Date startDate;
 
 	double getFullRate(Date searchDate);
 	bool valid_Num(std::string line, int i);    // 2nd

@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 07:31:26 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/19 10:41:49 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/11 12:21:50 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ bool RPN::isOperand(std::string s)
 	return (false);
 }
 
-int RPN::makeCount(std::string s)
+float RPN::makeCount(std::string s)
 {
-	std::stack<int>	nums;
+	std::stack<float>	nums;
 
 	populateStack(s);
 	while (!tokens.empty())
@@ -56,14 +56,14 @@ int RPN::makeCount(std::string s)
 	return (nums.top());
 }
 
-int RPN::execute(std::stack<int> *nums, std::string operation)
+float RPN::execute(std::stack<float> *nums, std::string operation)
 {
 
 	if (nums->size() < 2)
 		throw SignBadUsedException("Operator '" + operation + "', was used whithout enought numbers in stack! Review your input!");
 
-	int n1 = nums->top();	nums->pop();
-	int n2 = nums->top();	nums->pop();
+	float n1 = nums->top();	nums->pop();
+	float n2 = nums->top();	nums->pop();
 
 	char o = operation.at(0);
 	std::cout << "Operation: " << n2 << " " << o << " " << n1 << std::endl;
@@ -82,7 +82,7 @@ int RPN::execute(std::stack<int> *nums, std::string operation)
 /// @param s
 /// @return Conversion from string to int
 /// @throw
-int	RPN::verifingAtoi(std::string s)
+float	RPN::verifingAtoi(std::string s)
 {
 	long i = atol(s.c_str());
 
@@ -91,7 +91,7 @@ int	RPN::verifingAtoi(std::string s)
 	if (i < NUM_MIN)
 		throw NumberOutOfLimitsException("Numbers given is far away from my computational capacity, values should be [0, 9] !");
 	else
-		return (static_cast<int>(i));
+		return (static_cast<float>(i));
 }
 
 /// @brief Function will populate the queue with the tokens

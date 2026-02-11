@@ -6,41 +6,28 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2025/09/18 10:55:16 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/11 11:43:16 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-std::string concatChar(const std::string& s, char c) {
-    return s + c;
-}
 
 /* ------------------------- Date functions -------------------------  */
 
-int Date::getYear() { return (year); }
-int Date::getMonth() { return (month); }
-int Date::getDay() { return (day); }
-double Date::getValue() { return (value); }
 
 /// @brief Compare the distance in time between two dates
 /// @param other
-/// @return The distance between them in a positive integer
+/// @return The distance between them
 int Date::compare(Date &other)
 {
 	int distance = 0;
 
-	//std::cout << "---------------------" << std::endl;
-	//this->print();
-	//other.print();
 
-	distance = 365 * (std::max(this->year, other.getYear()) - std::min(this->year, other.getYear()));
-	distance += 30 * (std::max(this->month, other.getMonth()) - std::min(this->month, other.getMonth()));
-	distance += 1 * (std::max(this->day, other.getDay()) - std::min(this->day, other.getDay()));
+	distance = 365 * (this->year - other.getYear());
+	distance += 30 * (this->month - other.getMonth());
+	distance += 1 * (this->day - other.getDay());
 
-
-	//std::cout << "distance : " << distance << std::endl;
-	//std::cout << std::endl;
 	return (distance);
 }
 
@@ -58,7 +45,6 @@ bool Date::validDate(){
 
 	return (true);
 }
-
 
 /// @brief Function will read the date section of the line and parse it
 /// @param line
@@ -96,10 +82,6 @@ bool Date::readDate(std::string line)
 
 void Date::print() { std::cout << year << "-" << month << "-" << day << "," << value << std::endl; }
 
-Date::Date()
-{
-}
-
 Date::Date(std::string line, char separator)
 {
 	if (line.find(separator) == std::string::npos)
@@ -113,20 +95,18 @@ Date::Date(std::string line, char separator)
 
 		// -- get value
 		char* end;
+		std::string val = trim(line.substr((line.find(separator) + 1), line.size()));	
+		
+		if (!hasOnlyNumbersAndDots(val))
+			throw BadValueException("Databse line with random characters in it! Not allowed.");
+
 		this->value = static_cast<double>(strtod(line.substr((line.find(separator) + 1), line.size()).c_str(), &end));
+
 		if (value < VALUE_MIN)
 			throw BadValueException("not a positive number.");
 		if (separator == '|' && value > VALUE_MAX)
 			throw BadValueException("too large a number.");
 	}
-}
-
-Date::Date(const Date &other)
-{
-	this->day   = other.day;
-	this->month = other.month;
-	this->year  = other.year;
-	this->value = other.value;
 }
 
 Date::~Date() {}
@@ -140,7 +120,13 @@ Date Date::operator=(const Date &other)
 
 	return (*this);
 }
-
+	
+bool Date::operator==(const Date& other) const 
+{
+	return day == other.day && 
+			month == other.month && 
+			year == other.year;
+}
 
 /* ------------------------- ------------------------- -------------------------  */
 
@@ -192,6 +178,10 @@ void BitcoinExchange::readDatabaseValues(std::ifstream& inFile)
 			if (line.empty())
 				throw BadDateException("No date nor info in one line, fix your database!\n");
 			Date tmp = Date(line, ',');
+
+			if (std::find(db.begin(), db.end(), tmp) != db.end())
+				throw BadDateException("One date was defined more than once in the database!\n");
+
 			db.push_back(tmp);
 			//tmp.print();
 		}
@@ -208,20 +198,28 @@ void BitcoinExchange::readDatabaseValues(std::ifstream& inFile)
 double BitcoinExchange::getFullRate(Date searchDate)
 {
 	std::list<Date>::iterator it;
+
+	if (searchDate.compare(startDate) < 0) // before bitcoin creation/data starts
+		return (0);
+	
 	Date tmpDate = db.front();
+	double tmpValue = tmpDate.getValue();
 	double tmpDist = searchDate.compare(tmpDate);
-	double tmpValue = searchDate.getValue();
 
 	for (it = db.begin(); it != db.end(); ++it)
 	{
-		//std::cout << "value is " << it->getValue() << std::endl;
+		if (it->compare(searchDate) > 0) // if now is greater than the date to be search or equal it
+			break;
+			
 		if (searchDate.compare(*it) < tmpDist)
 		{
 			tmpDist = searchDate.compare(*it);
 			tmpValue = it->getValue();
+			tmpDate = *it;
+
 		}
-		tmpDate = *it;
 	}
+	tmpDate.print();
 	//std::cout << " value found: " << tmpValue << std::endl;
 	//std::cout << "\nclosest value is" << tmpValue << " " <<  tmpDist << std::endl;
 	return (tmpValue * searchDate.getValue());
@@ -230,7 +228,8 @@ double BitcoinExchange::getFullRate(Date searchDate)
 BitcoinExchange::BitcoinExchange()
 {
 	std::ifstream inFile(DATABASE_FILE);
-
+	startDate = Date("2009-01-02,0", ',');
+	
 	if (inFile.is_open())
 	{
 		try {
@@ -259,3 +258,57 @@ BitcoinExchange::~BitcoinExchange()
 }
 
 /* ------------------------- ------------------------- -------------------------  */
+
+
+/* ------------------------- Other functions from  date -------------------------  */
+
+std::string Date::concatChar(const std::string& s, char c) 
+{
+    return s + c;
+}
+
+std::string Date::trimLeft(const std::string& str) 
+{
+    size_t start = str.find_first_not_of(" \t\n\r\f\v");
+    return (start == std::string::npos) ? "" : str.substr(start);
+}
+
+std::string Date::trimRight(const std::string& str) 
+{
+    size_t end = str.find_last_not_of(" \t\n\r\f\v");
+    return (end == std::string::npos) ? "" : str.substr(0, end + 1);
+}
+
+std::string Date::trim(const std::string& str) 
+{
+    size_t start = str.find_first_not_of(" \t\n\r\f\v");
+    if (start == std::string::npos) return "";
+    
+    size_t end = str.find_last_not_of(" \t\n\r\f\v");
+    return str.substr(start, end - start + 1);
+}
+
+bool Date::hasOnlyNumbersAndDots(const std::string& str) 
+{
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (!isdigit(static_cast<unsigned char>(str[i])) && str[i] != '.') {
+            return false;
+        }
+    }
+    return true;
+}
+
+int Date::getYear() { return (year); }
+int Date::getMonth() { return (month); }
+int Date::getDay() { return (day); }
+double Date::getValue() { return (value); }
+
+Date::Date() { }
+
+Date::Date(const Date &other)
+{
+	this->day   = other.day;
+	this->month = other.month;
+	this->year  = other.year;
+	this->value = other.value;
+}
