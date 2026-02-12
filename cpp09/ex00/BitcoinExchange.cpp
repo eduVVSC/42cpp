@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/12 13:46:09 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:21:43 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void BitcoinExchange::convert(std::string filename)
 				try {
 					Date tmp = Date(line, '|');
 					std::cout << tmp.getYear() << "-" << tmp.getMonth() << "-" << tmp.getDay() << " => "
-					<< tmp.getValue() << " = " << formatValue(getFullRate(tmp)) << " " << getFullRate(tmp) << std::endl;
+					<< tmp.getValue() << " = " << formatValue(getFullRate(tmp)) << std::endl;
 				}
 				catch(const std::exception& e) {
 					std::cerr << "Error: " << e.what() << '\n';
@@ -321,7 +321,11 @@ bool Date::hasOnlyNumbersAndDots(const std::string& str)
             return false;
         }
     }
-    return true;
+
+	size_t ret1 = str.find_first_of('.');	// more than one = '.'
+	if (ret1 != std::string::npos && ret1 != str.find_last_of('.'))
+		return (false);
+    return (true);
 }
 
 int Date::getYear() { return (year); }
