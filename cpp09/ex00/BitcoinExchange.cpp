@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/12 14:21:43 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:34:57 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,12 @@ std::string Date::trim(const std::string& str)
 
 bool Date::hasOnlyNumbersAndDots(const std::string& str) 
 {
-    for (size_t i = 0; i < str.length(); ++i) {
+	size_t i = 0;
+	if (str.empty())
+		return (true); // to be considered 0 
+	if (str.at(0) == '+' || str.at(0) == '-')
+			i++;
+    for (; i < str.length(); ++i) {
         if (!isdigit(static_cast<unsigned char>(str[i])) && str[i] != '.') {
             return false;
         }
