@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 07:31:26 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/11 12:21:50 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 13:21:18 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ float RPN::execute(std::stack<float> *nums, std::string operation)
 	float n2 = nums->top();	nums->pop();
 
 	char o = operation.at(0);
-	std::cout << "Operation: " << n2 << " " << o << " " << n1 << std::endl;
+	//std::cout << "Operation: " << n2 << " " << o << " " << n1 << std::endl;
 	if (o == '+')
 		return (n2 + n1);
 	else if (o == '-')

@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:48:19 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/12 10:39:44 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 13:46:12 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 # include <exception>
 # include <list>
 
-#include <cstdlib>
-#include <climits>
-#include <string.h>
-#include <cerrno>
-#include <algorithm>
+# include <sstream>
+# include <cmath>
+# include <iomanip>
+# include <cstdlib>
+# include <climits>
+# include <string.h>
+# include <cerrno>
+# include <algorithm>
 
 
 # define DATABASE_FILE "data.csv"
@@ -86,7 +89,6 @@ private:
 	std::string	trim(const std::string& str);
 	std::string	trimLeft(const std::string& str);
 	std::string	trimRight(const std::string& str);
-	std::string concatChar(const std::string& s, char c);
 	bool		hasOnlyNumbersAndDots(const std::string& str);
 
 
@@ -117,11 +119,12 @@ private:
 	std::list<Date> db; // hold the read database
 	Date startDate;
 
-	double getFullRate(Date searchDate);
-	bool valid_Num(std::string line, int i);    // 2nd
-	bool valid_Date(std::string line, int which);   // 3rd
-	bool valid_Format(std::string line); // 1st
-	void readDatabaseValues(std::ifstream& inFile);
+	std::string	formatValue(double n);
+	double		getFullRate(Date searchDate);
+	bool		valid_Num(std::string line, int i);    // 2nd
+	bool		valid_Date(std::string line, int which);   // 3rd
+	bool		valid_Format(std::string line); // 1st
+	void		readDatabaseValues(std::ifstream& inFile);
 public:
 
 	BitcoinExchange();

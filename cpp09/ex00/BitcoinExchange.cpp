@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/12 10:43:20 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 13:46:09 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void Date::print() { std::cout << year << "-" << month << "-" << day << "," << v
 Date::Date(std::string line, char separator)
 {
 	if (line.find(separator) == std::string::npos)
-		throw BadDateException(concatChar("Line was not defined correctly, without ", separator));
+		throw BadDateException("bad input => " + line);
 	else
 	{
 		// -- get date
@@ -111,7 +111,7 @@ Date::Date(std::string line, char separator)
 		std::string val = trim(line.substr((line.find(separator) + 1), line.size()));	
 		
 		if (!hasOnlyNumbersAndDots(val))
-			throw BadValueException("Databse line with random characters in it! Not allowed.");
+			throw BadValueException("Line with not allowed characters in it!");
 
 		this->value = static_cast<double>(strtod(line.substr((line.find(separator) + 1), line.size()).c_str(), &end));
 
@@ -165,7 +165,7 @@ void BitcoinExchange::convert(std::string filename)
 				try {
 					Date tmp = Date(line, '|');
 					std::cout << tmp.getYear() << "-" << tmp.getMonth() << "-" << tmp.getDay() << " => "
-					<< tmp.getValue() << " = " << getFullRate(tmp) << std::endl;
+					<< tmp.getValue() << " = " << formatValue(getFullRate(tmp)) << " " << getFullRate(tmp) << std::endl;
 				}
 				catch(const std::exception& e) {
 					std::cerr << "Error: " << e.what() << '\n';
@@ -232,7 +232,7 @@ double BitcoinExchange::getFullRate(Date searchDate)
 
 		}
 	}
-	tmpDate.print();
+	//tmpDate.print();
 	//std::cout << " value found: " << tmpValue << std::endl;
 	//std::cout << "\nclosest value is" << tmpValue << " " <<  tmpDist << std::endl;
 	return (tmpValue * searchDate.getValue());
@@ -272,13 +272,26 @@ BitcoinExchange::~BitcoinExchange()
 
 /* ------------------------- ------------------------- -------------------------  */
 
+std::string	BitcoinExchange::formatValue(double n)
+{
+	std::ostringstream stream;
+	
+	stream << std::fixed << std::setprecision(2) << n;
+	std::string result = stream.str();
+	size_t dec = result.find('.');
+	if (dec != std::string::npos)
+	{
+		size_t last_non_zero = result.find_last_not_of('0');
+
+		if (last_non_zero == dec)
+			result.erase(dec);
+		else
+			result.erase(last_non_zero + 1);
+	}
+	return (result);
+}
 
 /* ------------------------- Other functions from  date -------------------------  */
-
-std::string Date::concatChar(const std::string& s, char c) 
-{
-    return s + c;
-}
 
 std::string Date::trimLeft(const std::string& str) 
 {
