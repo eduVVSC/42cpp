@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:48:19 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/11 11:32:34 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 10:39:44 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 
 # define DATABASE_FILE "data.csv"
 
-# define DAY_MAX 31
-# define MONTH_MAX 12
-# define YEAR_MAX 2022
+# define DAY_MIN 2
+# define MONTH_MIN 1
+# define YEAR_MIN 2009
 # define VALUE_MAX 1000
 # define VALUE_MIN 0
 

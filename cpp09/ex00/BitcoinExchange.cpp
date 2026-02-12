@@ -6,7 +6,7 @@
 /*   By: edvieira <edvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:49:49 by edvieira          #+#    #+#             */
-/*   Updated: 2026/02/11 11:43:16 by edvieira         ###   ########.fr       */
+/*   Updated: 2026/02/12 10:43:20 by edvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,27 @@ int Date::compare(Date &other)
 /// @brief Function validate if the date is corret according to the normal standards
 /// @return (true - valid date) (false - invalid date)
 bool Date::validDate(){
-	if (this->day > DAY_MAX)
+	if (this->year < YEAR_MIN)
+		return (false);
+	if (this->year == YEAR_MIN && this->month < MONTH_MIN)
 		return false;
-	if (this->month > MONTH_MAX)
-		return false;
-	if (this->year > YEAR_MAX)
+	if (this->year == YEAR_MIN && this->month == MONTH_MIN && this->day < DAY_MIN)
 		return false;
 
-	// VALIDATE BETTER LATER!
+	struct tm t_s = {};
+	t_s.tm_year = year - 1900;
+	t_s.tm_mon = month - 1;
+	t_s.tm_mday = day;
+
+	// Validate actual date
+	struct tm cache_t = t_s;
+	if (mktime(&cache_t) == -1)
+		return (false);
+
+	if (t_s.tm_year != cache_t.tm_year
+		|| t_s.tm_mon != cache_t.tm_mon
+		|| t_s.tm_mday != cache_t.tm_mday)
+		return (false);
 
 	return (true);
 }
